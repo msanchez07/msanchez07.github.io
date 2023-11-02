@@ -5,18 +5,15 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.11.5
+    jupytext_version: 1.15.2
 kernelspec:
   display_name: Python 3
   language: python
   name: python3
 ---
 
-
 # [Series](https://pandas.pydata.org/docs/reference/api/pandas.Series.html)
-
-Una Serie es un tipo de datos fundamental en Pandas. Es similar a un array de una dimensión o una columna en una hoja de cálculo. Los elementos de una Serie son homogéneos, es decir, todos los elementos deben ser del mismo tipo de dato. Puedes pensar en una Serie como una estructura de datos que consta de un índice (etiquetas) y una columna de valores asociados. Por ejemplo: 
-
+Una Serie es un tipo de datos fundamental en Pandas. Es similar a un array de una dimensión o una columna en una hoja de cálculo. Los elementos de una Serie son homogéneos, es decir, todos los elementos deben ser del mismo tipo de dato. Puedes pensar en una Serie como una estructura de datos que consta de un índice (etiquetas) y una columna de valores asociados. Por ejemplo:
 
 ```{code-cell}
 import pandas as pd 
@@ -24,6 +21,7 @@ import pandas as pd
 data = pd.Series([1, 2, 3, 4, 5])
 data 
 ```
+
 &nbsp;  
 
 
@@ -32,7 +30,7 @@ data
 &nbsp;
 
 
-Como podemos observar, Pandas establece unos índices por defecto a las columnas de una Serie, pero también podemos indicarlo nosotros en caso de que lo consideremos necesario: 
+Como podemos observar, Pandas establece unos índices por defecto a las columnas de una Serie, pero también podemos indicarlo nosotros en caso de que lo consideremos necesario:
 
 ```{code-cell}
 import pandas as pd 
@@ -40,13 +38,14 @@ import pandas as pd
 data = pd.Series([1, 2, 3, 4, 5], index=["A", "B", "C", "D", "E"]) 
 data
 ```
+
 &nbsp;
 
 ![](../../../images/pandas/02.png)
 
 &nbsp;
 
-Este mismo resultado lo podríamos obtener si creáramos la serie a partir de un diccionario: 
+Este mismo resultado lo podríamos obtener si creáramos la serie a partir de un diccionario:
 
 ```{code-cell}
 import pandas as pd 
@@ -74,60 +73,62 @@ Para acceder a los elementos de una serie de pandas en Python, puedes utilizar d
   <li><strong>Acceso por etiqueta</strong>: Puedes acceder a un elemento específico de la serie utilizando su etiqueta o nombre:
   
   &nbsp;
-  
-  ```{code-cell}
-  import pandas as pd 
-  # Crear una serie de ejemplo 
 
-  data = {'A': 1, 'B': 2, 'C': 3} 
-  serie = pd.Series(data) 
+```{code-cell}
+import pandas as pd 
+# Crear una serie de ejemplo 
 
-  # Acceder al elemento con etiqueta 'B' 
-  elemento = serie['B'] 
-  print(elemento) 
-  ```
+data = {'A': 1, 'B': 2, 'C': 3} 
+serie = pd.Series(data) 
+
+# Acceder al elemento con etiqueta 'B' 
+elemento = serie['B'] 
+print(elemento) 
+```
+
   &nbsp;
   </li>
 
   <li><strong>Acceso por posición</strong>: También puedes acceder a un elemento por su posición en la serie utilizando índices numéricos:
   
   &nbsp;
-  
-  ```{code-cell}
-  import pandas as pd 
-  # Crear una serie de ejemplo 
-  
-  data = [1, 2, 3] 
-  serie = pd.Series(data) 
 
-  # Acceder al elemento en la posición 1 (segundo elemento) 
-  elemento = serie[1] 
-  print(elemento) 
-  ```
+```{code-cell}
+import pandas as pd 
+# Crear una serie de ejemplo 
+
+data = [1, 2, 3] 
+serie = pd.Series(data) 
+
+# Acceder al elemento en la posición 1 (segundo elemento) 
+elemento = serie[1] 
+print(elemento) 
+```
+
   &nbsp;
   </li>
 
   <li><strong>Acceso a múltiples elementos</strong>: También puedes acceder a varios elementos a la vez especificando una lista de etiquetas o una lista de posiciones:
   
   &nbsp;
-  
-  ```{code-cell}
-  import pandas as pd 
 
-  # Crear una serie de ejemplo 
-  data = {'A': 1, 'B': 2, 'C': 3} 
-  serie = pd.Series(data) 
+```{code-cell}
+import pandas as pd 
 
-  
-  # Acceder a múltiples elementos por etiqueta 
-  elementos = serie[['A', 'C']] 
-  print(elementos) 
+# Crear una serie de ejemplo 
+data = {'A': 1, 'B': 2, 'C': 3} 
+serie = pd.Series(data) 
 
- 
-  # Acceder a múltiples elementos por posición 
-  elementos = serie.iloc[0:2]
-  print(elementos) 
-  ```
+
+# Acceder a múltiples elementos por etiqueta 
+elementos = serie[['A', 'C']] 
+print(elementos) 
+
+
+# Acceder a múltiples elementos por posición 
+elementos = serie.iloc[0:2]
+print(elementos) 
+```
 
   </li>
 
@@ -160,7 +161,7 @@ Una serie de pandas cuenta con varios métodos que facilitan la interacción con
 - **filter(condición)**: Se utiliza para seleccionar etiquetas de la serie basadas en criterios específicos, como nombres de etiquetas, coincidencias de cadenas o expresiones regulares. Puedes usarla para filtrar y seleccionar subconjuntos de datos de una serie. 
 
  
-Adicionalmente a estos métodos, podemos aplicar operaciones aritméticas a los elementos de una serie, dando como resultado una nueva serie con los elementos producidos tras aplicar estas operaciones. 
+Adicionalmente a estos métodos, podemos aplicar operaciones aritméticas a los elementos de una serie, dando como resultado una nueva serie con los elementos producidos tras aplicar estas operaciones.
 
 ```{code-cell}
 import pandas as pd 
@@ -172,3 +173,4 @@ serie = pd.Series(data)
 serie = serie * 5
 print(serie)
 ```
+
