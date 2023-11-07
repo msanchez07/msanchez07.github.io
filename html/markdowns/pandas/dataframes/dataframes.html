@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>DataFrames &#8212; Pandas</title>
+    <title>DataFrames &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -152,26 +152,34 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Pandas - Home"/>
-    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Pandas - Home"/>`);</script>
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Lenguajes de programación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../series/series.html">Series</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_avanzado.html">DataFrames Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">DataFrames</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
 </ul>
-</li>
-</ul>
-</li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
 </ul>
 
     </div>
@@ -473,7 +481,7 @@ dtype: int64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;countries.csv&#39;</span><span class="p">)</span> 
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./csv/countries.csv&#39;</span><span class="p">)</span> 
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -1003,17 +1011,111 @@ Name: Nombre, dtype: object
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Nombre&quot;</span><span class="p">:</span> <span class="s2">&quot;Nombre corto&quot;</span><span class="p">,</span> <span class="s2">&quot;Edad&quot;</span><span class="p">:</span> <span class="s2">&quot;Age&quot;</span><span class="p">})</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>También podemos cambiar el índice de las filas. Para ello, se debe indicar mediante un diccionario los anteriores índices y los nuevos:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">2000</span><span class="p">})</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="reindexar-un-dataframe">
@@ -1387,7 +1489,7 @@ Name: Nombre, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_25496/836562857.py:1: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cf/7wljb5295v9dlw5cdy6h0y3r0000gn/T/ipykernel_1016/836562857.py:1: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
@@ -2466,8 +2568,6 @@ Name: Nombre, dtype: object
 </div>
 </section>
 </section>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Pandas &#8212; Pandas</title>
+    <title>Pandas &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Series" href="series/series.html" />
-    <link rel="prev" title="Lenguajes de programación" href="../introduccion.html" />
+    <link rel="prev" title="Numpy" href="../../notebooks/Numpy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -152,26 +152,34 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="Pandas - Home"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Pandas - Home"/>`);</script>
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../introduccion.html">Lenguajes de programación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Numpy.html">Numpy</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="series/series.html">Series</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series/series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes/dataframes.html">DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes/ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes/dataframes_avanzado.html">DataFrames Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes/ejercicios2.html">Ejercicios Dataframes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes/dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="dataframes/dataframes.html">DataFrames</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="dataframes/ejercicios1.html">Ejercicios Dataframes 1</a></li>
 </ul>
-</li>
-</ul>
-</li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bibliografia.html">Bibliografía</a></li>
 </ul>
 
     </div>
@@ -305,7 +313,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;pandas&#39; from &#39;/home/nelo/miniconda3/lib/python3.11/site-packages/pandas/__init__.py&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;pandas&#39; from &#39;/usr/local/lib/python3.10/site-packages/pandas/__init__.py&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -348,12 +356,12 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../introduccion.html"
+       href="../../notebooks/Numpy.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Lenguajes de programación</p>
+        <p class="prev-next-title">Numpy</p>
       </div>
     </a>
     <a class="right-next"

@@ -78,7 +78,7 @@ Dado el DataFrame del ejercicio anterior, realiza las siguientes operaciones:
 ::::{admonition} Ejercicio 5
 Dado el siguiente archivo csv con los datos de los empleados de una empresa:
 
-[Empleados](employees.csv)
+[Empleados](./csv/employees.csv)
 
 Realiza las siguientes operaciones:
 

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Ejercicios Dataframes 1 &#8212; Pandas</title>
+    <title>Ejercicios Dataframes 1 &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/pandas/dataframes/ejercicios1';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DataFrames Avanzado" href="dataframes_avanzado.html" />
     <link rel="prev" title="DataFrames" href="dataframes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -151,26 +152,34 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Pandas - Home"/>
-    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Pandas - Home"/>`);</script>
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Lenguajes de programación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../series/series.html">Series</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes.html">DataFrames</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_avanzado.html">DataFrames Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="dataframes.html">DataFrames</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Ejercicios Dataframes 1</a></li>
 </ul>
-</li>
-</ul>
-</li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
 </ul>
 
     </div>
@@ -333,7 +342,7 @@ document.write(`
 <div class="admonition-ejercicio-5 admonition">
 <p class="admonition-title">Ejercicio 5</p>
 <p>Dado el siguiente archivo csv con los datos de los empleados de una empresa:</p>
-<p><a class="reference download internal" download="" href="../../../_downloads/edb9b34b887c7a146388875765423f1e/employees.csv"><span class="xref download myst">Empleados</span></a></p>
+<p><a class="reference download internal" download="" href="../../../_downloads/9cbb147d8bfaabcf0bf6990742f1c638/employees.csv"><span class="xref download myst">Empleados</span></a></p>
 <p>Realiza las siguientes operaciones:</p>
 <ul class="simple">
 <li><p>Obten el nombre de aquellos empleados que tienen un salario inferior a 3000 euros.</p></li>
@@ -384,6 +393,15 @@ document.write(`
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">DataFrames</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="dataframes_avanzado.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">DataFrames Avanzado</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

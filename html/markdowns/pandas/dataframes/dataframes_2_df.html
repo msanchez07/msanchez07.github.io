@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Trabajar con varios dataframes &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/pandas/dataframes/dataframes_2_df';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">El lenguaje de programación Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Lenguajes de programación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Herramientas de programación</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes.html">DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_avanzado.html">DataFrames Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Trabajar con varios dataframes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="trabajar-con-varios-dataframes">
+<h1>Trabajar con varios dataframes<a class="headerlink" href="#trabajar-con-varios-dataframes" title="Permalink to this heading">#</a></h1>
+<p>En el apartado anterior hemos visto como interactuar un poco con los DataFrames, cargar, exportar, obtener elementos, particionar un DataFrame y sus atributos y métodos. En este apartado vamos a ver como trabajar un poco a nivel avanzado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./csv/countries.csv&#39;</span><span class="p">)</span> 
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country_id</th>
+      <th>country_name</th>
+      <th>region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AR</td>
+      <td>Argentina</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU</td>
+      <td>Australia</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BE</td>
+      <td>Belgium</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BR</td>
+      <td>Brazil</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CA</td>
+      <td>Canada</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CH</td>
+      <td>Switzerland</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><img alt="" src="../../../_images/07.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">pandas.melt(frame,</span> <span class="pre">id_vars=None,</span> <span class="pre">value_vars=None,</span> <span class="pre">var_name=None,</span> <span class="pre">value_name='value',</span> <span class="pre">col_level=None,</span> <span class="pre">ignore_index=True)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">melted_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;Categoria&#39;</span><span class="p">,</span> <span class="s1">&#39;Tipo&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Valor_Cantidad&#39;</span><span class="p">,</span> <span class="s1">&#39;Valor_Precio&#39;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Valor&#39;</span><span class="p">)</span>
+
+
+<span class="n">melted_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">melted_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;Categoria&#39;</span><span class="p">,</span> <span class="s1">&#39;Tipo&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Valor_Cantidad&#39;</span><span class="p">,</span> <span class="s1">&#39;Valor_Precio&#39;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Valor&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">melted_df</span>
+
+<span class="nn">File /usr/local/lib/python3.10/site-packages/pandas/core/frame.py:8985,</span> in <span class="ni">DataFrame.melt</span><span class="nt">(self, id_vars, value_vars, var_name, value_name, col_level, ignore_index)</span>
+<span class="g g-Whitespace">   </span><span class="mi">8975</span> <span class="nd">@Appender</span><span class="p">(</span><span class="n">_shared_docs</span><span class="p">[</span><span class="s2">&quot;melt&quot;</span><span class="p">]</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;caller&quot;</span><span class="p">:</span> <span class="s2">&quot;df.melt(&quot;</span><span class="p">,</span> <span class="s2">&quot;other&quot;</span><span class="p">:</span> <span class="s2">&quot;melt&quot;</span><span class="p">})</span>
+<span class="g g-Whitespace">   </span><span class="mi">8976</span> <span class="k">def</span> <span class="nf">melt</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">8977</span>     <span class="bp">self</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">8983</span>     <span class="n">ignore_index</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">8984</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">8985</span>     <span class="k">return</span> <span class="n">melt</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">8986</span>         <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">8987</span>         <span class="n">id_vars</span><span class="o">=</span><span class="n">id_vars</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">8988</span>         <span class="n">value_vars</span><span class="o">=</span><span class="n">value_vars</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">8989</span>         <span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">8990</span>         <span class="n">value_name</span><span class="o">=</span><span class="n">value_name</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">8991</span>         <span class="n">col_level</span><span class="o">=</span><span class="n">col_level</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">8992</span>         <span class="n">ignore_index</span><span class="o">=</span><span class="n">ignore_index</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">8993</span>     <span class="p">)</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;melt&quot;</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/lib/python3.10/site-packages/pandas/core/reshape/melt.py:73,</span> in <span class="ni">melt</span><span class="nt">(frame, id_vars, value_vars, var_name, value_name, col_level, ignore_index)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>         <span class="n">missing</span> <span class="o">=</span> <span class="n">Index</span><span class="p">(</span><span class="n">com</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">id_vars</span><span class="p">))</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>         <span class="k">if</span> <span class="ow">not</span> <span class="n">missing</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">73</span>             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>                 <span class="s2">&quot;The following &#39;id_vars&#39; are not present &quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>                 <span class="sa">f</span><span class="s2">&quot;in the DataFrame: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span>             <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span>     <span class="n">id_vars</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="ne">KeyError</span>: &quot;The following &#39;id_vars&#39; are not present in the DataFrame: [&#39;Categoria&#39;, &#39;Fecha&#39;, &#39;Tipo&#39;]&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>© 2008–2022, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team
+Licensed under the 3-clause BSD License.
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.0/user_guide/reshaping.html">https://pandas.pydata.org/pandas-docs/version/1.5.0/user_guide/reshaping.html</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/pandas/dataframes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

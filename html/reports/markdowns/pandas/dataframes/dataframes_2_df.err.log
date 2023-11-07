@@ -1,0 +1,59 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/local/Cellar/python@3.10/3.10.8/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+melted_df = df.melt(id_vars=['Fecha', 'Categoria', 'Tipo'], value_vars=['Valor_Cantidad', 'Valor_Precio'], var_name='Variable', value_name='Valor')
+
+
+melted_df
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mKeyError[0m                                  Traceback (most recent call last)
+Cell [0;32mIn[2], line 1[0m
+[0;32m----> 1[0m melted_df [38;5;241m=[39m [43mdf[49m[38;5;241;43m.[39;49m[43mmelt[49m[43m([49m[43mid_vars[49m[38;5;241;43m=[39;49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mFecha[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mCategoria[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mTipo[39;49m[38;5;124;43m'[39;49m[43m][49m[43m,[49m[43m [49m[43mvalue_vars[49m[38;5;241;43m=[39;49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mValor_Cantidad[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mValor_Precio[39;49m[38;5;124;43m'[39;49m[43m][49m[43m,[49m[43m [49m[43mvar_name[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mVariable[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mvalue_name[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mValor[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m      4[0m melted_df
+
+File [0;32m/usr/local/lib/python3.10/site-packages/pandas/core/frame.py:8985[0m, in [0;36mDataFrame.melt[0;34m(self, id_vars, value_vars, var_name, value_name, col_level, ignore_index)[0m
+[1;32m   8975[0m [38;5;129m@Appender[39m(_shared_docs[[38;5;124m"[39m[38;5;124mmelt[39m[38;5;124m"[39m] [38;5;241m%[39m {[38;5;124m"[39m[38;5;124mcaller[39m[38;5;124m"[39m: [38;5;124m"[39m[38;5;124mdf.melt([39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mother[39m[38;5;124m"[39m: [38;5;124m"[39m[38;5;124mmelt[39m[38;5;124m"[39m})
+[1;32m   8976[0m [38;5;28;01mdef[39;00m [38;5;21mmelt[39m(
+[1;32m   8977[0m     [38;5;28mself[39m,
+[0;32m   (...)[0m
+[1;32m   8983[0m     ignore_index: [38;5;28mbool[39m [38;5;241m=[39m [38;5;28;01mTrue[39;00m,
+[1;32m   8984[0m ) [38;5;241m-[39m[38;5;241m>[39m DataFrame:
+[0;32m-> 8985[0m     [38;5;28;01mreturn[39;00m [43mmelt[49m[43m([49m
+[1;32m   8986[0m [43m        [49m[38;5;28;43mself[39;49m[43m,[49m
+[1;32m   8987[0m [43m        [49m[43mid_vars[49m[38;5;241;43m=[39;49m[43mid_vars[49m[43m,[49m
+[1;32m   8988[0m [43m        [49m[43mvalue_vars[49m[38;5;241;43m=[39;49m[43mvalue_vars[49m[43m,[49m
+[1;32m   8989[0m [43m        [49m[43mvar_name[49m[38;5;241;43m=[39;49m[43mvar_name[49m[43m,[49m
+[1;32m   8990[0m [43m        [49m[43mvalue_name[49m[38;5;241;43m=[39;49m[43mvalue_name[49m[43m,[49m
+[1;32m   8991[0m [43m        [49m[43mcol_level[49m[38;5;241;43m=[39;49m[43mcol_level[49m[43m,[49m
+[1;32m   8992[0m [43m        [49m[43mignore_index[49m[38;5;241;43m=[39;49m[43mignore_index[49m[43m,[49m
+[1;32m   8993[0m [43m    [49m[43m)[49m[38;5;241m.[39m__finalize__([38;5;28mself[39m, method[38;5;241m=[39m[38;5;124m"[39m[38;5;124mmelt[39m[38;5;124m"[39m)
+
+File [0;32m/usr/local/lib/python3.10/site-packages/pandas/core/reshape/melt.py:73[0m, in [0;36mmelt[0;34m(frame, id_vars, value_vars, var_name, value_name, col_level, ignore_index)[0m
+[1;32m     71[0m         missing [38;5;241m=[39m Index(com[38;5;241m.[39mflatten(id_vars))[38;5;241m.[39mdifference(cols)
+[1;32m     72[0m         [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m missing[38;5;241m.[39mempty:
+[0;32m---> 73[0m             [38;5;28;01mraise[39;00m [38;5;167;01mKeyError[39;00m(
+[1;32m     74[0m                 [38;5;124m"[39m[38;5;124mThe following [39m[38;5;124m'[39m[38;5;124mid_vars[39m[38;5;124m'[39m[38;5;124m are not present [39m[38;5;124m"[39m
+[1;32m     75[0m                 [38;5;124mf[39m[38;5;124m"[39m[38;5;124min the DataFrame: [39m[38;5;132;01m{[39;00m[38;5;28mlist[39m(missing)[38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m     76[0m             )
+[1;32m     77[0m [38;5;28;01melse[39;00m:
+[1;32m     78[0m     id_vars [38;5;241m=[39m []
+
+[0;31mKeyError[0m: "The following 'id_vars' are not present in the DataFrame: ['Categoria', 'Fecha', 'Tipo']"
+

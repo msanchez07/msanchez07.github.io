@@ -77,7 +77,7 @@ Aquí, proporcionamos una lista de listas para los datos y una lista separada pa
 ```{code-cell}
 import pandas as pd 
 
-df = pd.read_csv('countries.csv') 
+df = pd.read_csv('./csv/countries.csv') 
 df
 ```
 
@@ -243,12 +243,14 @@ Lo primero que podemos hacer es renombrar una o varias columnas utilizando el m�
 
 ```{code-cell}
 df = df.rename(columns = {"Nombre": "Nombre corto", "Edad": "Age"})
+df
 ```
 
 También podemos cambiar el índice de las filas. Para ello, se debe indicar mediante un diccionario los anteriores índices y los nuevos:
 
 ```{code-cell}
 df = df.rename(index={1: 1000, 2:2000})
+df
 ```
 
 ## Reindexar un DataFrame
