@@ -1,4 +1,4 @@
-# Programación de inteligencia artificial
+# Sistemas de aprendizaje automático
 
 
 La programación de inteligencia artificial (IA) es un campo emocionante y en constante crecimiento que ha revolucionado la forma en que interactuamos con la tecnología. Esta plataforma web está enfocada a dar los conocimientos necesarios sobre el módulo del curso de especialidad **Programación de inteligencia artificial**.

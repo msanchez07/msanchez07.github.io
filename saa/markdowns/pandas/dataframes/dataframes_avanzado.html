@@ -65,8 +65,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/pandas/dataframes/dataframes_avanzado';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Ejercicios Dataframes 2" href="ejercicios2.html" />
-    <link rel="prev" title="Ejercicios Dataframes 1" href="ejercicios1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,27 +157,9 @@ const thebe_selector_output = ".output, .cell_output"
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTELIGENCIA ARTIFICIAL</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Lenguajes de programación</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataframes.html">DataFrames</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">DataFrames Avanzado</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
-</ul>
-</li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Inteligencia artificial</a></li>
 </ul>
 
     </div>
@@ -789,7 +769,7 @@ memory usage: 276.0+ bytes
 <section id="pivot">
 <h3>Pivot<a class="headerlink" href="#pivot" title="Permalink to this heading">#</a></h3>
 <p>La función pivot permite reorganizar un DataFrame para cambiar su estructura de datos de largo a ancho. Puede ser especialmente útil cuando se desea comparar categorías o variables a través de columnas.</p>
-<p><img alt="" src="../../../_images/04.png" /></p>
+<p><img alt="" src="images/pandas/04.png" /></p>
 <p><strong><code class="docutils literal notranslate"><span class="pre">DataFrame.pivot(*,</span> <span class="pre">columns,</span> <span class="pre">index=_NoDefault.no_default,</span> <span class="pre">values=_NoDefault.no_default)</span></code></strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -852,7 +832,7 @@ memory usage: 276.0+ bytes
 <h3>Stack y Unstack<a class="headerlink" href="#stack-y-unstack" title="Permalink to this heading">#</a></h3>
 <p>Las funciones <strong>stack</strong> y <strong>unstack</strong> permiten cambiar entre estructuras de datos anchas y largas.</p>
 <p><strong>Stack</strong> convierte columnas en un índice múltiple:</p>
-<p><img alt="" src="../../../_images/05.png" /></p>
+<p><img alt="" src="images/pandas/05.png" /></p>
 <p><code class="docutils literal notranslate"><span class="pre">DataFrame.stack(level=-1,</span> <span class="pre">dropna=_NoDefault.no_default,</span> <span class="pre">sort=_NoDefault.no_default,</span> <span class="pre">future_stack=False</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -878,7 +858,7 @@ dtype: int64
 </div>
 </div>
 <p>Por su parte <strong>unstack</strong> convierte un índice múltiple en columnas.</p>
-<p><img alt="" src="../../../_images/06.png" /></p>
+<p><img alt="" src="images/pandas/06.png" /></p>
 <p><code class="docutils literal notranslate"><span class="pre">DataFrame.unstack(level=-1,</span> <span class="pre">fill_value=None,</span> <span class="pre">sort=True)</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -975,7 +955,7 @@ dtype: int64
 <section id="melt">
 <h3>Melt<a class="headerlink" href="#melt" title="Permalink to this heading">#</a></h3>
 <p>La función melt se utiliza para cambiar un DataFrame de ancho a largo. Convierte múltiples columnas en dos columnas: una que contiene las variables y otra que contiene los valores correspondientes.</p>
-<p><img alt="" src="../../../_images/07.png" /></p>
+<p><img alt="" src="images/pandas/07.png" /></p>
 <p><code class="docutils literal notranslate"><span class="pre">pandas.melt(frame,</span> <span class="pre">id_vars=None,</span> <span class="pre">value_vars=None,</span> <span class="pre">var_name=None,</span> <span class="pre">value_name='value',</span> <span class="pre">col_level=None,</span> <span class="pre">ignore_index=True)</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1118,24 +1098,6 @@ Licensed under the 3-clause BSD License.
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="ejercicios1.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Ejercicios Dataframes 1</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="ejercicios2.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ejercicios Dataframes 2</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
