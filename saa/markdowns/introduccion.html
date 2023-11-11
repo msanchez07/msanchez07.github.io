@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Introducción &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/introduccion';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introducción" href="sistemas_supervisados/introduccion.html" />
+    <link rel="prev" title="Sistemas de aprendizaje automático" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTELIGENCIA ARTIFICIAL</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introducción</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SISTEMAS DE APRENDIZAJE SUPERVISADO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="sistemas_supervisados/introduccion.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistemas_supervisados/proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sistemas_supervisados/analisis_datos.html">Análisis exploratorio de datos</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introducción</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-previos">Conceptos previos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historia-y-desarrollo-de-la-inteligencia-artificial">Historia y desarrollo de la inteligencia artificial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primeros-pasos-la-decada-de-1950">Primeros pasos, la década de 1950</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auge-y-caida-decadas-1960-y-1970">Auge y caída, décadas 1960 y 1970</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-revolucion-del-conocimiento-y-la-era-moderna-decadas-1980-y-1990">La revolución del conocimiento y la era moderna, décadas 1980 y 1990</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-siglo-xxi-y-el-auge-del-aprendizaje-automatico">El siglo XXI y el auge del aprendizaje automático</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-actualidad-y-el-futuro">La actualidad y el futuro</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduccion">
+<h1>Introducción<a class="headerlink" href="#introduccion" title="Permalink to this heading">#</a></h1>
+<p>La inteligencia artificial (IA) ha pasado de ser un concepto de ciencia ficción a una realidad transformadora en la informática y más allá. La capacidad de las máquinas para aprender, razonar y tomar decisiones ha llevado a avances tecnológicos que afectan todos los aspectos de nuestras vidas. En este capítulo, exploraremos los fundamentos de la inteligencia artificial y su relación directa con los sistemas de aprendizaje automático, presentando los conceptos y aplicaciones fundamentales que definen el panorama informático actual.</p>
+<p>Desde la visión artificial capaz de reconocer objetos en imágenes hasta la generación automática de texto, la IA está en constante evolución y esta evolución está impulsada en gran medida por los sistemas de aprendizaje automático. Estos sistemas permiten que las máquinas aprendan de los datos y mejoren su desempeño con la experiencia, lo que lleva a muchas aplicaciones útiles en campos tan diversos como la medicina, la industria, los medios y el entretenimiento. En este capítulo, comenzaremos a explorar los fundamentos de la inteligencia artificial y su desarrollo histórico. Analizaremos la diferencia entre IA débil y fuerte, y veremos cómo se pueden aplicar los conceptos de IA en un contexto informático. A continuación, nos sumergiremos en el mundo del aprendizaje automático, aprendiendo cómo las máquinas pueden aprender patrones y relaciones a partir de los datos y cómo eso se traduce en modelos que pueden hacer predicciones y decisiones.</p>
+<p>A medida que avancemos, exploraremos la importancia de la preparación y el procesamiento de datos, un paso esencial en la creación de modelos efectivos de aprendizaje automático. Discutiremos la importancia de los datos de entrenamiento, la transformación de características y la selección de características para garantizar que los modelos puedan aprender correctamente y de manera significativa. La capacitación y evaluación de modelos son aspectos importantes que no deben pasarse por alto. Profundizaremos en cómo los modelos se ajustan a los datos de entrenamiento y cómo medir su rendimiento en los nuevos datos de prueba. Exploraremos las funciones fit() y predict() de la biblioteca de aprendizaje de scikit, así como la importancia de la validación cruzada para garantizar la solidez de nuestros modelos.</p>
+<p>Los sistemas de inteligencia artificial y aprendizaje automático están en constante evolución, presentando oportunidades emocionantes y desafíos únicos para los científicos informáticos de hoy. Este capítulo proporcionará la base esencial para comprender cómo funcionan estos sistemas, cómo aplicarlos en situaciones de la vida real y cómo continuar aprendiendo y explorando en un campo en constante cambio. A medida que exploramos las diferentes secciones de este capítulo, trazaremos un camino para que los estudiantes se sumerjan en los fascinantes mundos de la IA y el aprendizaje automático.</p>
+<section id="conceptos-previos">
+<h2>Conceptos previos<a class="headerlink" href="#conceptos-previos" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Ciencia de datos</strong></p></td>
+<td><p>La ciencia de datos es un campo interdisciplinario que involucra la extracción, análisis e interpretación de información valiosa de conjuntos de datos. Combina habilidades de programación, estadísticas y dominio del negocio para tomar decisiones informadas y descubrir patrones y tendencias.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Inteligencia Artificial (IA)</strong></p></td>
+<td><p>La inteligencia artificial es la simulación de la inteligencia humana en máquinas. Se trata de crear sistemas que pueden aprender, razonar, resolver problemas y tomar decisiones similares a las de los seres humanos. Esto incluye áreas como el procesamiento del lenguaje natural, la visión por computadora y el aprendizaje automático.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Big Data</strong></p></td>
+<td><p>El big data se refiere a conjuntos de datos extremadamente grandes y complejos que superan las capacidades de las herramientas de procesamiento tradicionales. El big data se caracteriza por las “3 V’s”: volumen (cantidad masiva de datos), velocidad (velocidad a la que se generan los datos) y variedad (diversidad de tipos de datos).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Minería de Datos</strong></p></td>
+<td><p>La minería de datos es el proceso de descubrir patrones, relaciones y conocimientos útiles en grandes conjuntos de datos. Implica la extracción de información valiosa y no trivial a partir de datos que inicialmente pueden parecer caóticos o no estructurados.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Algoritmos y Modelos</strong></p></td>
+<td><p>Los algoritmos son pasos o instrucciones para resolver un problema específico. En el contexto del aprendizaje automático, los algoritmos son utilizados para entrenar modelos, que son representaciones matemáticas de un proceso o fenómeno en los datos. Estos modelos pueden predecir, clasificar u optimizar.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Parámetros e Hiperparámetros</strong></p></td>
+<td><p>ELos parámetros son configuraciones internas de un modelo que se ajustan durante el proceso de entrenamiento para lograr un mejor rendimiento en los datos de entrenamiento. Los hiperparámetros son configuraciones externas que se establecen antes del entrenamiento y afectan cómo se comporta un algoritmo de aprendizaje, como la velocidad de aprendizaje en un modelo de redes neuronales.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="historia-y-desarrollo-de-la-inteligencia-artificial">
+<h2>Historia y desarrollo de la inteligencia artificial<a class="headerlink" href="#historia-y-desarrollo-de-la-inteligencia-artificial" title="Permalink to this heading">#</a></h2>
+<p>La historia de la inteligencia artificial es un viaje fascinante que abarca más de medio siglo con avances, desafíos y momentos decisivos que dan forma al camino hacia la creación de máquinas inteligentes. Desde los humildes comienzos hasta los desarrollos de vanguardia de la actualidad, esta sección profundiza en los hitos clave y los números clave que han dado forma a la evolución de la inteligencia artificial.</p>
+<section id="primeros-pasos-la-decada-de-1950">
+<h3>Primeros pasos, la década de 1950<a class="headerlink" href="#primeros-pasos-la-decada-de-1950" title="Permalink to this heading">#</a></h3>
+<p>Las semillas de la inteligencia artificial se sembraron en la década de 1950, cuando científicos y matemáticos comenzaron a descubrir cómo las máquinas podían simular el pensamiento humano. El término “inteligencia artificial” fue acuñado por John McCarthy en 1956 durante una conferencia en el Dartmouth College. En aquellos primeros días, la atención se centró en la creación de programas que pudieran resolver problemas simples y simular el razonamiento humano básico.</p>
+</section>
+<section id="auge-y-caida-decadas-1960-y-1970">
+<h3>Auge y caída, décadas 1960 y 1970<a class="headerlink" href="#auge-y-caida-decadas-1960-y-1970" title="Permalink to this heading">#</a></h3>
+<p>Durante las décadas de 1960 y 1970, AI experimentó un período de optimismo seguido de una disminución de la confianza. Surgieron sistemas como el programa de ajedrez “El caballo de Troya” y el programa de lenguaje natural ELIZA, que imitaban conversaciones terapéuticas. Sin embargo, las expectativas no coincidieron con los resultados, lo que llevó a un período conocido como el “invierno de la IA”, en el que la financiación y los rendimientos disminuyeron.</p>
+</section>
+<section id="la-revolucion-del-conocimiento-y-la-era-moderna-decadas-1980-y-1990">
+<h3>La revolución del conocimiento y la era moderna, décadas 1980 y 1990<a class="headerlink" href="#la-revolucion-del-conocimiento-y-la-era-moderna-decadas-1980-y-1990" title="Permalink to this heading">#</a></h3>
+<p>La década de 1980 marcó el renacimiento de la inteligencia artificial. Los investigadores se centraron en los sistemas expertos, programas diseñados para imitar la toma de decisiones humana en dominios específicos. Algunos sistemas, como MYCIN para diagnóstico médico, mostraron resultados prometedores. A medida que avanzaban las décadas de 1980 y 1990, la potencia de procesamiento mejoró y surgieron nuevos enfoques, incluidas las redes neuronales y el procesamiento del lenguaje natural.</p>
+</section>
+<section id="el-siglo-xxi-y-el-auge-del-aprendizaje-automatico">
+<h3>El siglo XXI y el auge del aprendizaje automático<a class="headerlink" href="#el-siglo-xxi-y-el-auge-del-aprendizaje-automatico" title="Permalink to this heading">#</a></h3>
+<p>A principios del siglo XXI, la inteligencia artificial ha entrado en una nueva fase gracias a su enfoque en el aprendizaje automático y las redes neuronales profundas. Los algoritmos de aprendizaje automático, como el descenso de gradiente y las máquinas de vectores de soporte, están comenzando a revolucionar la forma en que el aprendizaje automático puede aprender patrones a partir de los datos. La disponibilidad de grandes conjuntos de datos y poder de procesamiento ha acelerado este avance, permitiendo el desarrollo de sistemas capaces de realizar tareas que antes eran impensables.</p>
+</section>
+<section id="la-actualidad-y-el-futuro">
+<h3>La actualidad y el futuro<a class="headerlink" href="#la-actualidad-y-el-futuro" title="Permalink to this heading">#</a></h3>
+<p>Hoy en día, la inteligencia artificial está en todas partes, desde asistentes virtuales en teléfonos hasta automóviles autónomos. Las redes neuronales profundas, el procesamiento del lenguaje natural y la visión por computadora están revolucionando la forma en que interactuamos con la tecnología. A medida que la IA continúa evolucionando, surgen desafíos éticos y regulatorios que requieren una consideración cuidadosa y una discusión abierta sobre cómo equilibrar el potencial de la IA con sus impactos.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sistemas de aprendizaje automático</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sistemas_supervisados/introduccion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introducción</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-previos">Conceptos previos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historia-y-desarrollo-de-la-inteligencia-artificial">Historia y desarrollo de la inteligencia artificial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primeros-pasos-la-decada-de-1950">Primeros pasos, la década de 1950</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auge-y-caida-decadas-1960-y-1970">Auge y caída, décadas 1960 y 1970</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-revolucion-del-conocimiento-y-la-era-moderna-decadas-1980-y-1990">La revolución del conocimiento y la era moderna, décadas 1980 y 1990</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-siglo-xxi-y-el-auge-del-aprendizaje-automatico">El siglo XXI y el auge del aprendizaje automático</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-actualidad-y-el-futuro">La actualidad y el futuro</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

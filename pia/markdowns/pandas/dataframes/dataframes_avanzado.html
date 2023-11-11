@@ -1,0 +1,1214 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>DataFrames Avanzado &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/pandas/dataframes/dataframes_avanzado';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Ejercicios Dataframes 2" href="ejercicios2.html" />
+    <link rel="prev" title="Ejercicios Dataframes 1" href="ejercicios1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Lenguajes de programación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes.html">DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">DataFrames Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>DataFrames Avanzado</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtener-las-caracteristicas-de-un-dataframe">Obtener las características de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remodelar-un-dataframe">Remodelar un DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot">Pivot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack-y-unstack">Stack y Unstack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#melt">Melt</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dataframes-avanzado">
+<h1>DataFrames Avanzado<a class="headerlink" href="#dataframes-avanzado" title="Permalink to this heading">#</a></h1>
+<p>En el apartado anterior hemos visto como interactuar un poco con los DataFrames, cargar, exportar, obtener elementos, particionar un DataFrame y sus atributos y métodos. En este apartado vamos a ver como trabajar un poco a nivel avanzado.</p>
+<section id="obtener-las-caracteristicas-de-un-dataframe">
+<h2>Obtener las características de un DataFrame<a class="headerlink" href="#obtener-las-caracteristicas-de-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>Un DataFrame es una herramienta muy importante dentro del análisis de datos. Permite de forma fácil obtener distintas características e información útil en el proceso de análisis de datos.</p>
+<p>Vamos a cargar un fichero csv en un DataFrame para poder analizar sus datos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./csv/countries.csv&#39;</span><span class="p">)</span> 
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country_id</th>
+      <th>country_name</th>
+      <th>region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AR</td>
+      <td>Argentina</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU</td>
+      <td>Australia</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BE</td>
+      <td>Belgium</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BR</td>
+      <td>Brazil</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CA</td>
+      <td>Canada</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CH</td>
+      <td>Switzerland</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Una vez cargado el DataFrame, podemos pegalre un primer vistazo con <code class="docutils literal notranslate"><span class="pre">head</span></code> o <code class="docutils literal notranslate"><span class="pre">tail</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country_id</th>
+      <th>country_name</th>
+      <th>region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AR</td>
+      <td>Argentina</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU</td>
+      <td>Australia</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BE</td>
+      <td>Belgium</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BR</td>
+      <td>Brazil</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CA</td>
+      <td>Canada</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Head nos muestra los <code class="docutils literal notranslate"><span class="pre">n</span></code> primeros elementos de un DataFrame, y por defecto 5. A su vez, tail muestra los <code class="docutils literal notranslate"><span class="pre">n</span></code> últimos elementos de un DataFrame, por defecto 5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country_id</th>
+      <th>country_name</th>
+      <th>region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>AU</td>
+      <td>Australia</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BE</td>
+      <td>Belgium</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BR</td>
+      <td>Brazil</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CA</td>
+      <td>Canada</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CH</td>
+      <td>Switzerland</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Otras funciones interesantes para obtener información de un DataFrame son:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">info()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">describe()</span></code></p></li>
+</ul>
+<p>La primera nos muestra un resumen de los datos que contiene el DataFrame, cuantas filas tiene, columnas, valores nulos, etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 6 entries, 0 to 5
+Data columns (total 3 columns):
+ #   Column        Non-Null Count  Dtype 
+---  ------        --------------  ----- 
+ 0   country_id    6 non-null      object
+ 1   country_name  6 non-null      object
+ 2   region_id     6 non-null      int64 
+dtypes: int64(1), object(2)
+memory usage: 276.0+ bytes
+</pre></div>
+</div>
+</div>
+</div>
+<p>La segunda, información estadística del DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>6.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1.833333</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.752773</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.250000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>3.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A su vez, podemos utilizar el parámetro all para obtener información más detallada del DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country_id</th>
+      <th>country_name</th>
+      <th>region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>6</td>
+      <td>6</td>
+      <td>6.000000</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>6</td>
+      <td>6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>AR</td>
+      <td>Argentina</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>1</td>
+      <td>1</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.833333</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.752773</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.250000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="remodelar-un-dataframe">
+<h2>Remodelar un DataFrame<a class="headerlink" href="#remodelar-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>La manipulación de DataFrames es una parte fundamental del análisis de datos en Python. A menudo, necesitamos remodelar nuestros datos para adaptarlos a nuestras necesidades de análisis. En este apartado, exploraremos cuatro funciones clave de remodelación de DataFrames en la biblioteca pandas: <code class="docutils literal notranslate"><span class="pre">pivot</span></code>, <code class="docutils literal notranslate"><span class="pre">stack</span></code>, <code class="docutils literal notranslate"><span class="pre">unstack</span></code> y <code class="docutils literal notranslate"><span class="pre">melt</span></code>. Estas funciones son esenciales para transformar datos, cambiar su estructura y realizar tareas de agregación. A lo largo de esta documentación, aprenderás cómo usar estas funciones con ejemplos prácticos y casos de uso comunes. Para ello, vamos a partir del siguiente DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Fecha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2023-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-01-02&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-01-02&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Categoria&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Tipo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Valor_Cantidad&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+    <span class="s1">&#39;Valor_Precio&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>Categoria</th>
+      <th>Tipo</th>
+      <th>Valor_Cantidad</th>
+      <th>Valor_Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2023-01-01</td>
+      <td>A</td>
+      <td>X</td>
+      <td>10</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2023-01-01</td>
+      <td>B</td>
+      <td>Y</td>
+      <td>15</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2023-01-02</td>
+      <td>A</td>
+      <td>X</td>
+      <td>8</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2023-01-02</td>
+      <td>B</td>
+      <td>Y</td>
+      <td>12</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="pivot">
+<h3>Pivot<a class="headerlink" href="#pivot" title="Permalink to this heading">#</a></h3>
+<p>La función pivot permite reorganizar un DataFrame para cambiar su estructura de datos de largo a ancho. Puede ser especialmente útil cuando se desea comparar categorías o variables a través de columnas.</p>
+<p><img alt="" src="../../../_images/04.png" /></p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">DataFrame.pivot(*,</span> <span class="pre">columns,</span> <span class="pre">index=_NoDefault.no_default,</span> <span class="pre">values=_NoDefault.no_default)</span></code></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pivot_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Categoria&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Valor_Cantidad&#39;</span><span class="p">)</span>
+
+<span class="n">pivot_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Categoria</th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>Fecha</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023-01-01</th>
+      <td>10</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>2023-01-02</th>
+      <td>8</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La función pivot puede producir el error <strong>“ValueError: Index contains duplicate entries, cannot reshape”</strong> cuando intentas aplicar la función en un DataFrame y el índice especificado (generalmente en la sección index del método pivot) contiene entradas duplicadas. Pandas no permite usar pivot si hay duplicados en las combinaciones de índice y columnas. Para resolver este error, puedes considerar las siguientes opciones:</p>
+<ol class="arabic simple">
+<li><p><strong>Eliminar los duplicados</strong>: La forma más sencilla de resolver el problema es eliminar las filas duplicadas antes de aplicar pivot. Puedes utilizar el método <strong>drop_duplicates()</strong> para hacerlo.</p></li>
+<li><p><strong>Agregar los valores duplicados</strong>: Si tienes valores duplicados que deseas conservar, debes realizar una operación de agregación antes de aplicar pivot. Puedes usar el método <strong>groupby</strong> para agrupar y luego aplicar una función de agregación, como <strong>sum</strong> o <strong>mean</strong>, para combinar los valores duplicados.</p></li>
+</ol>
+</section>
+<section id="stack-y-unstack">
+<h3>Stack y Unstack<a class="headerlink" href="#stack-y-unstack" title="Permalink to this heading">#</a></h3>
+<p>Las funciones <strong>stack</strong> y <strong>unstack</strong> permiten cambiar entre estructuras de datos anchas y largas.</p>
+<p><strong>Stack</strong> convierte columnas en un índice múltiple:</p>
+<p><img alt="" src="../../../_images/05.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">DataFrame.stack(level=-1,</span> <span class="pre">dropna=_NoDefault.no_default,</span> <span class="pre">sort=_NoDefault.no_default,</span> <span class="pre">future_stack=False</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stacked_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;Categoria&#39;</span><span class="p">,</span> <span class="s1">&#39;Tipo&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+
+<span class="n">stacked_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fecha       Categoria  Tipo                
+2023-01-01  A          X     Valor_Cantidad    10
+                             Valor_Precio       5
+            B          Y     Valor_Cantidad    15
+                             Valor_Precio       6
+2023-01-02  A          X     Valor_Cantidad     8
+                             Valor_Precio       7
+            B          Y     Valor_Cantidad    12
+                             Valor_Precio       9
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por su parte <strong>unstack</strong> convierte un índice múltiple en columnas.</p>
+<p><img alt="" src="../../../_images/06.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">DataFrame.unstack(level=-1,</span> <span class="pre">fill_value=None,</span> <span class="pre">sort=True)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unstacked_df</span> <span class="o">=</span> <span class="n">stacked_df</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">unstacked_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Categoria</th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>Fecha</th>
+      <th>Tipo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">2023-01-01</th>
+      <th rowspan="2" valign="top">X</th>
+      <th>Valor_Cantidad</th>
+      <td>10.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Valor_Precio</th>
+      <td>5.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Y</th>
+      <th>Valor_Cantidad</th>
+      <td>NaN</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>Valor_Precio</th>
+      <td>NaN</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2023-01-02</th>
+      <th rowspan="2" valign="top">X</th>
+      <th>Valor_Cantidad</th>
+      <td>8.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Valor_Precio</th>
+      <td>7.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Y</th>
+      <th>Valor_Cantidad</th>
+      <td>NaN</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>Valor_Precio</th>
+      <td>NaN</td>
+      <td>9.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="melt">
+<h3>Melt<a class="headerlink" href="#melt" title="Permalink to this heading">#</a></h3>
+<p>La función melt se utiliza para cambiar un DataFrame de ancho a largo. Convierte múltiples columnas en dos columnas: una que contiene las variables y otra que contiene los valores correspondientes.</p>
+<p><img alt="" src="../../../_images/07.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">pandas.melt(frame,</span> <span class="pre">id_vars=None,</span> <span class="pre">value_vars=None,</span> <span class="pre">var_name=None,</span> <span class="pre">value_name='value',</span> <span class="pre">col_level=None,</span> <span class="pre">ignore_index=True)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">melted_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;Categoria&#39;</span><span class="p">,</span> <span class="s1">&#39;Tipo&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Valor_Cantidad&#39;</span><span class="p">,</span> <span class="s1">&#39;Valor_Precio&#39;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Valor&#39;</span><span class="p">)</span>
+
+
+<span class="n">melted_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>Categoria</th>
+      <th>Tipo</th>
+      <th>Variable</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2023-01-01</td>
+      <td>A</td>
+      <td>X</td>
+      <td>Valor_Cantidad</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2023-01-01</td>
+      <td>B</td>
+      <td>Y</td>
+      <td>Valor_Cantidad</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2023-01-02</td>
+      <td>A</td>
+      <td>X</td>
+      <td>Valor_Cantidad</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2023-01-02</td>
+      <td>B</td>
+      <td>Y</td>
+      <td>Valor_Cantidad</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2023-01-01</td>
+      <td>A</td>
+      <td>X</td>
+      <td>Valor_Precio</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2023-01-01</td>
+      <td>B</td>
+      <td>Y</td>
+      <td>Valor_Precio</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2023-01-02</td>
+      <td>A</td>
+      <td>X</td>
+      <td>Valor_Precio</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2023-01-02</td>
+      <td>B</td>
+      <td>Y</td>
+      <td>Valor_Precio</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>© 2008–2022, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team
+Licensed under the 3-clause BSD License.
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/1.5.0/user_guide/reshaping.html">https://pandas.pydata.org/pandas-docs/version/1.5.0/user_guide/reshaping.html</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/pandas/dataframes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ejercicios1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ejercicios Dataframes 1</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ejercicios2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ejercicios Dataframes 2</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtener-las-caracteristicas-de-un-dataframe">Obtener las características de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remodelar-un-dataframe">Remodelar un DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot">Pivot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack-y-unstack">Stack y Unstack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#melt">Melt</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

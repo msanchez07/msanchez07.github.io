@@ -1,0 +1,2714 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>DataFrames &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/pandas/dataframes/dataframes';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Ejercicios Dataframes 1" href="ejercicios1.html" />
+    <link rel="prev" title="Ejercicios Series" href="../series/ejercicios_series.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Lenguajes de programación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_avanzado.html">DataFrames Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>DataFrames</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-un-dataframe">Crear un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-dataframes-a-ficheros">Exportar DataFrames a ficheros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-a-ficheros-csv">Exportar a ficheros CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-a-un-fichero-excel">Exportar a un fichero Excel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-a-un-fichero-json">Exportar a un fichero JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-a-base-de-datos-sql">Exportar a base de datos SQL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-un-dataframe">Atributos de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-un-dataframe">Métodos de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acceso-a-los-elementos-de-un-dataframe">Acceso a los elementos de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renombrar-elementos-de-un-dataframe">Renombrar elementos de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reindexar-un-dataframe">Reindexar un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajar-con-columnas-de-un-dataframe">Trabajar con columnas de un DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anadir-columnas">Añadir columnas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-sobre-columnas">Operaciones sobre columnas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-y-particionar-un-dataframe">Indexar y particionar un DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-con">Indexar con <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-con-loc-e-iloc">Indexar con <code class="docutils literal notranslate"><span class="pre">loc</span></code> e <code class="docutils literal notranslate"><span class="pre">iloc</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexado-booleano">Indexado booleano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-con-query">Indexar con <code class="docutils literal notranslate"><span class="pre">query()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dataframes">
+<h1><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">DataFrames</a><a class="headerlink" href="#dataframes" title="Permalink to this heading">#</a></h1>
+<p>Un DataFrame de Pandas es una estructura de datos bidimensional altamente flexible y potentec. Esencialmente, un DataFrame es una tabla con filas y columnas, similar a una hoja de cálculo o una tabla en una base de datos relacional. Cada columna en un DataFrame de Pandas puede contener diferentes tipos de datos, como números, cadenas de texto, fechas, etc.</p>
+<p>Algunas características clave de un DataFrame de Pandas incluyen:</p>
+<ul class="simple">
+<li><p><strong>Organización de datos tabulares</strong>: Los datos se organizan en filas y columnas, lo que facilita la representación y manipulación de datos en forma de tabla.</p></li>
+<li><p><strong>Etiquetas</strong>: Tanto las filas como las columnas pueden tener etiquetas, lo que permite un acceso más intuitivo a los datos.</p></li>
+<li><p><strong>Flexibilidad</strong>: Los DataFrames pueden manejar una amplia variedad de tipos de datos en cada columna y ofrecen numerosas operaciones para manipular, filtrar y analizar los datos.</p></li>
+<li><p><strong>Alto rendimiento</strong>: Pandas está diseñado para un rendimiento eficiente en la manipulación de datos, lo que lo hace adecuado para trabajar con conjuntos de datos grandes.</p></li>
+<li><p><strong>Integración con otras bibliotecas</strong>: Los DataFrames de Pandas se utilizan comúnmente junto con bibliotecas como NumPy, Matplotlib y Scikit-Learn para análisis de datos y visualización.</p></li>
+</ul>
+<p>Los DataFrames de Pandas son una herramienta esencial en la ciencia de datos y el análisis de datos en Python, lo que permite a los usuarios cargar, limpiar, transformar y analizar datos de manera efectiva.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">data</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    1
+1    2
+2    3
+3    4
+4    5
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p> </p>
+<p><img alt="" src="../../../_images/03.png" /></p>
+<p> </p>
+<section id="crear-un-dataframe">
+<h2>Crear un DataFrame<a class="headerlink" href="#crear-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>Para crear un DataFrame en Pandas, primero debes importar la biblioteca Pandas y luego proporcionar los datos que deseas incluir en el DataFrame. A continuación, se muestra cómo crear un DataFrame desde cero utilizando varias formas comunes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;Nombre&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Edad&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;Ciudad&quot;</span><span class="p">:</span> <span class="s2">&quot;Nueva York&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;Nombre&quot;</span><span class="p">:</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="s2">&quot;Edad&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="s2">&quot;Ciudad&quot;</span><span class="p">:</span> <span class="s2">&quot;Chicago&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;Nombre&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Edad&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;Ciudad&quot;</span><span class="p">:</span> <span class="s2">&quot;Los Ángeles&quot;</span><span class="p">},</span> 
+<span class="p">]</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> 
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>En este ejemplo, cada diccionario representa una fila y las claves del diccionario se convierten en nombres de columnas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;Nueva York&quot;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;Los Ángeles&quot;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="s2">&quot;Chicago&quot;</span><span class="p">]]</span> 
+
+<span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nombre&quot;</span><span class="p">,</span> <span class="s2">&quot;Edad&quot;</span><span class="p">,</span> <span class="s2">&quot;Ciudad&quot;</span><span class="p">]</span> 
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">column_names</span><span class="p">)</span> 
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Aquí, proporcionamos una lista de listas para los datos y una lista separada para los nombres de las columnas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./csv/countries.csv&#39;</span><span class="p">)</span> 
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country_id</th>
+      <th>country_name</th>
+      <th>region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AR</td>
+      <td>Argentina</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU</td>
+      <td>Australia</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BE</td>
+      <td>Belgium</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BR</td>
+      <td>Brazil</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CA</td>
+      <td>Canada</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CH</td>
+      <td>Switzerland</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Solo asegúrate de que el archivo CSV esté en el mismo directorio o proporciona la ruta correcta al archivo. Podemos abrir otros tipos de archivos, como los parquet, optimizados para guardar la información, o ficheros excel. Mira la documentación de pandas para obtener más información.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Nombre&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Edad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nueva York&quot;</span><span class="p">,</span> <span class="s2">&quot;Los Ángeles&quot;</span><span class="p">,</span> <span class="s2">&quot;Chicago&quot;</span><span class="p">]</span>
+<span class="n">df</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La última manera para crear un DataFrame pasa por crear uno vacío e ir añadiéndole datos.</p>
+</section>
+<section id="exportar-dataframes-a-ficheros">
+<h2>Exportar DataFrames a ficheros<a class="headerlink" href="#exportar-dataframes-a-ficheros" title="Permalink to this heading">#</a></h2>
+<p>Pandas ofrece varias formas de exportar DataFrames a archivos para guardar los datos en diferentes formatos, como CSV, Excel, JSON, SQL, y más. A continuación, se describe cómo exportar un DataFrame a algunos formatos comunes.</p>
+<div class="tip admonition">
+<p class="admonition-title">Nota</p>
+<p>El código está comentado para que no se ejecute la instruccion.</p>
+</div>
+<section id="exportar-a-ficheros-csv">
+<h3>Exportar a ficheros CSV<a class="headerlink" href="#exportar-a-ficheros-csv" title="Permalink to this heading">#</a></h3>
+<p>Para guardar un DataFrame en un archivo CSV, puedes utilizar el método to_csv de Pandas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df.to_csv(&#39;mi_archivo.csv&#39;, index=False) </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>El argumento index=False evita que se guarde el índice del DataFrame como una columna adicional en el archivo CSV.</p>
+</section>
+<section id="exportar-a-un-fichero-excel">
+<h3>Exportar a un fichero Excel<a class="headerlink" href="#exportar-a-un-fichero-excel" title="Permalink to this heading">#</a></h3>
+<p>Para exportar un DataFrame a un archivo de Excel, puedes usar el método to_excel:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df.to_excel(&#39;mi_archivo.xlsx&#39;, index=False) </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Este código guardará el DataFrame en un archivo de Excel sin incluir el índice.</p>
+</section>
+<section id="exportar-a-un-fichero-json">
+<h3>Exportar a un fichero JSON<a class="headerlink" href="#exportar-a-un-fichero-json" title="Permalink to this heading">#</a></h3>
+<p>De igual manera, un DataFrame puede exportar su información a ficheros JSON:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df.to_json(&#39;mi_archivo.json&#39;, orient=&#39;records&#39;)  </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>El argumento orient=’records’ especifica cómo se deben organizar los datos en el archivo JSON.</p>
+</section>
+<section id="exportar-a-base-de-datos-sql">
+<h3>Exportar a base de datos SQL<a class="headerlink" href="#exportar-a-base-de-datos-sql" title="Permalink to this heading">#</a></h3>
+<p>Pandas permite exportar un DataFrame directamente a una base de datos SQL utilizando la función to_sql:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span> 
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///mi_base_de_datos.db&#39;</span><span class="p">)</span> 
+<span class="c1">#df.to_sql(&#39;mi_tabla&#39;, con=engine, if_exists=&#39;replace&#39;, index=False) </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En este ejemplo, create_engine se utiliza para establecer una conexión con una base de datos SQL (en este caso, SQLite). El DataFrame se guarda en la tabla especificada en la base de datos.</p>
+</section>
+</section>
+<section id="atributos-de-un-dataframe">
+<h2>Atributos de un DataFrame<a class="headerlink" href="#atributos-de-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>Un DataFrame cuenta con varias propiedades o atributos que permiten manipular u obtener información de sus datos. A continuación, se muestran algunas de estas propiedades:</p>
+<p>Here’s a table of the main ways you can create dataframes (see the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html#dataframe">Pandas documentation</a> for more):</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Atributo</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>index</strong></p></td>
+<td><p>El índice es una etiqueta para las filas del DataFrame. Puede ser un conjunto de etiquetas únicas que identifican cada fila de manera única. El índice facilita el acceso y la manipulación de filas específicas.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>columns</strong></p></td>
+<td><p>Las columnas son las etiquetas para las variables o características en el DataFrame. Cada columna representa una variable y tiene un nombre único que la identifica. Pueden contener datos de diferentes tipos.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>shape</strong></p></td>
+<td><p>Este atributo muestra las dimensiones del DataFrame en términos de filas y columnas.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>dtypes</strong></p></td>
+<td><p>Describe los tipos de datos de cada columna en el DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>size</strong></p></td>
+<td><p>El número total de elementos en el DataFrame, que es igual al producto del número de filas y columnas.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>T</strong></p></td>
+<td><p>El atributo .T te permite transponer el DataFrame, es decir, intercambiar filas y columnas.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="metodos-de-un-dataframe">
+<h2>Métodos de un DataFrame<a class="headerlink" href="#metodos-de-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>A su vez, un DataFrame de Pandas cuenta con múltiples métodos que nos permiten realizar operaciones sobre los datos o mostrar información relevante. Vamos a ver algunos de ellos:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>head() y tail()</strong></p></td>
+<td><p>Estos métodos te permiten ver las primeras filas (usando head()) y las últimas filas (usando tail()) del DataFrame. Son útiles para obtener una vista previa de los datos.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>info()</strong></p></td>
+<td><p>Este método proporciona información sobre el DataFrame, incluyendo la cantidad de valores no nulos en cada columna, el uso de memoria y los tipos de datos de las columnas.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>describe()</strong></p></td>
+<td><p>Devuelve estadísticas descriptivas básicas para columnas numéricas, como la media, la desviación estándar, el mínimo, el máximo y los cuartiles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>iloc y loc</strong></p></td>
+<td><p>Estos métodos permiten la selección de datos basada en la posición (iloc) o etiquetas (loc) en el DataFrame. Son fundamentales para acceder a datos específicos.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>select_dtypes(include=None, exclude=None)</strong></p></td>
+<td><p>Permite seleccionar las columnas indicando los tipos de las columnas que queremos obtener.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>drop()</strong></p></td>
+<td><p>Permite eliminar filas o columnas del DataFrame. Puedes especificar los elementos a eliminar mediante etiquetas y especificar si deseas eliminar filas o columnas.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sort_values(by=[cols])</strong></p></td>
+<td><p>Ordena el DataFrame en función de los valores en una o más columnas.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>groupby(by=[cols])</strong></p></td>
+<td><p>Se utiliza para agrupar filas basadas en los valores de una o más columnas, lo que permite realizar operaciones de agregación en grupos de datos.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>merge() y join()</strong></p></td>
+<td><p>Estos métodos permiten combinar dos DataFrames en función de una o más columnas comunes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>fillna()</strong></p></td>
+<td><p>Rellena valores faltantes (NaN) en el DataFrame con un valor especificado o mediante una estrategia de llenado.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>drop_duplicates()</strong></p></td>
+<td><p>Elimina filas duplicadas en el DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>apply() y applymap()</strong></p></td>
+<td><p>Estos métodos se utilizan para aplicar funciones a filas o columnas, o a cada elemento del DataFrame, respectivamente.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>plot()</strong></p></td>
+<td><p>Permite crear gráficos directamente desde un DataFrame para visualizar los datos.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="acceso-a-los-elementos-de-un-dataframe">
+<h2>Acceso a los elementos de un DataFrame<a class="headerlink" href="#acceso-a-los-elementos-de-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>Existen distintas formas para poder acceder a los datos de un DataFrame. A continuación, vamos a mostrar algunas de ellas partiendo del siguiente DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Nombre&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Edad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nueva York&quot;</span><span class="p">,</span> <span class="s2">&quot;Los Ángeles&quot;</span><span class="p">,</span> <span class="s2">&quot;Chicago&quot;</span><span class="p">]</span>
+<span class="n">df</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Lo primero que vamos a seleccionar datos en base a su posición en el DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Los Ángeles&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>La función <strong>iloc</strong> nos permite seleccionar elementos en base a su posición. En el ejemplo anterior, estamos seleccionado los elementos de la fila 1 y columna 2, lo cual nos da como resultado “Los ángeles”. Cabe destacar que también podemos indicar un número de filas y columnas mayor a uno, es decir, indicar un rango de filas o columnas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nombre    Bob
+Edad       30
+Name: 1, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por último, podemos indicar la fila que queremos obtener y nos devolverá una Serie con los datos de esa fila:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nombre            Bob
+Edad               30
+Ciudad    Los Ángeles
+Name: 1, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por otro lado, podemos acceder a los elementos de un DataFrame a través de los nombres de sus elementos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Nombre&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      Alice
+1        Bob
+2    Charlie
+Name: Nombre, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esto nos devuelve una serie con los elementos correspondientes a la columna seleccionada. Si el nombre de la columna no tiene espacios, podemos acceder a ella de forma directa tal y como se muestra en el siguiente ejemplo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">Nombre</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      Alice
+1        Bob
+2    Charlie
+Name: Nombre, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por último, podemos crear un nuevo sub-DataFrame, indicando el nombre de las columnas que queremos incluir:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Nombre&#39;</span><span class="p">,</span> <span class="s1">&#39;Edad&#39;</span><span class="p">]]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="renombrar-elementos-de-un-dataframe">
+<h2>Renombrar elementos de un DataFrame<a class="headerlink" href="#renombrar-elementos-de-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>Para renombrar elementos en un DataFrame de Pandas, se pueden utilizar varios métodos según las necesidades. Vamos a partir del mismo DataFrame anterior para mostrar el funcionamiento de los métodos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Nombre&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Edad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nueva York&quot;</span><span class="p">,</span> <span class="s2">&quot;Los Ángeles&quot;</span><span class="p">,</span> <span class="s2">&quot;Chicago&quot;</span><span class="p">]</span>
+<span class="n">df</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Lo primero que podemos hacer es renombrar una o varias columnas utilizando el método <strong>rename</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Nombre&quot;</span><span class="p">:</span> <span class="s2">&quot;Nombre corto&quot;</span><span class="p">,</span> <span class="s2">&quot;Edad&quot;</span><span class="p">:</span> <span class="s2">&quot;Age&quot;</span><span class="p">})</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>También podemos cambiar el índice de las filas. Para ello, se debe indicar mediante un diccionario los anteriores índices y los nuevos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">2000</span><span class="p">})</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="reindexar-un-dataframe">
+<h2>Reindexar un DataFrame<a class="headerlink" href="#reindexar-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>Reindexar un DataFrame en Pandas implica cambiar el índice (etiquetas de filas) y, opcionalmente, reordenar las filas en un nuevo orden. Puedes utilizar el método <strong>reindex</strong> para llevar a cabo esta operación. Aquí tienes un ejemplo de cómo reindexar un DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Nombre corto&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Ciudad&quot;</span><span class="p">],</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="trabajar-con-columnas-de-un-dataframe">
+<h2>Trabajar con columnas de un DataFrame<a class="headerlink" href="#trabajar-con-columnas-de-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>Para trabajar con las columnas de un DataFrame en Pandas, puedes realizar diversas operaciones, como acceder a columnas específicas, realizar cálculos, modificar datos o crear nuevas columnas. A continuación, se mostrarán algunas de las operaciones comunes que se pueden realizar:</p>
+<section id="anadir-columnas">
+<h3>Añadir columnas<a class="headerlink" href="#anadir-columnas" title="Permalink to this heading">#</a></h3>
+<p>Puedes agregar una nueva columna al DataFrame simplemente asignándole valores. Por ejemplo, para agregar una columna ‘Sueldo’:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df[&quot;Sueldo&quot;] = [1000, 2000], fallaría, la lista debe tener el mismo número de elementos.</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Sueldo&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">]</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+      <th>Sueldo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3000</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+      <td>4000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>También podemos crear una nueva columna asignado esta a una serie:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hijos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+      <th>Sueldo</th>
+      <th>Hijos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+      <td>1000</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+      <td>2000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+      <td>4000</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>También podemos crear nuevas columnas en base a valores de otras columnas. Por ejemplo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Tiene hijos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hijos&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+      <th>Sueldo</th>
+      <th>Hijos</th>
+      <th>Tiene hijos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+      <td>1000</td>
+      <td>1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+      <td>2000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+      <td>4000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="operaciones-sobre-columnas">
+<h3>Operaciones sobre columnas<a class="headerlink" href="#operaciones-sobre-columnas" title="Permalink to this heading">#</a></h3>
+<p>Puedes realizar operaciones matemáticas en una columna y asignar el resultado a una nueva columna. Por ejemplo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+      <th>Sueldo</th>
+      <th>Hijos</th>
+      <th>Tiene hijos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>26</td>
+      <td>Nueva York</td>
+      <td>1000</td>
+      <td>1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>31</td>
+      <td>Los Ángeles</td>
+      <td>2000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>36</td>
+      <td>Chicago</td>
+      <td>4000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Puedes cambiar los valores de una columna específica utilizando la notación de corchetes. Por ejemplo, para cambiar el valor de la primera fila en la columna ‘Edad’ a 18:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13970/836562857.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&quot;Age&quot;][0] = 18
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+      <th>Sueldo</th>
+      <th>Hijos</th>
+      <th>Tiene hijos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>18</td>
+      <td>Nueva York</td>
+      <td>1000</td>
+      <td>1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>31</td>
+      <td>Los Ángeles</td>
+      <td>2000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>36</td>
+      <td>Chicago</td>
+      <td>4000</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Otra operación bastante interesante es aplicar una función a una columna a través del método apply:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">concatenar_datos</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;La persona &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; vive en &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ciudad</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;.&quot;</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Concatenacion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">concatenar_datos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Nombre corto&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Ciudad&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Ciudad</th>
+      <th>Sueldo</th>
+      <th>Hijos</th>
+      <th>Tiene hijos</th>
+      <th>Concatenacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>18</td>
+      <td>Nueva York</td>
+      <td>1000</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>La persona Alice vive en Nueva York.</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>31</td>
+      <td>Los Ángeles</td>
+      <td>2000</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>La persona Bob vive en Los Ángeles.</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3000</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>La persona 0 vive en 0.</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>36</td>
+      <td>Chicago</td>
+      <td>4000</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>La persona Charlie vive en Chicago.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Finalmente, puedes eliminar una columna utilizando el método drop. Por ejemplo, para eliminar la columna ‘Ciudad’:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Ciudad&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre corto</th>
+      <th>Age</th>
+      <th>Sueldo</th>
+      <th>Hijos</th>
+      <th>Tiene hijos</th>
+      <th>Concatenacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>18</td>
+      <td>1000</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>La persona Alice vive en Nueva York.</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>Bob</td>
+      <td>31</td>
+      <td>2000</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>La persona Bob vive en Los Ángeles.</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>0</td>
+      <td>1</td>
+      <td>3000</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>La persona 0 vive en 0.</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>Charlie</td>
+      <td>36</td>
+      <td>4000</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>La persona Charlie vive en Chicago.</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="indexar-y-particionar-un-dataframe">
+<h2>Indexar y particionar un DataFrame<a class="headerlink" href="#indexar-y-particionar-un-dataframe" title="Permalink to this heading">#</a></h2>
+<p>Aunque algunas de estas operaciones ya las hemos visto, resultra interesante volver a verlas y entender como podemos indexar y redimensionar DataFrames.</p>
+<p>Para ello, vamos a utilizar los siguientes elementos:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.loc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.iloc</span></code></p></li>
+<li><p>Indexado booleano</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query()</span></code></p></li>
+</ol>
+<p>Vamos a volver a generar el DataFrame anterior y mostrar las opciones que nos ofrece pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Nombre&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Edad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Ciudad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nueva York&quot;</span><span class="p">,</span> <span class="s2">&quot;Los Ángeles&quot;</span><span class="p">,</span> <span class="s2">&quot;Chicago&quot;</span><span class="p">]</span>
+<span class="n">df</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="indexar-con">
+<h3>Indexar con <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code><a class="headerlink" href="#indexar-con" title="Permalink to this heading">#</a></h3>
+<p>Como ya hemos visto, podemos obtener una columna de un DataFrame indicando su nombre:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Nombre&quot;</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      Alice
+1        Bob
+2    Charlie
+Name: Nombre, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esto nos devuelve una serie con el contenido de la columna. Pero si queremos que se devuelva un DataFrame con el contenido de la columna, debemos usar doble <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Nombre&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A su vez, podemos indicar varias columnas para obtener un subconjunto de un DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Nombre&quot;</span><span class="p">,</span> <span class="s2">&quot;Ciudad&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Por otro lado, podemos indicar un rango de filas para seleccionar un grupo de estas en un DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Cabe destacar que no podemos indicar solo el índice de una fila, ya que esto fallaría.</p>
+<p>Otro ejemplo de selección de filas sería el siguiente, donde hemos indicado donde empezamos pero no donde terminamos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="indexar-con-loc-e-iloc">
+<h3>Indexar con <code class="docutils literal notranslate"><span class="pre">loc</span></code> e <code class="docutils literal notranslate"><span class="pre">iloc</span></code><a class="headerlink" href="#indexar-con-loc-e-iloc" title="Permalink to this heading">#</a></h3>
+<p>Como ya hemos mencionado anteriormente, estos métodos permiten la selección de datos basada en la posición (iloc) o etiquetas (loc) en el DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nombre         Alice
+Edad              25
+Ciudad    Nueva York
+Name: 0, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Como se puede observar, esta instrucción devuelve una serie con el contenido de la primera columna. Pero si indicamos un rango de columnas, en vez de eso, nos va a devolver un DataFrame con el valor de las columnas seleccionadas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Por otro lado, podemos acceder al valor de una celda indicando la fila y la columna:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35
+</pre></div>
+</div>
+</div>
+</div>
+<p>O crear un nuevo DataFrame donde indiquemos las celdas que queremos seleccionar:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Con la función loc podemos seleccionar una columna indicando su nombre:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Nombre&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      Alice
+1        Bob
+2    Charlie
+Name: Nombre, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>O un conjunto de columnas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Nombre&#39;</span><span class="p">:</span><span class="s1">&#39;Edad&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A su vez, podemos indicar las filas que queremos seleccionar de una columna o columnas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Ciudad&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Finalmente, podemos jugar con el atributo <code class="docutils literal notranslate"><span class="pre">índex</span></code> y <code class="docutils literal notranslate"><span class="pre">columns</span></code> para acceder a los valores de las filas y las columnas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RangeIndex(start=0, stop=3, step=1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Nombre&#39;, &#39;Edad&#39;, &#39;Ciudad&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Ciudad&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Nueva York&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="indexado-booleano">
+<h3>Indexado booleano<a class="headerlink" href="#indexado-booleano" title="Permalink to this heading">#</a></h3>
+<p>Otra opción que tenemos es indexar el contenido a través de fórmulas booleanas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Por ejemplo, vamos a filtrar las filas de aquellas personas que tengan una edad mayor o igual a 30:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Edad&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>O por otro lado, aquellas que se llamen Alice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Nombre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Alice&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>25</td>
+      <td>Nueva York</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="indexar-con-query">
+<h3>Indexar con <code class="docutils literal notranslate"><span class="pre">query()</span></code><a class="headerlink" href="#indexar-con-query" title="Permalink to this heading">#</a></h3>
+<p>Finalmente, podemos utilizar el método query para realizar consultas a nuestro DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Edad &gt; 25 &amp; Nombre == &#39;Bob&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La anterior consulta nos filtra las personas que se llamen Bob y tengan una edad mayor a 25. Cabe destacar que toda query puede representarse mediante consultas booleanas o viceversa:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Edad&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Nombre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Bob&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Adicionalmente a esto, el método query permite utilizar variables ya definidad:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edad_minima</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Edad &gt; @edad_minima&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>30</td>
+      <td>Los Ángeles</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+      <td>Chicago</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/pandas/dataframes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../series/ejercicios_series.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ejercicios Series</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ejercicios1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ejercicios Dataframes 1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-un-dataframe">Crear un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-dataframes-a-ficheros">Exportar DataFrames a ficheros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-a-ficheros-csv">Exportar a ficheros CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-a-un-fichero-excel">Exportar a un fichero Excel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-a-un-fichero-json">Exportar a un fichero JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-a-base-de-datos-sql">Exportar a base de datos SQL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-un-dataframe">Atributos de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-un-dataframe">Métodos de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acceso-a-los-elementos-de-un-dataframe">Acceso a los elementos de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renombrar-elementos-de-un-dataframe">Renombrar elementos de un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reindexar-un-dataframe">Reindexar un DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajar-con-columnas-de-un-dataframe">Trabajar con columnas de un DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anadir-columnas">Añadir columnas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-sobre-columnas">Operaciones sobre columnas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-y-particionar-un-dataframe">Indexar y particionar un DataFrame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-con">Indexar con <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-con-loc-e-iloc">Indexar con <code class="docutils literal notranslate"><span class="pre">loc</span></code> e <code class="docutils literal notranslate"><span class="pre">iloc</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexado-booleano">Indexado booleano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-con-query">Indexar con <code class="docutils literal notranslate"><span class="pre">query()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

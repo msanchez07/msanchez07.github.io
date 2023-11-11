@@ -1,0 +1,10 @@
+# Introducción 
+El aprendizaje supervisado, un concepto fundamental en el campo de la inteligencia artificial y el machine learning, es el foco central de este capítulo. En esencia, el aprendizaje supervisado es el proceso mediante el cual las máquinas pueden aprender a partir de datos etiquetados, es decir, conjuntos de información que contienen ejemplos de entrada y la salida correspondiente. Esta técnica ha demostrado ser esencial en numerosas aplicaciones, desde la clasificación de correos electrónicos como spam hasta la detección de enfermedades médicas a partir de imágenes de diagnóstico. En este capítulo, exploraremos en profundidad los fundamentos del aprendizaje supervisado, su relevancia en la resolución de problemas del mundo real y cómo se ha convertido en una herramienta esencial en la era de la informática y la inteligencia artificial. 
+
+Comenzaremos desglosando los cimientos del aprendizaje supervisado, resaltando la crítica relevancia del análisis exploratorio de datos para comprender las características y relaciones clave. Luego, nos adentraremos en los distintos tipos de algoritmos que caracterizan esta disciplina, con énfasis en los algoritmos de regresión, que permiten predecir valores numéricos, y los algoritmos de clasificación, diseñados para categorizar datos en clases específicas. 
+
+A través de ejemplos prácticos y casos de estudio, demostraremos cómo estos algoritmos se aplican en una variedad de dominios, desde pronósticos financieros hasta la detección de spam en correos electrónicos. Examinaremos cómo ajustar y optimizar estos modelos para obtener predicciones precisas y tomar decisiones informadas en situaciones del mundo real. 
+
+En resumen, este capítulo ofrece una inmersión profunda en el aprendizaje supervisado, destacando la importancia de la exploración de datos y los algoritmos de regresión y clasificación. A medida que avancemos, los lectores adquirirán una sólida comprensión de esta disciplina fundamental en el campo del machine learning, y cómo se aplica en la resolución de problemas prácticos en una amplia gama de aplicaciones. 
+
+ 
