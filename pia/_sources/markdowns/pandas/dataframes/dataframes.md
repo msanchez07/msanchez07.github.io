@@ -98,16 +98,12 @@ La última manera para crear un DataFrame pasa por crear uno vacío e ir añadi�
 ## Exportar DataFrames a ficheros
 Pandas ofrece varias formas de exportar DataFrames a archivos para guardar los datos en diferentes formatos, como CSV, Excel, JSON, SQL, y más. A continuación, se describe cómo exportar un DataFrame a algunos formatos comunes.
 
-`````{admonition} Nota
-:class: tip
-El código está comentado para que no se ejecute la instruccion.
-`````
 
- ### Exportar a ficheros CSV
+### Exportar a ficheros CSV
  Para guardar un DataFrame en un archivo CSV, puedes utilizar el método to_csv de Pandas: 
 
- ```{code-cell}
-#df.to_csv('mi_archivo.csv', index=False) 
+ ```{code}
+df.to_csv('mi_archivo.csv', index=False) 
 ```
 
 El argumento index=False evita que se guarde el índice del DataFrame como una columna adicional en el archivo CSV. 
@@ -115,8 +111,8 @@ El argumento index=False evita que se guarde el índice del DataFrame como una c
 ### Exportar a un fichero Excel
 Para exportar un DataFrame a un archivo de Excel, puedes usar el método to_excel: 
 
- ```{code-cell}
-#df.to_excel('mi_archivo.xlsx', index=False) 
+ ```{code}
+df.to_excel('mi_archivo.xlsx', index=False) 
 ```
 
 Este código guardará el DataFrame en un archivo de Excel sin incluir el índice. 
@@ -124,8 +120,8 @@ Este código guardará el DataFrame en un archivo de Excel sin incluir el índic
 ### Exportar a un fichero JSON
 De igual manera, un DataFrame puede exportar su información a ficheros JSON: 
 
- ```{code-cell}
-#df.to_json('mi_archivo.json', orient='records')  
+ ```{code}
+df.to_json('mi_archivo.json', orient='records')  
 ```
 
 El argumento orient='records' especifica cómo se deben organizar los datos en el archivo JSON. 
@@ -133,11 +129,11 @@ El argumento orient='records' especifica cómo se deben organizar los datos en e
 ### Exportar a base de datos SQL 
 Pandas permite exportar un DataFrame directamente a una base de datos SQL utilizando la función to_sql: 
 
- ```{code-cell}
+ ```{code}
 from sqlalchemy import create_engine 
 
 engine = create_engine('sqlite:///mi_base_de_datos.db') 
-#df.to_sql('mi_tabla', con=engine, if_exists='replace', index=False) 
+df.to_sql('mi_tabla', con=engine, if_exists='replace', index=False) 
 ```
 
 En este ejemplo, create_engine se utiliza para establecer una conexión con una base de datos SQL (en este caso, SQLite). El DataFrame se guarda en la tabla especificada en la base de datos. 

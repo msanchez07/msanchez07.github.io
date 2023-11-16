@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/pandas/dataframes/dataframes_dos_dataframes';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Bibliografía" href="../../bibliografia.html" />
-    <link rel="prev" title="Ejercicios Dataframes 2" href="ejercicios2.html" />
+    <link rel="next" title="Otras operaciones con DataFrames" href="otras_operaciones.html" />
+    <link rel="prev" title="DataFrames Avanzado" href="dataframes_avanzado.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,12 +168,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dataframes.html">DataFrames</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dataframes_avanzado.html">DataFrames Avanzado</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Trabajar con varios DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="otras_operaciones.html">Otras operaciones con DataFrames</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EJERCICIOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ejercicios/pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios2.html">Ejercicios Dataframes 2</a></li>
 </ul>
 </li>
 </ul>
@@ -279,6 +286,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concat">Concat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge">Merge</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-join">Inner Join</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outer-join">Outer join</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#left-join">Left join</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#right-join">Right join</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicator">Indicator</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -654,6 +669,663 @@ document.write(`
 </div>
 <p>Cabe destacar que ne los ejemplos solo se han unido dos DataFrames, pero que en la práctica puedes unir tantos como quieras.</p>
 </section>
+<section id="merge">
+<h2>Merge<a class="headerlink" href="#merge" title="Permalink to this heading">#</a></h2>
+<p>El método merge nos permite unir dos dataframes como si utilizaramos un join con tablas SQL.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DataFrame.merge(right,</span> <span class="pre">how='inner',</span> <span class="pre">on=None,</span> <span class="pre">left_on=None,</span> <span class="pre">right_on=None,</span> <span class="pre">left_index=False,</span> <span class="pre">right_index=False,</span> <span class="pre">sort=False,</span> <span class="pre">suffixes=('_x',</span> <span class="pre">'_y'),</span> <span class="pre">copy=None,</span> <span class="pre">indicator=False,</span> <span class="pre">validate=None)</span></code></p>
+<p>Las operaciones permitidas son:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">inner</span> <span class="pre">join</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">outer</span> <span class="pre">join</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">left</span> <span class="pre">join</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right</span> <span class="pre">join</span></code></p></li>
+</ul>
+<p>Para este apartado vamos a contar con los siguientes dataframes:</p>
+<p><img alt="" src="../../../_images/10.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;nombre&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Arturo&#39;</span><span class="p">,</span> <span class="s1">&#39;Ramón&#39;</span><span class="p">,</span> <span class="s1">&#39;Enrique&#39;</span><span class="p">,</span> <span class="s1">&#39;Ana&#39;</span><span class="p">,</span> <span class="s1">&#39;María&#39;</span><span class="p">,</span> <span class="s1">&#39;Marta&#39;</span><span class="p">,</span> <span class="s1">&#39;Helena&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;coche&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;si&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;si&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;si&#39;</span><span class="p">,</span> <span class="s1">&#39;si&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;sexo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;hombre&#39;</span><span class="p">,</span> <span class="s1">&#39;hombre&#39;</span><span class="p">,</span> <span class="s1">&#39;hombre&#39;</span><span class="p">,</span> <span class="s1">&#39;mujer&#39;</span><span class="p">,</span> <span class="s1">&#39;mujer&#39;</span><span class="p">,</span> <span class="s1">&#39;mujer&#39;</span><span class="p">,</span> <span class="s1">&#39;mujer&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;cargo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;Programador&#39;</span><span class="p">,</span> <span class="s1">&#39;Programador&#39;</span><span class="p">,</span> <span class="s1">&#39;Programador&#39;</span><span class="p">,</span> <span class="s1">&#39;Gerente&#39;</span><span class="p">]})</span>
+
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nombre</th>
+      <th>coche</th>
+      <th>sexo</th>
+      <th>cargo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Arturo</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ramón</td>
+      <td>no</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Enrique</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ana</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Programador</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>María</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Marta</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Helena</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Gerente</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;cargo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Comercial&#39;</span><span class="p">,</span> <span class="s1">&#39;Programador&#39;</span><span class="p">,</span> <span class="s1">&#39;Analista&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;salario&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">30000</span><span class="p">,</span> <span class="mi">28000</span><span class="p">,</span> <span class="mi">40000</span><span class="p">]})</span>
+<span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cargo</th>
+      <th>salario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Comercial</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Programador</td>
+      <td>28000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Analista</td>
+      <td>40000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="inner-join">
+<h3>Inner Join<a class="headerlink" href="#inner-join" title="Permalink to this heading">#</a></h3>
+<p>Esta cláusula busca coincidencias entre 2 dataframes, en función a una columna que tienen en común y que debe ser indicada:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;cargo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nombre</th>
+      <th>coche</th>
+      <th>sexo</th>
+      <th>cargo</th>
+      <th>salario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Arturo</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ramón</td>
+      <td>no</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Enrique</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ana</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>María</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Marta</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="outer-join">
+<h3>Outer join<a class="headerlink" href="#outer-join" title="Permalink to this heading">#</a></h3>
+<p>El outer join obtendrá todas las filas de df1y df2, y colocará  NaN en aquellos elementos que no estén disponibles:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;cargo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nombre</th>
+      <th>coche</th>
+      <th>sexo</th>
+      <th>cargo</th>
+      <th>salario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Arturo</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ramón</td>
+      <td>no</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Enrique</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ana</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>María</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Marta</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Helena</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Gerente</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Analista</td>
+      <td>40000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="left-join">
+<h3>Left join<a class="headerlink" href="#left-join" title="Permalink to this heading">#</a></h3>
+<p>El left join devuelve todas las filas del df1 y todas las columnas del df1 y df2, añadiendo NaN donde no haya datos en las columnas del df2:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;cargo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nombre</th>
+      <th>coche</th>
+      <th>sexo</th>
+      <th>cargo</th>
+      <th>salario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Arturo</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ramón</td>
+      <td>no</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Enrique</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ana</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>María</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Marta</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Helena</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Gerente</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="right-join">
+<h3>Right join<a class="headerlink" href="#right-join" title="Permalink to this heading">#</a></h3>
+<p>Es la operación inversa a left join. Devuelve todas las filas del df1 y todas las columnas del df1 y df2, añadiendo NaN donde no haya datos en las columnas del df1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;cargo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nombre</th>
+      <th>coche</th>
+      <th>sexo</th>
+      <th>cargo</th>
+      <th>salario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Arturo</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ramón</td>
+      <td>no</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Enrique</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ana</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>María</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Marta</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Analista</td>
+      <td>40000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="indicator">
+<h3>Indicator<a class="headerlink" href="#indicator" title="Permalink to this heading">#</a></h3>
+<p>Existe un parámetro adicional llamado indicator. Este parámetro, por defecto está a <code class="docutils literal notranslate"><span class="pre">False</span></code>, pero si lo cambiamos a <code class="docutils literal notranslate"><span class="pre">True</span></code> se creará una nueva columna indicando en que dataframe se han encontrado las coincidencias de la clave indicada:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;cargo&quot;</span><span class="p">,</span> <span class="n">indicator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nombre</th>
+      <th>coche</th>
+      <th>sexo</th>
+      <th>cargo</th>
+      <th>salario</th>
+      <th>_merge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Arturo</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ramón</td>
+      <td>no</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Enrique</td>
+      <td>si</td>
+      <td>hombre</td>
+      <td>Comercial</td>
+      <td>30000.0</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Ana</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>María</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Marta</td>
+      <td>si</td>
+      <td>mujer</td>
+      <td>Programador</td>
+      <td>28000.0</td>
+      <td>both</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Helena</td>
+      <td>no</td>
+      <td>mujer</td>
+      <td>Gerente</td>
+      <td>NaN</td>
+      <td>left_only</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Analista</td>
+      <td>40000.0</td>
+      <td>right_only</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -687,20 +1359,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ejercicios2.html"
+       href="dataframes_avanzado.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Ejercicios Dataframes 2</p>
+        <p class="prev-next-title">DataFrames Avanzado</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../bibliografia.html"
+       href="otras_operaciones.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliografía</p>
+        <p class="prev-next-title">Otras operaciones con DataFrames</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -720,6 +1392,14 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concat">Concat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge">Merge</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-join">Inner Join</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outer-join">Outer join</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#left-join">Left join</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#right-join">Right join</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicator">Indicator</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

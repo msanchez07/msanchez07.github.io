@@ -72,3 +72,74 @@ concat_df
 ```
 
 Cabe destacar que ne los ejemplos solo se han unido dos DataFrames, pero que en la práctica puedes unir tantos como quieras.
+
+
+## Merge 
+El método merge nos permite unir dos dataframes como si utilizaramos un join con tablas SQL. 
+
+`DataFrame.merge(right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'), copy=None, indicator=False, validate=None)`
+
+Las operaciones permitidas son:
+
+- `inner join`
+- `outer join`
+- `left join`
+- `right join`
+
+
+Para este apartado vamos a contar con los siguientes dataframes:
+
+![](../../../images/pandas/10.png)
+
+
+```{code-cell}
+df1 = pd.DataFrame({"nombre": ['Arturo', 'Ramón', 'Enrique', 'Ana', 'María', 'Marta', 'Helena'],
+                    'coche': ['si', 'no', 'si', 'no', 'si', 'si', 'no'],
+                    'sexo': ['hombre', 'hombre', 'hombre', 'mujer', 'mujer', 'mujer', 'mujer'],
+                    'cargo': ['Comercial', 'Comercial', 'Comercial', 'Programador', 'Programador', 'Programador', 'Gerente']})
+
+df1
+```
+
+
+```{code-cell}
+df2 = pd.DataFrame({'cargo': ['Comercial', 'Programador', 'Analista'],
+                    'salario': [30000, 28000, 40000]})
+df2
+```
+
+### Inner Join
+Esta cláusula busca coincidencias entre 2 dataframes, en función a una columna que tienen en común y que debe ser indicada:
+
+```{code-cell}
+pd.merge(df1, df2, how="inner", on="cargo")
+```
+
+### Outer join
+El outer join obtendrá todas las filas de df1y df2, y colocará  NaN en aquellos elementos que no estén disponibles:
+
+```{code-cell}
+pd.merge(df1, df2, how="outer", on="cargo")
+```
+
+### Left join
+El left join devuelve todas las filas del df1 y todas las columnas del df1 y df2, añadiendo NaN donde no haya datos en las columnas del df2:
+
+```{code-cell}
+pd.merge(df1, df2, how="left", on="cargo")
+```
+
+### Right join
+Es la operación inversa a left join. Devuelve todas las filas del df1 y todas las columnas del df1 y df2, añadiendo NaN donde no haya datos en las columnas del df1:
+
+
+```{code-cell}
+pd.merge(df1, df2, how="right", on="cargo")
+```
+
+### Indicator
+Existe un parámetro adicional llamado indicator. Este parámetro, por defecto está a `False`, pero si lo cambiamos a `True` se creará una nueva columna indicando en que dataframe se han encontrado las coincidencias de la clave indicada:
+
+```{code-cell}
+pd.merge(df1, df2, how="outer", on="cargo", indicator=True)
+```

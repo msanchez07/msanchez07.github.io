@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/pandas/dataframes/dataframes';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Ejercicios Dataframes 1" href="ejercicios1.html" />
-    <link rel="prev" title="Ejercicios Series" href="../series/ejercicios_series.html" />
+    <link rel="next" title="DataFrames Avanzado" href="dataframes_avanzado.html" />
+    <link rel="prev" title="Series" href="../series/series.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,12 +168,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../series/ejercicios_series.html">Ejercicios Series</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">DataFrames</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dataframes_avanzado.html">DataFrames Avanzado</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="otras_operaciones.html">Otras operaciones con DataFrames</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EJERCICIOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ejercicios/pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios2.html">Ejercicios Dataframes 2</a></li>
 </ul>
 </li>
 </ul>
@@ -616,58 +623,38 @@ dtype: int64
 <section id="exportar-dataframes-a-ficheros">
 <h2>Exportar DataFrames a ficheros<a class="headerlink" href="#exportar-dataframes-a-ficheros" title="Permalink to this heading">#</a></h2>
 <p>Pandas ofrece varias formas de exportar DataFrames a archivos para guardar los datos en diferentes formatos, como CSV, Excel, JSON, SQL, y más. A continuación, se describe cómo exportar un DataFrame a algunos formatos comunes.</p>
-<div class="tip admonition">
-<p class="admonition-title">Nota</p>
-<p>El código está comentado para que no se ejecute la instruccion.</p>
-</div>
 <section id="exportar-a-ficheros-csv">
 <h3>Exportar a ficheros CSV<a class="headerlink" href="#exportar-a-ficheros-csv" title="Permalink to this heading">#</a></h3>
 <p>Para guardar un DataFrame en un archivo CSV, puedes utilizar el método to_csv de Pandas:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df.to_csv(&#39;mi_archivo.csv&#39;, index=False) </span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;mi_archivo.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
 </pre></div>
-</div>
-</div>
 </div>
 <p>El argumento index=False evita que se guarde el índice del DataFrame como una columna adicional en el archivo CSV.</p>
 </section>
 <section id="exportar-a-un-fichero-excel">
 <h3>Exportar a un fichero Excel<a class="headerlink" href="#exportar-a-un-fichero-excel" title="Permalink to this heading">#</a></h3>
 <p>Para exportar un DataFrame a un archivo de Excel, puedes usar el método to_excel:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df.to_excel(&#39;mi_archivo.xlsx&#39;, index=False) </span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;mi_archivo.xlsx&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
 </pre></div>
-</div>
-</div>
 </div>
 <p>Este código guardará el DataFrame en un archivo de Excel sin incluir el índice.</p>
 </section>
 <section id="exportar-a-un-fichero-json">
 <h3>Exportar a un fichero JSON<a class="headerlink" href="#exportar-a-un-fichero-json" title="Permalink to this heading">#</a></h3>
 <p>De igual manera, un DataFrame puede exportar su información a ficheros JSON:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df.to_json(&#39;mi_archivo.json&#39;, orient=&#39;records&#39;)  </span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s1">&#39;mi_archivo.json&#39;</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>  
 </pre></div>
-</div>
-</div>
 </div>
 <p>El argumento orient=’records’ especifica cómo se deben organizar los datos en el archivo JSON.</p>
 </section>
 <section id="exportar-a-base-de-datos-sql">
 <h3>Exportar a base de datos SQL<a class="headerlink" href="#exportar-a-base-de-datos-sql" title="Permalink to this heading">#</a></h3>
 <p>Pandas permite exportar un DataFrame directamente a una base de datos SQL utilizando la función to_sql:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span> 
 
 <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///mi_base_de_datos.db&#39;</span><span class="p">)</span> 
-<span class="c1">#df.to_sql(&#39;mi_tabla&#39;, con=engine, if_exists=&#39;replace&#39;, index=False) </span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;mi_tabla&#39;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
 </pre></div>
-</div>
-</div>
 </div>
 <p>En este ejemplo, create_engine se utiliza para establecer una conexión con una base de datos SQL (en este caso, SQLite). El DataFrame se guarda en la tabla especificada en la base de datos.</p>
 </section>
@@ -1489,7 +1476,7 @@ Name: Nombre, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13970/836562857.py:1: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_36909/836562857.py:1: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
@@ -2601,20 +2588,20 @@ Name: Nombre, dtype: object
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../series/ejercicios_series.html"
+       href="../series/series.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Ejercicios Series</p>
+        <p class="prev-next-title">Series</p>
       </div>
     </a>
     <a class="right-next"
-       href="ejercicios1.html"
+       href="dataframes_avanzado.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ejercicios Dataframes 1</p>
+        <p class="prev-next-title">DataFrames Avanzado</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

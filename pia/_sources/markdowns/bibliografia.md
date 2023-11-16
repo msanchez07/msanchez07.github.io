@@ -7,7 +7,7 @@ A continuación se listan los distintos elementos utilizados para realizar esta 
 2. [Pandas](https://pandas.pydata.org/)
 3. [Python Programming for Data Science](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html)
 4. [Runebook.dev](https://runebook.dev/es/)
-5. [w3resource](https://www.w3resource.com/index.php)
+5. [w3resource](https://www.w3resource.com)
 6. [Practical Data Science!](https://www.practicaldatascience.org/)
 
 ## Libros
