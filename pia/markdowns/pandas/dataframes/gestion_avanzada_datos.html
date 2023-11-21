@@ -1,0 +1,1867 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Gestión avanzada de datos con Pandas &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/pandas/dataframes/gestion_avanzada_datos';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Ejercicios pandas" href="../../ejercicios/pandas/ejercicios_index.html" />
+    <link rel="prev" title="Otras operaciones con DataFrames" href="otras_operaciones.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Lenguajes de programación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/Numpy.html">Numpy</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../pandas.html">Pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../series/series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes.html">DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_avanzado.html">DataFrames Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="otras_operaciones.html">Otras operaciones con DataFrames</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Gestión avanzada de datos con Pandas</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EJERCICIOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ejercicios/pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios2.html">Ejercicios Dataframes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ejercicios/pandas/ejercicios3.html">Ejercicios Dataframes 3</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Gestión avanzada de datos con Pandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-del-tipo-string">Métodos del tipo String</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajando-con-fechas">Trabajando con fechas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-elementos-de-tipo-datetime">Crear elementos de tipo DateTime</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformar-elementos-en-datetime">Transformar elementos en DateTime</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-y-filtrar-por-fechas-y-horas">Indexar y filtrar por fechas y horas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-fechas-y-horas">Descomposición de fechas y horas:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desplazar-fechas-y-zona-horaria">Desplazar fechas y zona horaria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redimensionar-y-utilizar-funciones-de-agregacion">Redimensionar y utilizar funciones de agregación</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="gestion-avanzada-de-datos-con-pandas">
+<h1>Gestión avanzada de datos con Pandas<a class="headerlink" href="#gestion-avanzada-de-datos-con-pandas" title="Permalink to this heading">#</a></h1>
+<p>En este punto vamos a trabajar con métodos propios de los tipos de datos. En concreto nos vamos a centrar en los Strings y los DateTime.</p>
+<section id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Permalink to this heading">#</a></h2>
+<p>El tipo de datos String, es representado en pandas como un <code class="docutils literal notranslate"><span class="pre">objeto</span></code>, pero este tipo de dato es usado por pandas cuando la variable no es numérica y no sabe de que tipo es. Adicionalmente a esto, Pandas ha creado un tipo nuevo llamado StringDtype para las cadeas de texto. Puedes leer más documentación de esto en la <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types"><strong>documentación de pandas</strong></a>.</p>
+<section id="metodos-del-tipo-string">
+<h3>Métodos del tipo String<a class="headerlink" href="#metodos-del-tipo-string" title="Permalink to this heading">#</a></h3>
+<p>Como ya hemos visto en alguna ocasión, pandas puede aplicar operaciones a todos los elementosde un array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 2,  4,  6,  8, 10])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esto no se puede utilizar en elementos de tipo String y el siguiente código fallaría:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Ana&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria&#39;</span><span class="p">,</span> <span class="s1">&#39;Luís&#39;</span><span class="p">,</span> <span class="s1">&#39;Javi&#39;</span><span class="p">,</span> <span class="s1">&#39;Verónica&#39;</span><span class="p">])</span>
+<span class="n">names</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Por lo tanto, la única manera de aplicar esta operación es recorriendo los elementos del array y uno a uno, aplicar la operación:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Ana&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria&#39;</span><span class="p">,</span> <span class="s1">&#39;Luís&#39;</span><span class="p">,</span> <span class="s1">&#39;Javi&#39;</span><span class="p">,</span> <span class="s1">&#39;Verónica&#39;</span><span class="p">])</span>
+<span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;ANA&#39;, &#39;MARIA&#39;, &#39;LUÍS&#39;, &#39;JAVI&#39;, &#39;VERÓNICA&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hay que tener en cuenta que el código anterior fallará si cualquier elemento de tu array es nulo. Por lo tanto, todos los elementos deben tener valor.</p>
+<p>Pandas aborda ambos problemas anteriroes con sus métodos de String. Se puede acceder a los métodos de String mediante el atributo <code class="docutils literal notranslate"><span class="pre">.str</span></code> de los elementos o de los índices. Cabe destacar que prácticamente todas las operaciones de String están disponibles, los cuales podemos consultar en la <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/text.html#method-summary">documentación de pandas</a>.</p>
+<p>Vamos a ver algún ejemplo de aplicar las operaciones de Strings sobre los elementos de una serie:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Ana&#39;</span><span class="p">,</span> <span class="s1">&#39;Maria&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Javi&#39;</span><span class="p">,</span> <span class="s1">&#39;Verónica&#39;</span><span class="p">])</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0         Ana
+1       Maria
+2        None
+3        Javi
+4    Verónica
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>primero vamos a pasar todos los elementos a mayúsculas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0         ANA
+1       MARIA
+2        None
+3        JAVI
+4    VERÓNICA
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>posteriormente haremos un split:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;ri&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ana</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ma</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Javi</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Verónica</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Ahora comprobaremos la longitud de las cadenas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    3.0
+1    5.0
+2    NaN
+3    4.0
+4    8.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>También podemos aplicar estas operaciones a los índices de las filas o a los nombres de las columnas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                  <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Columna 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Columna 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Columna 3&#39;</span><span class="p">],</span>
+                  <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;FILA_</span><span class="si">{</span><span class="n">_</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Columna 1</th>
+      <th>Columna 2</th>
+      <th>Columna 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>FILA_0</th>
+      <td>0.785459</td>
+      <td>0.844426</td>
+      <td>0.631212</td>
+    </tr>
+    <tr>
+      <th>FILA_1</th>
+      <td>0.699208</td>
+      <td>0.895540</td>
+      <td>0.589718</td>
+    </tr>
+    <tr>
+      <th>FILA_2</th>
+      <td>0.465681</td>
+      <td>0.602725</td>
+      <td>0.230614</td>
+    </tr>
+    <tr>
+      <th>FILA_3</th>
+      <td>0.114378</td>
+      <td>0.576983</td>
+      <td>0.445647</td>
+    </tr>
+    <tr>
+      <th>FILA_4</th>
+      <td>0.989765</td>
+      <td>0.763261</td>
+      <td>0.045052</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Vamos a cambiar el valor de las columnas cambiando Columna por col:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Columna&quot;</span><span class="p">,</span> <span class="s2">&quot;Col&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>y las filas por row:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;FILA&quot;</span><span class="p">,</span> <span class="s2">&quot;ROW&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Col 1</th>
+      <th>Col 2</th>
+      <th>Col 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ROW_0</th>
+      <td>0.785459</td>
+      <td>0.844426</td>
+      <td>0.631212</td>
+    </tr>
+    <tr>
+      <th>ROW_1</th>
+      <td>0.699208</td>
+      <td>0.895540</td>
+      <td>0.589718</td>
+    </tr>
+    <tr>
+      <th>ROW_2</th>
+      <td>0.465681</td>
+      <td>0.602725</td>
+      <td>0.230614</td>
+    </tr>
+    <tr>
+      <th>ROW_3</th>
+      <td>0.114378</td>
+      <td>0.576983</td>
+      <td>0.445647</td>
+    </tr>
+    <tr>
+      <th>ROW_4</th>
+      <td>0.989765</td>
+      <td>0.763261</td>
+      <td>0.045052</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="trabajando-con-fechas">
+<h2>Trabajando con fechas<a class="headerlink" href="#trabajando-con-fechas" title="Permalink to this heading">#</a></h2>
+<p>Pandas cuenta con operaciones propias para trabajar con elementos de tipo <code class="docutils literal notranslate"><span class="pre">DateTime</span></code>. A continuación vamos a ver algunas de estas operaciones.</p>
+<section id="crear-elementos-de-tipo-datetime">
+<h3>Crear elementos de tipo DateTime<a class="headerlink" href="#crear-elementos-de-tipo-datetime" title="Permalink to this heading">#</a></h3>
+<p>En este punto vamos a ver como crear elementos de tipo DateTime. Normalmente, los elementos que vas a querer crear serán:</p>
+<ol class="arabic simple">
+<li><p>Un elemento en un momento dado con la función <code class="docutils literal notranslate"><span class="pre">pd.Timestamp()</span></code>, por ejemplo <code class="docutils literal notranslate"><span class="pre">2020-07-10</span> <span class="pre">00:00:00</span></code>.</p></li>
+<li><p>Crear un lapso de tiempo con la función <code class="docutils literal notranslate"><span class="pre">pd.Period()</span></code>, por ejemplo, <code class="docutils literal notranslate"><span class="pre">Enero</span> <span class="pre">de</span> <span class="pre">2020</span></code>.</p></li>
+<li><p>Crear una serie de fechas y horas con <code class="docutils literal notranslate"><span class="pre">pd.date_range()</span></code> o <code class="docutils literal notranslate"><span class="pre">pd.period_range()</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2023-10-01&#39;</span><span class="p">))</span> <span class="c1">#A partir de un String.  </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># Indicando directamente la fecha.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2024</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>  <span class="c1"># Indicando un objeto de tipo datetime.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-10-01 00:00:00
+2023-12-01 00:00:00
+2024-01-01 00:00:00
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo anterior es un momento específico. A continuación, vamos a  usar pd.Period() para especificar un lapso de tiempo (como un día):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">periodo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="s1">&#39;2020-07-09&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">periodo</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">periodo</span><span class="o">.</span><span class="n">start_time</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">periodo</span><span class="o">.</span><span class="n">end_time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2020-07-09
+2020-07-09 00:00:00
+2020-07-09 23:59:59.999999999
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">momento</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;1900-07-07 12:00&#39;</span><span class="p">)</span>
+<span class="n">periodo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="s1">&#39;1900-07-07&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Momento: </span><span class="si">{</span><span class="n">momento</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Periodo: </span><span class="si">{</span><span class="n">periodo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;¿El momento está incluido en el periodo? </span><span class="si">{</span><span class="n">periodo</span><span class="o">.</span><span class="n">start_time</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">momento</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">periodo</span><span class="o">.</span><span class="n">end_time</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Momento: 1900-07-07 12:00:00
+Periodo: 1900-07-07
+¿El momento está incluido en el periodo? True
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la mayoría de las ocasiones querrar crear matrices de fechas y horas. Para eso, se puede utilizar las clases <code class="docutils literal notranslate"><span class="pre">PeriodIndex</span></code> o <code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code> o <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2020-01-01 12:00&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;2020-12-31 12:00&#39;</span><span class="p">,</span>
+              <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2020-01-31 12:00:00&#39;, &#39;2020-02-29 12:00:00&#39;,
+               &#39;2020-03-31 12:00:00&#39;, &#39;2020-04-30 12:00:00&#39;,
+               &#39;2020-05-31 12:00:00&#39;, &#39;2020-06-30 12:00:00&#39;,
+               &#39;2020-07-31 12:00:00&#39;, &#39;2020-08-31 12:00:00&#39;,
+               &#39;2020-09-30 12:00:00&#39;, &#39;2020-10-31 12:00:00&#39;,
+               &#39;2020-11-30 12:00:00&#39;, &#39;2020-12-31 12:00:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;M&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>En el ejemplo anterior hemos creado un array de fechas con una frecuencia mensual. Cabe destacar que nos ha devuelto el último día de cada més.</p>
+<p>Por otro lado, vamos a crear un array de los días de un mes indicando un periodo de tiempo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">period_range</span><span class="p">(</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;2021-01-31&#39;</span><span class="p">,</span>
+                <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PeriodIndex([&#39;2021-01-01&#39;, &#39;2021-01-02&#39;, &#39;2021-01-03&#39;, &#39;2021-01-04&#39;,
+             &#39;2021-01-05&#39;, &#39;2021-01-06&#39;, &#39;2021-01-07&#39;, &#39;2021-01-08&#39;,
+             &#39;2021-01-09&#39;, &#39;2021-01-10&#39;, &#39;2021-01-11&#39;, &#39;2021-01-12&#39;,
+             &#39;2021-01-13&#39;, &#39;2021-01-14&#39;, &#39;2021-01-15&#39;, &#39;2021-01-16&#39;,
+             &#39;2021-01-17&#39;, &#39;2021-01-18&#39;, &#39;2021-01-19&#39;, &#39;2021-01-20&#39;,
+             &#39;2021-01-21&#39;, &#39;2021-01-22&#39;, &#39;2021-01-23&#39;, &#39;2021-01-24&#39;,
+             &#39;2021-01-25&#39;, &#39;2021-01-26&#39;, &#39;2021-01-27&#39;, &#39;2021-01-28&#39;,
+             &#39;2021-01-29&#39;, &#39;2021-01-30&#39;, &#39;2021-01-31&#39;],
+            dtype=&#39;period[D]&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por último, la función <code class="docutils literal notranslate"><span class="pre">Timedelata</span></code> se utiliza para generar objetos temperoales en base a operaciones de añadir o quitar tiempo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2020-01-01 12:00&#39;</span><span class="p">,</span> <span class="s1">&#39;2020-01-11 12:00&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1.5 hour&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2020-01-01 13:30:00&#39;, &#39;2020-01-02 13:30:00&#39;,
+               &#39;2020-01-03 13:30:00&#39;, &#39;2020-01-04 13:30:00&#39;,
+               &#39;2020-01-05 13:30:00&#39;, &#39;2020-01-06 13:30:00&#39;,
+               &#39;2020-01-07 13:30:00&#39;, &#39;2020-01-08 13:30:00&#39;,
+               &#39;2020-01-09 13:30:00&#39;, &#39;2020-01-10 13:30:00&#39;,
+               &#39;2020-01-11 13:30:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por último, vamos a remarcar que pandas representa los valores de fecha nulos como <code class="docutils literal notranslate"><span class="pre">Nat</span></code>.</p>
+</section>
+<section id="transformar-elementos-en-datetime">
+<h3>Transformar elementos en DateTime<a class="headerlink" href="#transformar-elementos-en-datetime" title="Permalink to this heading">#</a></h3>
+<p>Es bastante común tener una serie de fechas como Strings, las cuales podemos transformar con el método <code class="docutils literal notranslate"><span class="pre">pd.to_datetime()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fechas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;July 9, 2020&#39;</span><span class="p">,</span> <span class="s1">&#39;August 1, 2020&#39;</span><span class="p">,</span> <span class="s1">&#39;August 28, 2020&#39;</span><span class="p">]</span>
+<span class="n">fechas</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;July 9, 2020&#39;, &#39;August 1, 2020&#39;, &#39;August 28, 2020&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">fechas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2020-07-09&#39;, &#39;2020-08-01&#39;, &#39;2020-08-28&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si quieres transformar un formato de fecha y hora más complejo, puedes utilizar el argumento <code class="docutils literal notranslate"><span class="pre">format</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fechas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;01/01/2023&#39;</span><span class="p">,</span> <span class="s1">&#39;01/10/2024&#39;</span><span class="p">,</span> <span class="s1">&#39;01/05/2025&#39;</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">fechas</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;2023-01-01&#39;, &#39;2024-10-01&#39;, &#39;2025-05-01&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tambien puedes utilizar un diccionario para indicar los elementos que quieres transformar:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dict_fechas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">({</span><span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2024</span><span class="p">,</span> <span class="mi">2025</span><span class="p">],</span>
+                             <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                             <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">]})</span>  
+<span class="n">dict_fechas</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0   2023-01-23
+1   2024-02-24
+2   2025-03-25
+dtype: datetime64[ns]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="indexar-y-filtrar-por-fechas-y-horas">
+<h3>Indexar y filtrar por fechas y horas<a class="headerlink" href="#indexar-y-filtrar-por-fechas-y-horas" title="Permalink to this heading">#</a></h3>
+<p>Vamos a cargar el DataFrame de empleados indicando que queremos que nuestr índice sea la columna correspondiente a la fecha de contratación y que parsee los campos de tipo fecha:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;csv/employees.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>employ_id</th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>email</th>
+      <th>phone_number</th>
+      <th>job_id</th>
+      <th>salary</th>
+      <th>commission_pct</th>
+      <th>manager_id</th>
+      <th>department_id</th>
+    </tr>
+    <tr>
+      <th>hire_date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1987-06-17</th>
+      <td>100</td>
+      <td>Steven</td>
+      <td>King</td>
+      <td>SKING</td>
+      <td>515.123.4567</td>
+      <td>AD_PRES</td>
+      <td>24000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-18</th>
+      <td>101</td>
+      <td>Neena</td>
+      <td>Kochhar</td>
+      <td>NKOCHHAR</td>
+      <td>515.123.4568</td>
+      <td>AD_VP</td>
+      <td>17000</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-19</th>
+      <td>102</td>
+      <td>Lex</td>
+      <td>De Haan</td>
+      <td>LDEHAAN</td>
+      <td>515.123.4569</td>
+      <td>AD_VP</td>
+      <td>17000</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-20</th>
+      <td>103</td>
+      <td>Alexander</td>
+      <td>Hunold</td>
+      <td>AHUNOLD</td>
+      <td>590.423.4567</td>
+      <td>IT_PROG</td>
+      <td>9000</td>
+      <td>NaN</td>
+      <td>102.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-21</th>
+      <td>104</td>
+      <td>Bruce</td>
+      <td>Ernst</td>
+      <td>BERNST</td>
+      <td>590.423.4568</td>
+      <td>IT_PROG</td>
+      <td>6000</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1987-09-27</th>
+      <td>202</td>
+      <td>Pat</td>
+      <td>Fay</td>
+      <td>PFAY</td>
+      <td>603.123.6666</td>
+      <td>MK_REP</td>
+      <td>6000</td>
+      <td>NaN</td>
+      <td>201.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>1987-09-28</th>
+      <td>203</td>
+      <td>Susan</td>
+      <td>Mavris</td>
+      <td>SMAVRIS</td>
+      <td>515.123.7777</td>
+      <td>HR_REP</td>
+      <td>6500</td>
+      <td>NaN</td>
+      <td>101.0</td>
+      <td>40.0</td>
+    </tr>
+    <tr>
+      <th>1987-09-29</th>
+      <td>204</td>
+      <td>Hermann</td>
+      <td>Baer</td>
+      <td>HBAER</td>
+      <td>515.123.8888</td>
+      <td>PR_REP</td>
+      <td>10000</td>
+      <td>NaN</td>
+      <td>101.0</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>1987-09-30</th>
+      <td>205</td>
+      <td>Shelley</td>
+      <td>Higgins</td>
+      <td>SHIGGINS</td>
+      <td>515.123.8080</td>
+      <td>AC_MGR</td>
+      <td>12000</td>
+      <td>NaN</td>
+      <td>101.0</td>
+      <td>110.0</td>
+    </tr>
+    <tr>
+      <th>1987-10-01</th>
+      <td>206</td>
+      <td>William</td>
+      <td>Gietz</td>
+      <td>WGIETZ</td>
+      <td>515.123.8181</td>
+      <td>AC_ACCOUNT</td>
+      <td>8300</td>
+      <td>NaN</td>
+      <td>205.0</td>
+      <td>110.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>107 rows × 10 columns</p>
+</div></div></div>
+</div>
+<p>Ahora, ya podemos filtrar en base a esta columna de forma fácil:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;1987-06&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>employ_id</th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>email</th>
+      <th>phone_number</th>
+      <th>job_id</th>
+      <th>salary</th>
+      <th>commission_pct</th>
+      <th>manager_id</th>
+      <th>department_id</th>
+    </tr>
+    <tr>
+      <th>hire_date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1987-06-17</th>
+      <td>100</td>
+      <td>Steven</td>
+      <td>King</td>
+      <td>SKING</td>
+      <td>515.123.4567</td>
+      <td>AD_PRES</td>
+      <td>24000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-18</th>
+      <td>101</td>
+      <td>Neena</td>
+      <td>Kochhar</td>
+      <td>NKOCHHAR</td>
+      <td>515.123.4568</td>
+      <td>AD_VP</td>
+      <td>17000</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-19</th>
+      <td>102</td>
+      <td>Lex</td>
+      <td>De Haan</td>
+      <td>LDEHAAN</td>
+      <td>515.123.4569</td>
+      <td>AD_VP</td>
+      <td>17000</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-20</th>
+      <td>103</td>
+      <td>Alexander</td>
+      <td>Hunold</td>
+      <td>AHUNOLD</td>
+      <td>590.423.4567</td>
+      <td>IT_PROG</td>
+      <td>9000</td>
+      <td>NaN</td>
+      <td>102.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-21</th>
+      <td>104</td>
+      <td>Bruce</td>
+      <td>Ernst</td>
+      <td>BERNST</td>
+      <td>590.423.4568</td>
+      <td>IT_PROG</td>
+      <td>6000</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-22</th>
+      <td>105</td>
+      <td>David</td>
+      <td>Austin</td>
+      <td>DAUSTIN</td>
+      <td>590.423.4569</td>
+      <td>IT_PROG</td>
+      <td>4800</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-23</th>
+      <td>106</td>
+      <td>Valli</td>
+      <td>Pataballa</td>
+      <td>VPATABAL</td>
+      <td>590.423.4560</td>
+      <td>IT_PROG</td>
+      <td>4800</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-24</th>
+      <td>107</td>
+      <td>Diana</td>
+      <td>Lorentz</td>
+      <td>DLORENTZ</td>
+      <td>590.423.5567</td>
+      <td>IT_PROG</td>
+      <td>4200</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-25</th>
+      <td>108</td>
+      <td>Nancy</td>
+      <td>Greenberg</td>
+      <td>NGREENBE</td>
+      <td>515.124.4569</td>
+      <td>FI_MGR</td>
+      <td>12000</td>
+      <td>NaN</td>
+      <td>101.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-26</th>
+      <td>109</td>
+      <td>Daniel</td>
+      <td>Faviet</td>
+      <td>DFAVIET</td>
+      <td>515.124.4169</td>
+      <td>FI_ACCOUNT</td>
+      <td>9000</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-27</th>
+      <td>110</td>
+      <td>John</td>
+      <td>Chen</td>
+      <td>JCHEN</td>
+      <td>515.124.4269</td>
+      <td>FI_ACCOUNT</td>
+      <td>8200</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-28</th>
+      <td>111</td>
+      <td>Ismael</td>
+      <td>Sciarra</td>
+      <td>ISCIARRA</td>
+      <td>515.124.4369</td>
+      <td>FI_ACCOUNT</td>
+      <td>7700</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-29</th>
+      <td>112</td>
+      <td>Jose Manuel</td>
+      <td>Urman</td>
+      <td>JMURMAN</td>
+      <td>515.124.4469</td>
+      <td>FI_ACCOUNT</td>
+      <td>7800</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-30</th>
+      <td>113</td>
+      <td>Luis</td>
+      <td>Popp</td>
+      <td>LPOPP</td>
+      <td>515.124.4567</td>
+      <td>FI_ACCOUNT</td>
+      <td>6900</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>O indicando la fecha de contratación exacta:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;1987-06-21&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>employ_id                  104
+first_name               Bruce
+last_name                Ernst
+email                   BERNST
+phone_number      590.423.4568
+job_id                 IT_PROG
+salary                    6000
+commission_pct             NaN
+manager_id               103.0
+department_id             60.0
+Name: 1987-06-21 00:00:00, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>También podemos indicar un rango de fechas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;1987-06-20&#39;</span><span class="p">:</span><span class="s1">&#39;1987-06-30&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>employ_id</th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>email</th>
+      <th>phone_number</th>
+      <th>job_id</th>
+      <th>salary</th>
+      <th>commission_pct</th>
+      <th>manager_id</th>
+      <th>department_id</th>
+    </tr>
+    <tr>
+      <th>hire_date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1987-06-20</th>
+      <td>103</td>
+      <td>Alexander</td>
+      <td>Hunold</td>
+      <td>AHUNOLD</td>
+      <td>590.423.4567</td>
+      <td>IT_PROG</td>
+      <td>9000</td>
+      <td>NaN</td>
+      <td>102.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-21</th>
+      <td>104</td>
+      <td>Bruce</td>
+      <td>Ernst</td>
+      <td>BERNST</td>
+      <td>590.423.4568</td>
+      <td>IT_PROG</td>
+      <td>6000</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-22</th>
+      <td>105</td>
+      <td>David</td>
+      <td>Austin</td>
+      <td>DAUSTIN</td>
+      <td>590.423.4569</td>
+      <td>IT_PROG</td>
+      <td>4800</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-23</th>
+      <td>106</td>
+      <td>Valli</td>
+      <td>Pataballa</td>
+      <td>VPATABAL</td>
+      <td>590.423.4560</td>
+      <td>IT_PROG</td>
+      <td>4800</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-24</th>
+      <td>107</td>
+      <td>Diana</td>
+      <td>Lorentz</td>
+      <td>DLORENTZ</td>
+      <td>590.423.5567</td>
+      <td>IT_PROG</td>
+      <td>4200</td>
+      <td>NaN</td>
+      <td>103.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-25</th>
+      <td>108</td>
+      <td>Nancy</td>
+      <td>Greenberg</td>
+      <td>NGREENBE</td>
+      <td>515.124.4569</td>
+      <td>FI_MGR</td>
+      <td>12000</td>
+      <td>NaN</td>
+      <td>101.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-26</th>
+      <td>109</td>
+      <td>Daniel</td>
+      <td>Faviet</td>
+      <td>DFAVIET</td>
+      <td>515.124.4169</td>
+      <td>FI_ACCOUNT</td>
+      <td>9000</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-27</th>
+      <td>110</td>
+      <td>John</td>
+      <td>Chen</td>
+      <td>JCHEN</td>
+      <td>515.124.4269</td>
+      <td>FI_ACCOUNT</td>
+      <td>8200</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-28</th>
+      <td>111</td>
+      <td>Ismael</td>
+      <td>Sciarra</td>
+      <td>ISCIARRA</td>
+      <td>515.124.4369</td>
+      <td>FI_ACCOUNT</td>
+      <td>7700</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-29</th>
+      <td>112</td>
+      <td>Jose Manuel</td>
+      <td>Urman</td>
+      <td>JMURMAN</td>
+      <td>515.124.4469</td>
+      <td>FI_ACCOUNT</td>
+      <td>7800</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1987-06-30</th>
+      <td>113</td>
+      <td>Luis</td>
+      <td>Popp</td>
+      <td>LPOPP</td>
+      <td>515.124.4567</td>
+      <td>FI_ACCOUNT</td>
+      <td>6900</td>
+      <td>NaN</td>
+      <td>108.0</td>
+      <td>100.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>O utilizar <code class="docutils literal notranslate"><span class="pre">query</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&#39;1987-06-21&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>employ_id                  104
+first_name               Bruce
+last_name                Ernst
+email                   BERNST
+phone_number      590.423.4568
+job_id                 IT_PROG
+salary                    6000
+commission_pct             NaN
+manager_id               103.0
+department_id             60.0
+Name: 1987-06-21 00:00:00, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="descomposicion-de-fechas-y-horas">
+<h3>Descomposición de fechas y horas:<a class="headerlink" href="#descomposicion-de-fechas-y-horas" title="Permalink to this heading">#</a></h3>
+<p>Podemos descomponer fácilmente nuestra serie temporal en los componentes que la constituyen. Hay muchos atributos que definen a estos elementos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([1987, 1987, 1987, 1987, 1987, 1987, 1987, 1987, 1987, 1987,
+       ...
+       1987, 1987, 1987, 1987, 1987, 1987, 1987, 1987, 1987, 1987],
+      dtype=&#39;int32&#39;, name=&#39;hire_date&#39;, length=107)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">second</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       ...
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      dtype=&#39;int32&#39;, name=&#39;hire_date&#39;, length=107)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">weekday</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([2, 3, 4, 5, 6, 0, 1, 2, 3, 4,
+       ...
+       1, 2, 3, 4, 5, 6, 0, 1, 2, 3],
+      dtype=&#39;int32&#39;, name=&#39;hire_date&#39;, length=107)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Las fechas también cuentan con una serie de métodos que podemos utilizar:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day_name</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Wednesday&#39;, &#39;Thursday&#39;, &#39;Friday&#39;, &#39;Saturday&#39;, &#39;Sunday&#39;, &#39;Monday&#39;,
+       &#39;Tuesday&#39;, &#39;Wednesday&#39;, &#39;Thursday&#39;, &#39;Friday&#39;,
+       ...
+       &#39;Tuesday&#39;, &#39;Wednesday&#39;, &#39;Thursday&#39;, &#39;Friday&#39;, &#39;Saturday&#39;, &#39;Sunday&#39;,
+       &#39;Monday&#39;, &#39;Tuesday&#39;, &#39;Wednesday&#39;, &#39;Thursday&#39;],
+      dtype=&#39;object&#39;, name=&#39;hire_date&#39;, length=107)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month_name</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;June&#39;, &#39;June&#39;, &#39;June&#39;, &#39;June&#39;, &#39;June&#39;, &#39;June&#39;, &#39;June&#39;, &#39;June&#39;, &#39;June&#39;,
+       &#39;June&#39;,
+       ...
+       &#39;September&#39;, &#39;September&#39;, &#39;September&#39;, &#39;September&#39;, &#39;September&#39;,
+       &#39;September&#39;, &#39;September&#39;, &#39;September&#39;, &#39;September&#39;, &#39;October&#39;],
+      dtype=&#39;object&#39;, name=&#39;hire_date&#39;, length=107)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="desplazar-fechas-y-zona-horaria">
+<h3>Desplazar fechas y zona horaria<a class="headerlink" href="#desplazar-fechas-y-zona-horaria" title="Permalink to this heading">#</a></h3>
+<p>Antes vimos cómo podemos usar <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> para sumar/restar tiempo a nuestras fechas y horas. <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> respeta el tiempo absoluto, lo que puede resultar problemático en algunos casos, donde el tiempo no es regular. Por ejemplo, el 8 de marzo comenzó el horario de verano en Canadá y los relojes avanzaron 1 hora:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-03-07 12:00:00&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;Canada/Pacific&#39;</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s2">&quot;1 day&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original time: </span><span class="si">{</span><span class="n">t1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Plus one day: </span><span class="si">{</span><span class="n">t2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># note that time has moved from 12:00 -&gt; 13:00</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original time: 2020-03-07 12:00:00-08:00
+ Plus one day: 2020-03-08 13:00:00-07:00
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para solucionar este problema, debemos usar la función <code class="docutils literal notranslate"><span class="pre">Dateoffset</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t3</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original time: </span><span class="si">{</span><span class="n">t1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Plus one day: </span><span class="si">{</span><span class="n">t3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># note that time has stayed at 12:00</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original time: 2020-03-07 12:00:00-08:00
+ Plus one day: 2020-03-08 12:00:00-07:00
+</pre></div>
+</div>
+</div>
+</div>
+<p>De forma predeterminada, los objetos de fecha y hora no reconocen la zona horaria. Para asociar horas con una zona horaria, podemos usar el argumento <code class="docutils literal notranslate"><span class="pre">tz</span></code> en la construcción, o podemos usar el método <code class="docutils literal notranslate"><span class="pre">tz_localize()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;        No timezone: </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-03-07 12:00:00&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tz</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;             tz arg: </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-03-07 12:00:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">tz</span><span class="o">=</span><span class="s1">&#39;Canada/Pacific&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tz</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;.tz_localize method: </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-03-07 12:00:00&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;Canada/Pacific&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tz</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        No timezone: None
+             tz arg: Canada/Pacific
+.tz_localize method: Canada/Pacific
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por último, podemos utilizar el método <code class="docutils literal notranslate"><span class="pre">tz_convert()</span></code> para convertir zonas horarias o el método <code class="docutils literal notranslate"><span class="pre">DateOffset</span></code> para añadir o quitar tiempo.</p>
+</section>
+<section id="redimensionar-y-utilizar-funciones-de-agregacion">
+<h3>Redimensionar y utilizar funciones de agregación<a class="headerlink" href="#redimensionar-y-utilizar-funciones-de-agregacion" title="Permalink to this heading">#</a></h3>
+<p>Una de las operaciones más comunes que solemos realizar cuando trabajamos con series temporales es modificar la serie temporal a una agregación más gruesa/fina/regular. Por ejemplo, es posible que desees modificar los datos diarios en datos semanales. Podemos hacerlo con el método <code class="docutils literal notranslate"><span class="pre">resample()</span></code> . Por ejemplo, vamos a volver al dataframe de empleados:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;salary&quot;</span><span class="p">,</span> <span class="s2">&quot;department_id&quot;</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatetimeIndex([&#39;1987-06-17&#39;, &#39;1987-06-18&#39;, &#39;1987-06-19&#39;, &#39;1987-06-20&#39;,
+               &#39;1987-06-21&#39;, &#39;1987-06-22&#39;, &#39;1987-06-23&#39;, &#39;1987-06-24&#39;,
+               &#39;1987-06-25&#39;, &#39;1987-06-26&#39;,
+               ...
+               &#39;1987-09-22&#39;, &#39;1987-09-23&#39;, &#39;1987-09-24&#39;, &#39;1987-09-25&#39;,
+               &#39;1987-09-26&#39;, &#39;1987-09-27&#39;, &#39;1987-09-28&#39;, &#39;1987-09-29&#39;,
+               &#39;1987-09-30&#39;, &#39;1987-10-01&#39;],
+              dtype=&#39;datetime64[ns]&#39;, name=&#39;hire_date&#39;, length=107, freq=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vamos a redimensionar el dataframe, lo cual es muy parecido a utilizar un <code class="docutils literal notranslate"><span class="pre">groupby</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;1M&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">dfr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>salary</th>
+      <th>department_id</th>
+    </tr>
+    <tr>
+      <th>hire_date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1987-06-30</th>
+      <td>14</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>1987-07-31</th>
+      <td>31</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>1987-08-31</th>
+      <td>31</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>1987-09-30</th>
+      <td>30</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>1987-10-31</th>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Con esto lo que hemos hecho ha sido contar cuanta gente se contrato en cada mes.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/pandas/dataframes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="otras_operaciones.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Otras operaciones con DataFrames</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../ejercicios/pandas/ejercicios_index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ejercicios pandas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-del-tipo-string">Métodos del tipo String</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajando-con-fechas">Trabajando con fechas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-elementos-de-tipo-datetime">Crear elementos de tipo DateTime</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformar-elementos-en-datetime">Transformar elementos en DateTime</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexar-y-filtrar-por-fechas-y-horas">Indexar y filtrar por fechas y horas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-fechas-y-horas">Descomposición de fechas y horas:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desplazar-fechas-y-zona-horaria">Desplazar fechas y zona horaria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redimensionar-y-utilizar-funciones-de-agregacion">Redimensionar y utilizar funciones de agregación</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

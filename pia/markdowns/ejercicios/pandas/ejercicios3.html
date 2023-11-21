@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Ejercicios Series &#8212; Programación de inteligencia artificial</title>
+    <title>Ejercicios Dataframes 3 &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -68,11 +68,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/ejercicios/pandas/ejercicios_series';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/ejercicios/pandas/ejercicios3';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Ejercicios Dataframes 1" href="ejercicios1.html" />
-    <link rel="prev" title="Ejercicios pandas" href="ejercicios_index.html" />
+    <link rel="next" title="Bibliografía" href="../../bibliografia.html" />
+    <link rel="prev" title="Ejercicios Dataframes 2" href="ejercicios2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -185,10 +185,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EJERCICIOS</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ejercicios_index.html">Ejercicios pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ejercicios_series.html">Ejercicios Series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ejercicios1.html">Ejercicios Dataframes 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios3.html">Ejercicios Dataframes 3</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ejercicios Dataframes 3</a></li>
 </ul>
 </li>
 </ul>
@@ -281,7 +281,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Ejercicios Series</h1>
+    <h1>Ejercicios Dataframes 3</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -295,102 +295,82 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ejercicios-series">
-<h1>Ejercicios Series<a class="headerlink" href="#ejercicios-series" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ejercicios-dataframes-3">
+<h1>Ejercicios Dataframes 3<a class="headerlink" href="#ejercicios-dataframes-3" title="Permalink to this heading">#</a></h1>
 <div class="admonition-ejercicio-1 admonition">
 <p class="admonition-title">Ejercicio 1</p>
-<p>Dada una serie:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<p>Dado la siguiente serie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;01 Jan 2010&#39;</span><span class="p">,</span> <span class="s1">&#39;02-02-2011&#39;</span><span class="p">,</span> <span class="s1">&#39;20120303&#39;</span><span class="p">,</span> <span class="s1">&#39;2013/04/04&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-05-05&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-06-06T12:20&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Escribe una función que filtre la serie y devuelva solo los valores mayores que 3.</p>
+<p>Transforma la serie para que se muestren los elementos de la serie en formato datetime.</p>
 </div>
 <div class="admonition-ejercicio-2 admonition">
 <p class="admonition-title">Ejercicio 2</p>
-<p>Dada una serie fechas que contiene fechas:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-
-<span class="n">fechas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s1">&#39;2023-01-15&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-02-20&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-03-25&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-04-30&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-05-15&#39;</span><span class="p">])</span> 
-</pre></div>
-</div>
-<p>Crea una función que calcule la diferencia en días entre cada fecha y la fecha más temprana en la serie.</p>
+<p>Dada la serie del ejercicio anterior, obten los siguientes elementos:</p>
+<ul class="simple">
+<li><p>Un array con los días del mes.</p></li>
+<li><p>Un array con el número de la semana.</p></li>
+<li><p>Un array con el año.</p></li>
+<li><p>Un array con el día de la semana en texto.</p></li>
+</ul>
 </div>
 <div class="admonition-ejercicio-3 admonition">
 <p class="admonition-title">Ejercicio 3</p>
-<p>Dada una serie con nombres de personas:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-
-<span class="n">nombres</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;Ana&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;María&#39;</span><span class="p">,</span> <span class="s1">&#39;Carlos&#39;</span><span class="p">,</span> <span class="s1">&#39;Sofía&#39;</span><span class="p">])</span> 
+<p>Dada la siguiente serie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;Jan 2010&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb 2011&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar 2012&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Escribe una función que devuelva una nueva serie con la primera letra de cada nombre en mayúsculas.</p>
+<p>Transforma la serie para que se muestra la fecha en formato Y-m-d y el días sea el último del mes.</p>
 </div>
 <div class="admonition-ejercicio-4 admonition">
 <p class="admonition-title">Ejercicio 4</p>
-<p>Crea una serie aleatoria de longitud 10 que contenga números enteros aleatorios entre 1 y 100. Luego, escribe una función para encontrar el número más grande en la serie.</p>
+<p>Dados los siguientes datos:</p>
+<p><a class="reference download internal" download="" href="../../../_downloads/32003e257864ea385bdb3f70cdb45c75/log_report.xlsx"><span class="xref download myst">Datos</span></a></p>
+<p>Muestra:</p>
+<ul class="simple">
+<li><p>Los registros que hay desde el año 2022 hasta el año actual.</p></li>
+<li><p>Los registros que hay de marzo de 2022.</p></li>
+<li><p>Cual fue la última inspección del equipo ‘Pump’.</p></li>
+<li><p>Cuántos registros hay entre abril de 2021 y junio de 2021.</p></li>
+<li><p>HCuantos días han pasado desde la última inspección del equipo ‘Pump’.</p></li>
+<li><p>Muestra los últimos 30 registros desde el día actual.</p></li>
+<li><p>Muestra todos los registros que se han generado en miércoles.</p></li>
+<li><p>Muestra el año y el número de registros de ese año.</p></li>
+<li><p>Muestra el mes y el número de registros en ese mes.</p></li>
+<li><p>Mostrar año y mes con la cantidad de registros en ese mes del año</p></li>
+</ul>
 </div>
 <div class="admonition-ejercicio-5 admonition">
 <p class="admonition-title">Ejercicio 5</p>
-<p>Crea una serie que represente la población de una ciudad en diferentes años. Luego, escribe una función que calcule la tasa de crecimiento anual de la población en base a un valor que tu consideres.</p>
+<p>Dada la saiguiente serie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;Apple&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">,</span> <span class="s1">&#39;Plan&#39;</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Money&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Obten aquellas alabras que tienen dos vocales.</p>
 </div>
 <div class="admonition-ejercicio-6 admonition">
 <p class="admonition-title">Ejercicio 6</p>
-<p>Dada una serie que contiene algunos valores nulos:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
-
-<span class="n">valores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span> 
+<p>Dada la siguiente serie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">emails</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;buying books at amazom.com&#39;</span><span class="p">,</span> <span class="s1">&#39;rameses@egypt.com&#39;</span><span class="p">,</span> <span class="s1">&#39;matt@t.co&#39;</span><span class="p">,</span> <span class="s1">&#39;narendra@modi.com&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Escribe una función que reemplace los valores nulos con el promedio de los valores no nulos en la serie.</p>
+<p>Utiliza una expresión regular para obtener los emails válidos.</p>
 </div>
 <div class="admonition-ejercicio-7 admonition">
 <p class="admonition-title">Ejercicio 7</p>
-<p>Dada una serie de fechas:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
-
-<span class="n">horarios</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s1">&#39;2023-01-15 08:30&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-02-20 12:45&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-03-25 19:15&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-04-30 22:00&#39;</span><span class="p">])</span> 
+<p>Dado el siguiente dataframe:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;texto&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Python es genial&#39;</span><span class="p">,</span> <span class="s1">&#39;Programación en Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Análisis de datos&#39;</span><span class="p">,</span> <span class="s1">&#39;Ciencia de datos&#39;</span><span class="p">,</span> <span class="s1">&#39;Machine Learning&#39;</span><span class="p">]}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Escribe una función que calcule la diferencia en horas entre cada par de fechas consecutivas.</p>
-</div>
-<div class="admonition-ejercicio-8 admonition">
-<p class="admonition-title">Ejercicio 8</p>
-<p>Dada una serie de texto:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-
-<span class="n">texto</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;Python es genial&#39;</span><span class="p">,</span> <span class="s1">&#39;Data Science es emocionante&#39;</span><span class="p">,</span> <span class="s1">&#39;Aprender es divertido&#39;</span><span class="p">])</span> 
-</pre></div>
-</div>
-<p>Escribe una función que cuente cuántas palabras en cada elemento de la serie tienen una longitud de 6 letras o más.</p>
-</div>
-<div class="admonition-ejercicio-9 admonition">
-<p class="admonition-title">Ejercicio 9</p>
-<p>Dada una serie que contiene nombres y fechas de nacimiento de personas, escribe una función que calcule la edad de cada persona en años completos a partir de su fecha de nacimiento. Luego, debes crear una nueva serie que contenga los nombres y las edades de las personas.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-
-<span class="n">datos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nombre&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ana&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;María&#39;</span><span class="p">,</span> <span class="s1">&#39;Carlos&#39;</span><span class="p">],</span> 
-<span class="s1">&#39;FechaNacimiento&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1990-03-15&#39;</span><span class="p">,</span> <span class="s1">&#39;1985-12-10&#39;</span><span class="p">,</span> <span class="s1">&#39;1995-05-20&#39;</span><span class="p">,</span> <span class="s1">&#39;1980-07-01&#39;</span><span class="p">]}</span> 
-
-<span class="n">personas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span> 
-
-<span class="n">personas</span><span class="p">[</span><span class="s1">&#39;FechaNacimiento&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">personas</span><span class="p">[</span><span class="s1">&#39;FechaNacimiento&#39;</span><span class="p">])</span> 
-</pre></div>
-</div>
-</div>
-<div class="admonition-ejercicio-10 admonition">
-<p class="admonition-title">Ejercicio 10</p>
-<p>Crea dos series serie1 y serie2 con etiquetas que se superpongan. Luego, escribe una función que combine ambas series, sumando los valores correspondientes cuando las etiquetas coinciden.</p>
-<p>Ejemplo de series que se superponen</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-
-<span class="n">serie1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span> 
-<span class="n">serie2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span> 
-</pre></div>
-</div>
+<ol class="arabic simple">
+<li><p>Concatena las palabras del texto en una sola cadena, separadas por guiones bajos.</p></li>
+<li><p>Encuentra la palabra más larga en cada texto y almacenala en una nueva columna.</p></li>
+<li><p>Cuenta la cantidad de palabras que comienzan con la letra ‘a’ en cada texto.</p></li>
+<li><p>Reemplaza cada vocal en cada texto por la vocal siguiente en el alfabeto (a por e, e por i, etc.).</p></li>
+<li><p>Crea una nueva columna que contenga solo las palabras únicas en cada texto, ordenadas alfabéticamente.</p></li>
+</ol>
 </div>
 </section>
 
@@ -425,20 +405,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ejercicios_index.html"
+       href="ejercicios2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Ejercicios pandas</p>
+        <p class="prev-next-title">Ejercicios Dataframes 2</p>
       </div>
     </a>
     <a class="right-next"
-       href="ejercicios1.html"
+       href="../../bibliografia.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ejercicios Dataframes 1</p>
+        <p class="prev-next-title">Bibliografía</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

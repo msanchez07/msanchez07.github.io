@@ -1,0 +1,32 @@
+section {
+    text-align: justify;
+}
+
+.my-table-header{
+    background-color: #1F4E79 !important; 
+    color: white !important;
+}
+
+table.my-table, th.my-table, tr.my-table, td.my-table{
+    border: 3px double !important;
+    border-color: #1F4E79 !important;
+}
+
+th.left-header{
+    text-align: left !important;
+    vertical-align: middle !important;
+}
+
+th.left-header-background{
+    background-color: aqua;
+}
+
+* {
+    user-select: none;
+  }
+  *::selection {
+    background: none;
+  }
+  *::-moz-selection {
+    background: none;
+  }

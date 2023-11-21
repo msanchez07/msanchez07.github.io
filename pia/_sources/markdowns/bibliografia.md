@@ -9,6 +9,7 @@ A continuación se listan los distintos elementos utilizados para realizar esta 
 4. [Runebook.dev](https://runebook.dev/es/)
 5. [w3resource](https://www.w3resource.com)
 6. [Practical Data Science!](https://www.practicaldatascience.org/)
+7. [Machine learning +](https://www.machinelearningplus.com/)
 
 ## Libros
 [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/) by Aurélien Géron.
