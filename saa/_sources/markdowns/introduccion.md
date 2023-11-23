@@ -8,18 +8,38 @@ A medida que avancemos, exploraremos la importancia de la preparación y el proc
 
 Los sistemas de inteligencia artificial y aprendizaje automático están en constante evolución, presentando oportunidades emocionantes y desafíos únicos para los científicos informáticos de hoy. Este capítulo proporcionará la base esencial para comprender cómo funcionan estos sistemas, cómo aplicarlos en situaciones de la vida real y cómo continuar aprendiendo y explorando en un campo en constante cambio. A medida que exploramos las diferentes secciones de este capítulo, trazaremos un camino para que los estudiantes se sumerjan en los fascinantes mundos de la IA y el aprendizaje automático. 
 
-
-
-## Conceptos previos
-
-|              |               |
-| ------------ | ------------- |
-| **Ciencia de datos**         | La ciencia de datos es un campo interdisciplinario que involucra la extracción, análisis e interpretación de información valiosa de conjuntos de datos. Combina habilidades de programación, estadísticas y dominio del negocio para tomar decisiones informadas y descubrir patrones y tendencias.  |
-| **Inteligencia Artificial (IA)**  | La inteligencia artificial es la simulación de la inteligencia humana en máquinas. Se trata de crear sistemas que pueden aprender, razonar, resolver problemas y tomar decisiones similares a las de los seres humanos. Esto incluye áreas como el procesamiento del lenguaje natural, la visión por computadora y el aprendizaje automático.  |
-| **Big Data** | El big data se refiere a conjuntos de datos extremadamente grandes y complejos que superan las capacidades de las herramientas de procesamiento tradicionales. El big data se caracteriza por las "3 V's": volumen (cantidad masiva de datos), velocidad (velocidad a la que se generan los datos) y variedad (diversidad de tipos de datos).  |
-| **Minería de Datos** | La minería de datos es el proceso de descubrir patrones, relaciones y conocimientos útiles en grandes conjuntos de datos. Implica la extracción de información valiosa y no trivial a partir de datos que inicialmente pueden parecer caóticos o no estructurados.  |
-| **Algoritmos y Modelos** | Los algoritmos son pasos o instrucciones para resolver un problema específico. En el contexto del aprendizaje automático, los algoritmos son utilizados para entrenar modelos, que son representaciones matemáticas de un proceso o fenómeno en los datos. Estos modelos pueden predecir, clasificar u optimizar.   |
-| **Parámetros e Hiperparámetros** | ELos parámetros son configuraciones internas de un modelo que se ajustan durante el proceso de entrenamiento para lograr un mejor rendimiento en los datos de entrenamiento. Los hiperparámetros son configuraciones externas que se establecen antes del entrenamiento y afectan cómo se comporta un algoritmo de aprendizaje, como la velocidad de aprendizaje en un modelo de redes neuronales. |
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">CONCEPTOS PREVIOS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="left-header" scope="row">Ciencia de datos</th>
+      <td  colspan="3">La ciencia de datos es un campo interdisciplinario que involucra la extracción, análisis e interpretación de información valiosa de conjuntos de datos. Combina habilidades de programación, estadísticas y dominio del negocio para tomar decisiones informadas y descubrir patrones y tendencias.  </td>
+    </tr>
+     <tr>
+      <th class="left-header" scope="row">Inteligencia Artificial (IA)</th>
+      <td  colspan="3">La inteligencia artificial es la simulación de la inteligencia humana en máquinas. Se trata de crear sistemas que pueden aprender, razonar, resolver problemas y tomar decisiones similares a las de los seres humanos. Esto incluye áreas como el procesamiento del lenguaje natural, la visión por computadora y el aprendizaje automático. </td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">Big Data</th>
+      <td  colspan="3">El big data se refiere a conjuntos de datos extremadamente grandes y complejos que superan las capacidades de las herramientas de procesamiento tradicionales. El big data se caracteriza por las "3 V's": volumen (cantidad masiva de datos), velocidad (velocidad a la que se generan los datos) y variedad (diversidad de tipos de datos). </td>
+    </tr>
+    <th class="left-header" scope="row">Minería de Datos</th>
+      <td  colspan="3">La minería de datos es el proceso de descubrir patrones, relaciones y conocimientos útiles en grandes conjuntos de datos. Implica la extracción de información valiosa y no trivial a partir de datos que inicialmente pueden parecer caóticos o no estructurados. </td>
+    </tr>
+     <tr>
+      <th scope="row" class="left-header">Algoritmos y Modelos</th>
+      <td  colspan="3">Los algoritmos son pasos o instrucciones para resolver un problema específico. En el contexto del aprendizaje automático, los algoritmos son utilizados para entrenar modelos, que son representaciones matemáticas de un proceso o fenómeno en los datos. Estos modelos pueden predecir, clasificar u optimizar.   </td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">Parámetros e Hiperparámetros</th>
+      <td  colspan="3">Los parámetros son configuraciones internas de un modelo que se ajustan durante el proceso de entrenamiento para lograr un mejor rendimiento en los datos de entrenamiento. Los hiperparámetros son configuraciones externas que se establecen antes del entrenamiento y afectan cómo se comporta un algoritmo de aprendizaje, como la velocidad de aprendizaje en un modelo de redes neuronales. </td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## Historia y desarrollo de la inteligencia artificial 

@@ -1,0 +1,79 @@
+Traceback (most recent call last):
+  File "/home/nelo/miniconda3/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/nelo/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nelo/miniconda3/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nelo/miniconda3/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/nelo/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/nelo/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/nelo/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(reg, X, y, scoring="mape", cv=10)
+
+scores
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mInvalidParameterError[0m                     Traceback (most recent call last)
+Cell [0;32mIn[4], line 3[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodel_selection[39;00m [38;5;28;01mimport[39;00m cross_val_score
+[0;32m----> 3[0m scores [38;5;241m=[39m [43mcross_val_score[49m[43m([49m[43mreg[49m[43m,[49m[43m [49m[43mX[49m[43m,[49m[43m [49m[43my[49m[43m,[49m[43m [49m[43mscoring[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mmape[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mcv[49m[38;5;241;43m=[39;49m[38;5;241;43m10[39;49m[43m)[49m
+[1;32m      5[0m scores
+
+File [0;32m~/miniconda3/lib/python3.11/site-packages/sklearn/model_selection/_validation.py:560[0m, in [0;36mcross_val_score[0;34m(estimator, X, y, groups, scoring, cv, n_jobs, verbose, fit_params, pre_dispatch, error_score)[0m
+[1;32m    442[0m [38;5;250m[39m[38;5;124;03m"""Evaluate a score by cross-validation.[39;00m
+[1;32m    443[0m 
+[1;32m    444[0m [38;5;124;03mRead more in the :ref:`User Guide <cross_validation>`.[39;00m
+[0;32m   (...)[0m
+[1;32m    557[0m [38;5;124;03m[0.3315057  0.08022103 0.03531816][39;00m
+[1;32m    558[0m [38;5;124;03m"""[39;00m
+[1;32m    559[0m [38;5;66;03m# To ensure multimetric format is not supported[39;00m
+[0;32m--> 560[0m scorer [38;5;241m=[39m [43mcheck_scoring[49m[43m([49m[43mestimator[49m[43m,[49m[43m [49m[43mscoring[49m[38;5;241;43m=[39;49m[43mscoring[49m[43m)[49m
+[1;32m    562[0m cv_results [38;5;241m=[39m cross_validate(
+[1;32m    563[0m     estimator[38;5;241m=[39mestimator,
+[1;32m    564[0m     X[38;5;241m=[39mX,
+[0;32m   (...)[0m
+[1;32m    573[0m     error_score[38;5;241m=[39merror_score,
+[1;32m    574[0m )
+[1;32m    575[0m [38;5;28;01mreturn[39;00m cv_results[[38;5;124m"[39m[38;5;124mtest_score[39m[38;5;124m"[39m]
+
+File [0;32m~/miniconda3/lib/python3.11/site-packages/sklearn/utils/_param_validation.py:201[0m, in [0;36mvalidate_params.<locals>.decorator.<locals>.wrapper[0;34m(*args, **kwargs)[0m
+[1;32m    198[0m to_ignore [38;5;241m+[39m[38;5;241m=[39m [[38;5;124m"[39m[38;5;124mself[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mcls[39m[38;5;124m"[39m]
+[1;32m    199[0m params [38;5;241m=[39m {k: v [38;5;28;01mfor[39;00m k, v [38;5;129;01min[39;00m params[38;5;241m.[39marguments[38;5;241m.[39mitems() [38;5;28;01mif[39;00m k [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m to_ignore}
+[0;32m--> 201[0m [43mvalidate_parameter_constraints[49m[43m([49m
+[1;32m    202[0m [43m    [49m[43mparameter_constraints[49m[43m,[49m[43m [49m[43mparams[49m[43m,[49m[43m [49m[43mcaller_name[49m[38;5;241;43m=[39;49m[43mfunc[49m[38;5;241;43m.[39;49m[38;5;18;43m__qualname__[39;49m
+[1;32m    203[0m [43m[49m[43m)[49m
+[1;32m    205[0m [38;5;28;01mtry[39;00m:
+[1;32m    206[0m     [38;5;28;01mwith[39;00m config_context(
+[1;32m    207[0m         skip_parameter_validation[38;5;241m=[39m(
+[1;32m    208[0m             prefer_skip_nested_validation [38;5;129;01mor[39;00m global_skip_validation
+[1;32m    209[0m         )
+[1;32m    210[0m     ):
+
+File [0;32m~/miniconda3/lib/python3.11/site-packages/sklearn/utils/_param_validation.py:95[0m, in [0;36mvalidate_parameter_constraints[0;34m(parameter_constraints, params, caller_name)[0m
+[1;32m     89[0m [38;5;28;01melse[39;00m:
+[1;32m     90[0m     constraints_str [38;5;241m=[39m (
+[1;32m     91[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00m[38;5;124m'[39m[38;5;124m, [39m[38;5;124m'[39m[38;5;241m.[39mjoin([[38;5;28mstr[39m(c)[38;5;250m [39m[38;5;28;01mfor[39;00m[38;5;250m [39mc[38;5;250m [39m[38;5;129;01min[39;00m[38;5;250m [39mconstraints[:[38;5;241m-[39m[38;5;241m1[39m]])[38;5;132;01m}[39;00m[38;5;124m or[39m[38;5;124m"[39m
+[1;32m     92[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124m [39m[38;5;132;01m{[39;00mconstraints[[38;5;241m-[39m[38;5;241m1[39m][38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m     93[0m     )
+[0;32m---> 95[0m [38;5;28;01mraise[39;00m InvalidParameterError(
+[1;32m     96[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;124mThe [39m[38;5;132;01m{[39;00mparam_name[38;5;132;01m!r}[39;00m[38;5;124m parameter of [39m[38;5;132;01m{[39;00mcaller_name[38;5;132;01m}[39;00m[38;5;124m must be[39m[38;5;124m"[39m
+[1;32m     97[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;124m [39m[38;5;132;01m{[39;00mconstraints_str[38;5;132;01m}[39;00m[38;5;124m. Got [39m[38;5;132;01m{[39;00mparam_val[38;5;132;01m!r}[39;00m[38;5;124m instead.[39m[38;5;124m"[39m
+[1;32m     98[0m )
+
+[0;31mInvalidParameterError[0m: The 'scoring' parameter of check_scoring must be a str among {'recall_micro', 'balanced_accuracy', 'precision_macro', 'explained_variance', 'jaccard_weighted', 'accuracy', 'rand_score', 'average_precision', 'v_measure_score', 'jaccard', 'f1_micro', 'neg_mean_gamma_deviance', 'normalized_mutual_info_score', 'precision_micro', 'neg_mean_poisson_deviance', 'roc_auc', 'completeness_score', 'mutual_info_score', 'positive_likelihood_ratio', 'top_k_accuracy', 'neg_mean_squared_error', 'neg_negative_likelihood_ratio', 'max_error', 'neg_brier_score', 'roc_auc_ovo_weighted', 'f1', 'r2', 'roc_auc_ovr_weighted', 'roc_auc_ovr', 'neg_median_absolute_error', 'jaccard_samples', 'precision', 'recall_macro', 'homogeneity_score', 'f1_weighted', 'matthews_corrcoef', 'recall_weighted', 'recall_samples', 'neg_root_mean_squared_error', 'precision_weighted', 'recall', 'adjusted_rand_score', 'fowlkes_mallows_score', 'neg_mean_absolute_error', 'jaccard_macro', 'f1_macro', 'jaccard_micro', 'precision_samples', 'adjusted_mutual_info_score', 'f1_samples', 'roc_auc_ovo', 'neg_mean_squared_log_error', 'neg_log_loss', 'neg_mean_absolute_percentage_error'}, a callable or None. Got 'mape' instead.
+

@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Random forest &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js"></script>
+    <script src="../../../../_static/js/notebook.js"></script>
+    <script src="../../../../_static/js/notebook.js"></script>
+    <script src="../../../../_static/js/notebook.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/regresion/modelos/random_forest';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Ensamble de modelos" href="ensamble_modelos.html" />
+    <link rel="prev" title="Otros tipos de regresión" href="regresion_ridge_lasso.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTELIGENCIA ARTIFICIAL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduccion.html">Introducción</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SISTEMAS DE APRENDIZAJE SUPERVISADO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analisis_datos.html">Análisis exploratorio de datos</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../regresion.html">Problemas de regresión</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../entrenar_modelo.html">Entrenamiento del modelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arboles_decision.html">Árboles de decisión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="svm.html">Máquinas de vectores de soporte (SVM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Random forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensamble_modelos.html">Ensamble de modelos</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/r2.html">Coeficiente de Determinación (<span class="math notranslate nohighlight">\(R^2\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/mape.html">Error Porcentual Absoluto Medio (MAPE)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Random forest</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenar-un-random-forest">Entrenar un Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros-de-los-random-forest">Hiperparámetros de los Random Forest</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="random-forest">
+<h1>Random forest<a class="headerlink" href="#random-forest" title="Permalink to this heading">#</a></h1>
+<p>El Random Forest es un poderoso algoritmo de aprendizaje supervisado utilizado tanto para clasificación como para regresión en problemas de machine learning. Este método pertenece a la categoría de “ensemble learning”, que implica combinar las predicciones de múltiples modelos para mejorar la precisión y la robustez del modelo global. La idea fundamental detrás de Random Forest es la construcción de un conjunto diverso de árboles de decisión.</p>
+<p>En Random Forest, se generan varios árboles de decisión durante el entrenamiento, y cada uno de estos árboles se entrena con diferentes subconjuntos aleatorios del conjunto de datos. Además, en cada nodo de un árbol, se realiza una selección aleatoria de un subconjunto de características para dividir los datos. Esta variabilidad en la construcción de árboles y la selección aleatoria de características ayuda a reducir el sobreajuste y mejora la generalización del modelo.</p>
+<img alt="../../../../_images/17.png" class="bg-primary align-center" src="../../../../_images/17.png" />
+</br>
+<p>Cuando se realiza una predicción con Random Forest, se obtienen las predicciones de todos los árboles y se promedian (en el caso de regresión) o se realiza una votación (en el caso de clasificación) para determinar la predicción final. Esta técnica de promediar o votar ayuda a suavizar las decisiones individuales de cada árbol, lo que resulta en un modelo más robusto y resistente al ruido en los datos.</p>
+<p>Random Forest también es conocido por su capacidad para manejar conjuntos de datos grandes con muchas características, ya que puede manejar automáticamente la importancia relativa de las variables, proporcionando una visión general de qué características son más influyentes en la predicción. Además, este algoritmo es eficiente computacionalmente y paralelizable, lo que lo hace adecuado para problemas en los que se requiere procesamiento rápido de grandes cantidades de datos.</p>
+<section id="entrenar-un-random-forest">
+<h2>Entrenar un Random Forest<a class="headerlink" href="#entrenar-un-random-forest" title="Permalink to this heading">#</a></h2>
+<p>Vamos a ver como entrenar un Random Forest para nuestro problema de los seguros:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">regression</span> <span class="kn">import</span> <span class="n">calculate_error</span><span class="p">,</span> <span class="n">get_train_test_validation</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">get_train_test_validation</span><span class="p">()</span>
+
+
+<span class="n">reg</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+
+<span class="n">calculate_error</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 5886.83
+MAPE: 0.44
+R2: 0.65
+</pre></div>
+</div>
+</div>
+</div>
+<p>Una vez ejecutado el código, podemos observar que sin haber configurado ningún hiperparámetro, ya obtenemos una puntuación parecida a un árbol de decisión. Con esto queda patente que la combinación de modelos es una herramienta muy potente para la predicción de valores.</p>
+</section>
+<section id="hiperparametros-de-los-random-forest">
+<h2>Hiperparámetros de los Random Forest<a class="headerlink" href="#hiperparametros-de-los-random-forest" title="Permalink to this heading">#</a></h2>
+<p>Vamos a mostrar algúnos de los <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">hiperparámetros</a> más importantes del Random Forest:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">HIPERPARÁMETROS DE LOS RANDOM FOREST</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="left-header" scope="row">n_estimators</th>
+      <td  colspan="3">Este parámetro determina el número de árboles en el bosque. Un mayor número de árboles generalmente mejora el rendimiento del modelo, pero también aumenta el costo computacional.</td>
+    </tr>
+     <tr>
+      <th class="left-header" scope="row">criterion</th>
+      <td  colspan="3">Especifica la función para medir la calidad de una división. Puede ser "gini" para la impureza de Gini o "entropy" para la ganancia de información. La elección depende de la naturaleza del problema y las preferencias del usuario.</td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">max_depth</th>
+      <td  colspan="3">Controla la profundidad máxima de cada árbol en el bosque. Limitar la profundidad ayuda a prevenir el sobreajuste, pero también puede llevar a un modelo subajustado.</td>
+    </tr>
+    <th class="left-header" scope="row">min_samples_split</th>
+      <td  colspan="3">Establece el número mínimo de muestras requeridas para realizar una división en un nodo interno. Un valor más alto evita divisiones que generan nodos con muy pocas muestras.</td>
+    </tr>
+    <th class="left-header" scope="row">min_samples_leaf</th>
+      <td  colspan="3">Especifica el número mínimo de muestras requeridas para ser una hoja (nodo terminal). Ayuda a controlar el tamaño de las hojas y evita particiones con muy pocas muestras.</td>
+    </tr>
+    <th class="left-header" scope="row">max_features</th>
+      <td  colspan="3">Controla el número máximo de características a considerar para hacer una división en cada nodo. Puede ser un número entero, un porcentaje o "auto" para considerar todas las características.</td>
+    </tr>
+    <th class="left-header" scope="row">bootstrap</th>
+      <td  colspan="3">Indica si se debe realizar el muestreo con reemplazo al construir árboles. Si es True, se realiza el muestreo con reemplazo (bootstrap), y si es False, se utiliza el conjunto de datos completo.</td>
+    </tr>
+    <th class="left-header" scope="row">random_state</th>
+      <td  colspan="3">Semilla para la generación de números aleatorios. Proporciona reproducibilidad, ya que fija la secuencia de números aleatorios utilizada en el proceso de construcción de árboles.</td>
+    </tr>
+  </tbody>
+</table>
+<p>Alguno de estos parámetros ya lo hemos visto en los árboles de decisión, por lo que es muy fácil entender que podemos hacer con ellos.</p>
+<p>Siguiendo con el ejemplo, vamos a configurar el Random Forest con los parámetros que utilizamos en los árboles de decisión.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
+                            <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                            <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                            <span class="n">max_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                            <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;squared_error&quot;</span><span class="p">,</span>
+                            <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+<span class="n">calculate_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 6110.13
+MAPE: 0.67
+R2: 0.73
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vamos a comparar los resultados obtenidos a ver que tal:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">MÉTRICAS DE EVALUACIÓN DE LOS MODELOS DE REGRESIÓN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <th>MÉTRICA</th>
+        <th>ÁRBOLES DE DECISIÓN</th>
+        <th>RANDOM FOREST</th>
+    </tr>
+    <tr>
+      <td >RMSE</td>
+      <td>6308.49</td>
+      <td>6135.73</td>
+    </tr>
+    <tr>
+      <td >R²</td>
+      <td>0.71</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <td >MAPE</td>
+      <td>0.85</td>
+      <td>0.67</td>
+    </tr>
+  </tbody>
+</table>
+<p>Vaya, parece que algo hemos mejorado, ¡esto pinta bien!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/sistemas_supervisados/regresion/modelos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="regresion_ridge_lasso.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Otros tipos de regresión</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ensamble_modelos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ensamble de modelos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenar-un-random-forest">Entrenar un Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros-de-los-random-forest">Hiperparámetros de los Random Forest</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

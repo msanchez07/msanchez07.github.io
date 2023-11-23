@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Árboles de decisión &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js"></script>
+    <script src="../../../../_static/js/notebook.js"></script>
+    <script src="../../../../_static/js/notebook.js"></script>
+    <script src="../../../../_static/js/notebook.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/regresion/modelos/arboles_decision';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Máquinas de vectores de soporte (SVM)" href="svm.html" />
+    <link rel="prev" title="Entrenamiento del modelo" href="../entrenar_modelo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTELIGENCIA ARTIFICIAL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduccion.html">Introducción</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SISTEMAS DE APRENDIZAJE SUPERVISADO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analisis_datos.html">Análisis exploratorio de datos</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../regresion.html">Problemas de regresión</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../entrenar_modelo.html">Entrenamiento del modelo</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Árboles de decisión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="svm.html">Máquinas de vectores de soporte (SVM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_forest.html">Random forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensamble_modelos.html">Ensamble de modelos</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/r2.html">Coeficiente de Determinación (<span class="math notranslate nohighlight">\(R^2\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/mape.html">Error Porcentual Absoluto Medio (MAPE)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Árboles de decisión</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-de-decision-en-problemas-de-regresion">Árboles de decisión en problemas de regresión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenar-y-visualizar-arboles-de-decision">Entrenar y visualizar árboles de decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros">Hiperparámetros</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="arboles-de-decision">
+<h1>Árboles de decisión<a class="headerlink" href="#arboles-de-decision" title="Permalink to this heading">#</a></h1>
+<p>Los árboles de decisión son una poderosa herramienta en el arsenal del aprendizaje automático, ofreciendo una metodología visual e intuitiva para la toma de decisiones basada en datos. En esencia, estos modelos representan estructuras jerárquicas de decisiones, donde cada nodo interno representa una pregunta o condición sobre las variables de entrada, y las ramas y hojas conducen a las posibles respuestas o resultados. Esta representación gráfica facilita la interpretación y comprensión de cómo el modelo toma decisiones, convirtiendo a los árboles de decisión en una herramienta valiosa tanto para expertos como para aquellos nuevos en el campo del aprendizaje automático.</p>
+<img alt="../../../../_images/06.png" class="bg-primary align-center" src="../../../../_images/06.png" />
+</br>
+<p>La flexibilidad de los árboles de decisión los hace idóneos para una variedad de tareas, desde la clasificación hasta la regresión. Su capacidad para manejar relaciones no lineales y la interacción entre múltiples características hace que sean particularmente eficaces en conjuntos de datos complejos y heterogéneos. Además, los árboles de decisión pueden gestionar tanto variables numéricas como categóricas, lo que amplía su aplicabilidad en una amplia gama de dominios y problemas.</p>
+<p>Una característica distintiva de los árboles de decisión es su capacidad para realizar divisiones recursivas basadas en la importancia de las características, contribuyendo así a la eficiencia en la selección de características relevantes. Esta característica se traduce en modelos simplificados y más interpretables, además de ayudar a mitigar el sobreajuste, un problema común en el aprendizaje automático. A medida que avanzamos en esta exploración de los árboles de decisión, examinaremos en detalle sus aplicaciones, ventajas y desafíos, destacando su papel fundamental en la construcción de modelos predictivos y en la toma de decisiones basada en datos.</p>
+<section id="arboles-de-decision-en-problemas-de-regresion">
+<h2>Árboles de decisión en problemas de regresión<a class="headerlink" href="#arboles-de-decision-en-problemas-de-regresion" title="Permalink to this heading">#</a></h2>
+<p>El objetivo de un árbol de decisión en la regresión es modelar la relación entre un conjunto de variables predictoras y una variable de respuesta continua. A diferencia de la regresión lineal, que asume una relación lineal entre las variables, un árbol de decisión busca capturar patrones más complejos y no lineales en los datos. La estructura de árbol se construye de manera jerárquica, dividiendo el conjunto de datos en subconjuntos cada vez más homogéneos en términos de la variable de respuesta.</p>
+<p>El proceso de construcción del árbol implica seleccionar de manera óptima las variables predictoras y los puntos de corte (umbrales) que dividen el conjunto de datos en subgrupos que minimizan la variabilidad de la variable de respuesta dentro de cada subgrupo. Esto se realiza de manera recursiva hasta que se alcanza un criterio de parada, como un tamaño mínimo de nodo o una profundidad máxima del árbol.</p>
+<a class="bg-primary reference internal image-reference" href="../../../../_images/07.png"><img alt="../../../../_images/07.png" class="bg-primary align-center" src="../../../../_images/07.png" style="width: 80%;" /></a>
+<p>Una vez construido el árbol, se utiliza para hacer predicciones asignando a cada observación el valor medio de la variable de respuesta en el subconjunto correspondiente del árbol. El árbol de decisión busca, por lo tanto, proporcionar una representación estructurada de cómo las variables predictoras están relacionadas con la variable de respuesta, permitiendo la identificación de patrones no lineales y no monótonos en los datos.</p>
+<p>En resumen, el objetivo central de un árbol de decisión en la regresión es ofrecer un modelo flexible y interpretable que pueda adaptarse a relaciones no lineales en los datos, dividiendo el espacio de características de manera óptima para predecir la variable de respuesta continua.</p>
+<div class="note admonition">
+<p class="admonition-title">Nota</p>
+<p>Llegados a este punto, vamos a utilizar unas funciones para no repetir tanto código. Estas se pueden visualizar en los anexos.</p>
+</div>
+</section>
+<section id="entrenar-y-visualizar-arboles-de-decision">
+<h2>Entrenar y visualizar árboles de decisión<a class="headerlink" href="#entrenar-y-visualizar-arboles-de-decision" title="Permalink to this heading">#</a></h2>
+<p>Vamos a ver como entrenar un árbol de decisión para nuestro problema de los seguros:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">regression</span> <span class="kn">import</span> <span class="n">calculate_error</span><span class="p">,</span> <span class="n">get_train_test_validation</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">get_train_test_validation</span><span class="p">()</span>
+
+<span class="n">reg</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+
+<span class="n">calculate_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 7562.26
+MAPE: 0.36
+R2: 0.58
+</pre></div>
+</div>
+</div>
+</div>
+<p>El código anterior simplemente crea un árbol de decisión para un problema de regresión y lo entrena. Posteriormente utiliza los datos de validación para medir el error obtenido. Posteriormente, podemos visualizar como ha clasificado los datos de nuestro problema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Source</span>
+
+<span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span>
+        <span class="n">reg</span><span class="p">,</span>
+        <span class="n">out_file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;./img&quot;</span><span class="p">,</span> <span class="s2">&quot;regression_tree.dot&quot;</span><span class="p">),</span>
+        <span class="n">feature_names</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+        <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">filled</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+<span class="n">Source</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;./img/regression_tree.dot&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Llegado a este punto, vamos a comparar los resultados obtenidos con la regresión lineal y con los árboles de decisión:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">MÉTRICAS DE EVALUACIÓN DE LOS MODELOS DE REGRESIÓN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <th>MÉTRICA</th>
+        <th>RÉGRESIÓN LINEAL</th>
+        <th>ÁRBOLES DE DECISIÓN</th>
+    </tr>
+    <tr>
+      <td >RMSE</td>
+      <td>6427.98</td>
+      <td>8050.03</td>
+    </tr>
+    <tr>
+      <td >R²</td>
+      <td>0.7</td>
+      <td>0.53</td>
+    </tr>
+    <tr>
+      <td >MAPE</td>
+      <td>0.51</td>
+      <td>0.39</td>
+    </tr>
+  </tbody>
+</table>
+<p>Parece ser que no hemos mejorado mucho en nuestro modelo, ¿Como puede ser? Hay que tener en cuenta que los árboles de decisión son uno de los mejores algoritmos de aprendizaje automático, así que algo falla.</p>
+<p>Si miramos la implementación de nuestro árbol de decisión, vemos qeu simplemente lo hemos inicializado, pero no hemos configurado ninguno de sus múltiplos parámetros o <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html"><strong>hiperparámetros</strong></a>. Pero, ¿que es un hiperparámetro?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="hiperparametros">
+<h2>Hiperparámetros<a class="headerlink" href="#hiperparametros" title="Permalink to this heading">#</a></h2>
+<p>Los hiperparámetros son parámetros externos al modelo que no se aprenden directamente durante el proceso de entrenamiento, sino que se establecen antes de iniciar dicho proceso. Los hiperparámetros influyen en la arquitectura y en el comportamiento del modelo, y su ajuste correcto puede ser crucial para lograr un rendimiento óptimo.</p>
+<p>Diferenciándolos de los parámetros del modelo, que son los valores internos que se ajustan durante el entrenamiento para minimizar una función de pérdida, los hiperparámetros son decisiones que toma el diseñador o el ingeniero de machine learning antes de iniciar el proceso de entrenamiento. La elección adecuada de los hiperparámetros es fundamental para lograr un equilibrio entre el ajuste al conjunto de entrenamiento y la capacidad de generalización del modelo a nuevos datos.</p>
+<p>Ejemplos comunes de hiperparámetros incluyen la tasa de aprendizaje en algoritmos de optimización, la profundidad máxima de un árbol de decisión, el número de vecinos en k-Nearest Neighbors, y muchos otros parámetros que controlan la configuración y el comportamiento del modelo. La búsqueda y selección adecuada de hiperparámetros a menudo implica técnicas como la validación cruzada y la búsqueda en cuadrícula para encontrar la combinación que optimiza el rendimiento del modelo en datos no vistos.</p>
+<p>Algunos de los hiperparámetros más importantes dentro de un árbol de decisión son:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">HIPERPARÁMETROS DE UN ÁRBOL DE DECISIÓN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="left-header" scope="row">Profundidad del Árbol (max_depth)</th>
+      <td  colspan="3">Este parámetro controla la profundidad máxima del árbol. Limitar la profundidad ayuda a prevenir el sobreajuste al evitar que el árbol se vuelva demasiado complejo y se ajuste demasiado a los detalles del conjunto de entrenamiento.</td>
+    </tr>
+     <tr>
+      <th class="left-header" scope="row">Número Mínimo de Muestras en Hojas (min_samples_leaf)</th>
+      <td  colspan="3">Especifica el número mínimo de muestras requeridas en una hoja del árbol. Aumentar este valor puede ayudar a regularizar el modelo, evitando divisiones que se basen en un número muy pequeño de observaciones.</td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">Número Mínimo de Muestras en un Nodo (min_samples_split)</th>
+      <td  colspan="3">Indica el número mínimo de muestras requeridas para realizar una división en un nodo interno. Al aumentar este valor, se evitan divisiones que generan nodos con un número reducido de observaciones.</td>
+    </tr>
+    <th class="left-header" scope="row">Número Máximo de Características Consideradas en Cada División (max_features)</th>
+      <td  colspan="3">Controla el número máximo de características que se deben considerar al realizar una división. Limitar este número puede ayudar a reducir la complejidad y la correlación entre los árboles en un conjunto de árboles, como en el caso de un bosque aleatorio.</td>
+    </tr>
+     <tr>
+      <th scope="row" class="left-header">Criterio de División (criterion)</th>
+      <td  colspan="3">Indica la función que se utilizará para medir la calidad de una división. Los dos criterios más comunes son "mse" (error cuadrático medio) para regresión y "mae" (error absoluto medio) para regresión también.</td>
+    </tr>
+    <tr>
+      <th scope="row" class="left-header">Número Máximo de Nodos Terminales (max_leaf_nodes)</th>
+      <td  colspan="3">Limita el número total de nodos terminales (hojas) en el árbol. Esto puede ayudar a controlar la complejidad del modelo.</td>
+    </tr>
+  </tbody>
+</table>
+</br>
+</br>
+<a class="bg-primary reference internal image-reference" href="../../../../_images/09.png"><img alt="../../../../_images/09.png" class="bg-primary align-center" src="../../../../_images/09.png" style="width: 100%;" /></a>
+</br>
+</br>
+<p>vamos pues a configurar estos hiperparámetros en nuestro modelo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
+                            <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                            <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                            <span class="n">max_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                            <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;squared_error&quot;</span><span class="p">,</span>
+                            <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+<span class="n">calculate_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 9478.32
+MAPE: 1.17
+R2: 0.35
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vaya, parece que nuestro modelo ha mejorado bastante solo configurando cuatro hiperparámetros. Esto demuestra la importancia de conocer bien los algoritmos y sus hiperparámetros para poder configurarlos.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/sistemas_supervisados/regresion/modelos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../entrenar_modelo.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Entrenamiento del modelo</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="svm.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Máquinas de vectores de soporte (SVM)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-de-decision-en-problemas-de-regresion">Árboles de decisión en problemas de regresión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenar-y-visualizar-arboles-de-decision">Entrenar y visualizar árboles de decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros">Hiperparámetros</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

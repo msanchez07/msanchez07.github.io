@@ -24,18 +24,79 @@ En resumen, el Análisis Exploratorio de Datos es el cimiento sobre el cual se c
 ## Un primer vistazo a los datos
 La calidad de los resultados del EDA depende en gran medida de la calidad de los datos con los que trabajamos. Para poder desarrollar los conceptos de este capítulo, vamos a contar con el conjunto de datos proporcionado por el DataSet Medical Cost Personal DataSets1. Este DataSet cuenta con 1338 filas y 8 columnas, las cuales se describen en la siguiente tabla:
 
-| Columna | Definición | Tipo de datos | Ejemplos | Números nulos |
-| ------------ | ------------- | ------------ | ------------- | ------------ |
-| No         | Número de la columna | Number | 22, 35, 48 | 0 |
-| Age | Edad del beneficiario. | Número | 22.0, 33.0, 32.0 | 29 |
-| Sex | Género del beneficiario. | Texto | Male, Female | 86 | 
-| Bmi | Índice de masa corporal | Número | 11, 20, 31 | 98 | 
-| Children | Número de hijos cubiertos por el seguro | Número | 0.0, 1.0, 3.0 | 82 | 
-| Smoker | Indica si el asegurado fuma | Texto | Yes, no | 48 | 
-| Region | Zona de E.E.U.U. donde habita el beneficiario. | Texto | Southwest, southeast | 121 | 
-| **Charges** | **Prima del seguro** | **Número** | **16884.92400, 1725.55230** | **55**
 
-La columna o variable en negrita es nuestra variable objetivo, es decir, el valor que queremos predecir mediante nuestro modelo. Muchos de los análisis y cálculos que se van a desarrollar estarán centralizados en esta variable.
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="1">Columna</th>
+      <th class="text-center my-table-header" colspan="1">Definición</th>
+      <th class="text-center my-table-header" colspan="1">Tipo de datos</th>
+      <th class="text-center my-table-header" colspan="1">Ejemplos</th>
+      <th class="text-center my-table-header" colspan="1">Número de nulos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr >
+      <td colspan="1">No</th>
+      <td colspan="1">Número de la columna</td>
+      <td colspan="1">Número</th>
+      <td colspan="1">22, 35, 48</td>
+      <td colspan="1">0</td>
+    </tr>
+    <tr >
+      <td colspan="1">Age</th>
+      <td colspan="1">Edad del beneficiario</td>
+      <td colspan="1">Número</th>
+      <td colspan="1">22.0, 33.0, 32.0</td>
+      <td colspan="1">29</td>
+    </tr>
+    <tr >
+      <td colspan="1">Sex</th>
+      <td colspan="1">Género del beneficiario</td>
+      <td colspan="1">Texto</th>
+      <td colspan="1">Male, female</td>
+      <td colspan="1">86</td>
+    </tr>
+    <tr >
+      <td colspan="1">Bmi</th>
+      <td colspan="1">Índice de masa corporal</td>
+      <td colspan="1">Número</th>
+      <td colspan="1">11, 20, 31</td>
+      <td colspan="1">98</td>
+    </tr>
+    <tr >
+      <td colspan="1">Children</th>
+      <td colspan="1">Hijos en el seguro</td>
+      <td colspan="1">Número</th>
+      <td colspan="1">0.0, 1.0, 3.0</td>
+      <td colspan="1">82</td>
+    </tr>
+    <tr >
+      <td colspan="1">Smoker</th>
+      <td colspan="1">Fumador</td>
+      <td colspan="1">Texto</th>
+      <td colspan="1">Yes, no</td>
+      <td colspan="1">48</td>
+    </tr>
+    <tr >
+      <td colspan="1">Region</th>
+      <td colspan="1">Zona del beneficiario</td>
+      <td colspan="1">Texto</th>
+      <td colspan="1">Southwest, southeast</td>
+      <td colspan="1">121</td>
+    </tr>
+    <tr class="table-warning">
+      <td colspan="1"><strong>Charges</strong></th>
+      <td colspan="1"><strong>Prima del seguro</strong></td>
+      <td colspan="1"><strong>Número</strong></th>
+      <td colspan="1"><strong>16884.92, 1725.55</strong></td>
+      <td colspan="1"><strong>55</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+
+La columna o variable resaltada es nuestra variable objetivo, es decir, el valor que queremos predecir mediante nuestro modelo. Muchos de los análisis y cálculos que se van a desarrollar estarán centralizados en esta variable.
 
 ```{admonition} Nota
 :class: note

@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Problemas de regresión &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/regresion/regresion';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Entrenamiento del modelo" href="entrenar_modelo.html" />
+    <link rel="prev" title="Análisis exploratorio de datos" href="../analisis_datos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTELIGENCIA ARTIFICIAL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SISTEMAS DE APRENDIZAJE SUPERVISADO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduccion.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analisis_datos.html">Análisis exploratorio de datos</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Problemas de regresión</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="entrenar_modelo.html">Entrenamiento del modelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/arboles_decision.html">Árboles de decisión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/svm.html">Máquinas de vectores de soporte (SVM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/random_forest.html">Random forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/ensamble_modelos.html">Ensamble de modelos</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/r2.html">Coeficiente de Determinación (<span class="math notranslate nohighlight">\(R^2\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mape.html">Error Porcentual Absoluto Medio (MAPE)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Problemas de regresión</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal">Regresión lineal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-esperada">Relación esperada</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-coeficientes">Interpretación de Coeficientes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-practica">Aplicación Práctica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-en-python">Regresión lineal en Python</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="problemas-de-regresion">
+<h1>Problemas de regresión<a class="headerlink" href="#problemas-de-regresion" title="Permalink to this heading">#</a></h1>
+<p>La <strong>regresión</strong> es un concepto fundamental en estadística y aprendizaje automático que se utiliza para modelar <strong>la relación entre variables</strong>. Un problema de regresión implica <strong>predecir un valor numérico basado en la relación entre una o más variables de entrada</strong>. Este tipo de problemas se contrasta con los problemas de clasificación, donde el objetivo es asignar una etiqueta a una instancia. En cambio, en la regresión, se busca estimar o predecir un valor continuo.</p>
+<p>En un problema de regresión, se asume que <strong>existe una relación funcional entre las variables de entrada y la variable de salida</strong>. La tarea consiste en encontrar la mejor aproximación de esta relación. Los modelos de regresión pueden ser <strong>lineales o no lineales</strong>, dependiendo de la naturaleza de la relación subyacente. Los modelos lineales asumen una relación lineal entre las variables, mientras que los modelos no lineales permiten relaciones más complejas.</p>
+<p>El objetivo principal en un problema de regresión es minimizar el error entre las predicciones del modelo y los valores reales de la variable de salida. Esto se logra ajustando los parámetros del modelo de manera que la diferencia entre las predicciones y los valores reales sea lo más pequeña posible. Las métricas comunes para evaluar la calidad de un modelo de regresión incluyen el error cuadrático medio (ECM) o el coeficiente de determinación (R²).</p>
+<p>Los problemas de regresión tienen aplicaciones en diversas disciplinas, como economía, finanzas, ciencias sociales, ciencias naturales y muchas otras. Por ejemplo, en economía, se pueden utilizar modelos de regresión para predecir el crecimiento económico basándose en diferentes variables predictoras.</p>
+<section id="regresion-lineal">
+<h2>Regresión lineal<a class="headerlink" href="#regresion-lineal" title="Permalink to this heading">#</a></h2>
+<p>La regresión lineal es una de las herramientas más fundamentales en el campo de la informática y la ciencia de datos. Permite a los profesionales de la informática modelar y predecir relaciones entre variables, lo que resulta esencial para la toma de decisiones informadas y la resolución de problemas en una amplia variedad de aplicaciones tecnológicas.</p>
+<p>La regresión lineal es una técnica que <strong>busca establecer una relación lineal entre una variable que deseamos predecir (la variable dependiente) y una o más variables que utilizamos para realizar esa predicción (variables independientes o predictores)</strong>. Puede aplicarse a escenarios tan diversos como la predicción de tiempos de ejecución de algoritmos, la recomendación de productos a usuarios o la gestión eficiente de recursos en servidores.</p>
+<p>En el corazón de la regresión lineal se encuentra la idea de que podemos comprender y cuantificar cómo una o más variables influyen en otra variable de interés. Esta técnica es muy importante, ya que permite tomar decisiones basadas en datos, tales como <strong>optimizar algoritmos y sistemas además de  construir aplicaciones más inteligentes y predictivas</strong>.</p>
+<p>En términos simples, la regresión lineal se trata de <strong>encontrar la mejor línea recta que se ajuste a un conjunto de datos</strong>. Imagina que tienes un conjunto de puntos dispersos en un gráfico, donde en el eje horizontal tienes una variable (o características) y en el eje vertical tienes la variable que quieres predecir. La regresión lineal busca trazar una línea que minimice la distancia entre esta línea y todos los puntos, de manera que se pueda utilizar para hacer predicciones precisas.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../../_images/10d52be465c1fa5db00948e2c933c6561c213e6705a655de7fc1d8a77661f2f5.png" src="../../../_images/10d52be465c1fa5db00948e2c933c6561c213e6705a655de7fc1d8a77661f2f5.png" />
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+y = b_{0} + b_{1}x_{1} + b_{2}x_{2} + ... + b_{p}x_{p} + ε
+\]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p>y es la variable que queremos predecir.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{1}, x_{2}, …, x_{p}\)</span> son las características (variables) que utilizamos para hacer la predicción.</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_{0}\)</span> es el término de intersección (el valor de y cuando todas las x son cero).</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_{1}, b_{2}, …, b_{p}\)</span> son los coeficientes que representan cómo influyen las características en y.</p></li>
+<li><p><span class="math notranslate nohighlight">\(ϵ\)</span> es el término de error que tiene en cuenta la variabilidad no explicada por el modelo.</p></li>
+</ul>
+<p>La regresión lineal puede ser <strong>simple</strong>, con una sola variable predictora, o <strong>múltiple</strong>, con múltiples variables predictoras. En informática, esto es especialmente útil, ya que puedes predecir resultados basados en múltiples factores, como el rendimiento de un algoritmo en función de diferentes métricas de entrada.</p>
+<section id="relacion-esperada">
+<h3>Relación esperada<a class="headerlink" href="#relacion-esperada" title="Permalink to this heading">#</a></h3>
+<p>En el modelo de regresión lineal, uno de los aspectos cruciales es definir <strong>la relación esperada entre las variables independiente y dependientes</strong>. Esta relación es el núcleo del modelo y tiene implicaciones significativas en la interpretación y las predicciones que podemos hacer.</p>
+<p>La relación esperada puede variar en naturaleza. En un escenario de regresión lineal simple, se supone una relación lineal, lo que significa que se espera que los cambios en la variable independiente se reflejen proporcionalmente en la variable dependiente. Esto se representa como una línea recta en un gráfico de dispersión.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../../_images/3d9bd9fbdac4f37d46b408dc68598d67314f65f09427d5cc02eb441223071a5a.png" src="../../../_images/3d9bd9fbdac4f37d46b408dc68598d67314f65f09427d5cc02eb441223071a5a.png" />
+</div>
+</div>
+<p>Sin embargo, en situaciones del mundo real, la relación puede no ser perfectamente lineal. En tales casos, se <strong>pueden explorar modelos de regresión no lineales que se ajusten mejor a la relación subyacente</strong>, como la <strong>regresión polinómica</strong> o la <strong>regresión exponencial</strong>.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<p><img alt="" src="../../../_images/012.png" /></p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<p><img alt="" src="../../../_images/02.png" /></p>
+</div>
+</div>
+</div>
+<p>La suposición de linealidad es fundamental en la regresión lineal simple. Significa que, según la relación esperada, un cambio constante en la variable independiente debería tener un efecto constante en la variable dependiente. Esta simplicidad hace que el modelo sea fácil de interpretar y calcular.</p>
+<p>Sin embargo, es importante destacar que, si la relación subyacente no es lineal, el modelo de regresión lineal simple podría no ser adecuado. Identificar la naturaleza correcta de la relación es esencial para garantizar que el modelo capture con precisión el comportamiento de los datos.</p>
+<p>Por otro lado, la formulación de la relación esperada está estrechamente relacionada con los supuestos del modelo de regresión lineal. Estos supuestos incluyen la linealidad, la independencia de errores, la homocedasticidad6 y la normalidad de los errores. La violación de cualquiera de estos supuestos puede afectar la validez del modelo y las predicciones que genera.</p>
+<p>Por lo tanto, antes de aplicar el modelo de regresión lineal, <strong>es esencial validar si la relación consta de  una linealidad y considerar otras alternativas si la relación esperada no es lineal.</strong></p>
+<p>Para ilustrar la importancia de la relación esperada, consideremos un ejemplo: la relación entre el tiempo de estudio de un estudiante y su puntuación en un examen. En este caso, se espera que exista una relación positiva, lo que significa que, en general, a medida que un estudiante pasa más tiempo estudiando (variable independiente), obtendrá una puntuación más alta en el examen (variable dependiente).</p>
+<p>Al formular la relación esperada de esta manera, estamos preparados para aplicar un modelo de regresión lineal simple que nos permita cuantificar y predecir el impacto del tiempo de estudio en las puntuaciones del examen.</p>
+</section>
+<section id="interpretacion-de-coeficientes">
+<h3>Interpretación de Coeficientes<a class="headerlink" href="#interpretacion-de-coeficientes" title="Permalink to this heading">#</a></h3>
+<p>En una regresión lineal, la interpretación de los coeficientes es esencial para comprender cómo la variable independiente influye en la variable dependiente. Vamos a explicar la interpretación de los coeficientes en un contexto de regresión lineal simple sin introducir la fórmula matemática.</p>
+<ul class="simple">
+<li><p><strong>Coeficiente de la Variable Independiente (<span class="math notranslate nohighlight">\(β_{1}\)</span>)</strong>: Este coeficiente representa el cambio esperado en la variable dependiente (Y) por cada unidad de cambio en la variable independiente (X). En otras palabras, si <span class="math notranslate nohighlight">\(β_{1}\)</span> es igual a 2, significa que, en promedio, cada unidad adicional en X se asocia con un aumento de 2 unidades en Y (si <span class="math notranslate nohighlight">\(β_{1}\)</span> es positivo) o una disminución de 2 unidades en Y (si <span class="math notranslate nohighlight">\(β_{1}\)</span> es negativo).</p></li>
+<li><p><strong>Coeficiente de Intercepción (<span class="math notranslate nohighlight">\(β_{0}\)</span>​)</strong>: Este coeficiente representa el valor esperado de la variable dependiente (Y) cuando la variable independiente (X) es igual a cero. En muchos contextos, esta interpretación puede no tener un significado práctico, ya que a menudo no tiene sentido que X sea igual a cero en situaciones del mundo real.</p></li>
+</ul>
+<p>Hay que tener en cuenta que la interpretación de <span class="math notranslate nohighlight">\(β_{1}\)</span>​ es fundamental. Por ejemplo, si estamos realizando una regresión lineal simple para predecir el rendimiento de un automóvil en millas por galón (Y) en función de la velocidad del automóvil en millas por hora (X), y <span class="math notranslate nohighlight">\(β_{1}\)</span> es igual a 2, podemos decir que, en promedio, por cada aumento de 1 milla por hora en la velocidad del automóvil, se espera un aumento de 2 millas por galón en el rendimiento del combustible. Del mismo modo, si <span class="math notranslate nohighlight">\(β_{1}\)</span> es igual a -2, significaría que, en promedio, por cada aumento de 1 milla por hora en la velocidad del automóvil, se espera una disminución de 2 millas por galón en el rendimiento del combustible.</p>
+<p>Es esencial recordar que la interpretación de los coeficientes depende en gran medida del contexto del problema y de la elección de las variables. Además, las relaciones lineales simples capturan relaciones proporcionales en los datos. Si la relación no es lineal, la interpretación puede volverse más compleja.</p>
+</section>
+<section id="aplicacion-practica">
+<h3>Aplicación Práctica<a class="headerlink" href="#aplicacion-practica" title="Permalink to this heading">#</a></h3>
+<p>Una vez formulado correctamente el modelo, podemos proceder a la estimación de los coeficientes y realizar predicciones basadas en datos reales. La formulación del modelo sienta las bases para el análisis y la toma de decisiones informadas en diversas aplicaciones informáticas. Vamos a ver algunas aplicaciones de la regresión lineal simple:</p>
+<ol class="arabic simple">
+<li><p>En el <strong>mundo empresarial</strong>, la regresión lineal simple se utiliza para <strong>predecir las ventas de un producto o servicio en función de variables como el gasto en publicidad</strong>. Por ejemplo, si una empresa quiere entender cómo el gasto en publicidad afecta a las ventas de un producto, puede utilizar un modelo de regresión lineal simple. Esto permite tomar decisiones informadas sobre la inversión en publicidad.</p></li>
+<li><p>En el **ámbito de la **, la regresión lineal simple se aplica para <strong>analizar el rendimiento de servidores</strong>. La variable independiente podría ser la carga de trabajo del servidor (por ejemplo, el número de solicitudes por minuto), y la variable dependiente podría ser el tiempo de respuesta del servidor. Esto ayuda a optimizar recursos y mejorar la eficiencia del servidor.</p></li>
+<li><p>En el <strong>campo educativo</strong>, se utiliza la regresión lineal simple para <strong>comprender cómo las horas de estudio afectan al rendimiento académico de los estudiantes</strong>. Esto permite a los educadores y estudiantes tomar decisiones basadas en datos para mejorar los resultados.</p></li>
+<li><p>En la <strong>investigación científica</strong>, la regresión lineal simple se emplea para <strong>analizar datos experimentales</strong>. Por ejemplo, en la física, se puede utilizar para relacionar la temperatura con la presión en un experimento. En la biología, se puede aplicar para estudiar la relación entre la dosis de un medicamento y su efecto en un organismo.</p></li>
+<li><p>En la <strong>meteorología</strong>, la regresión lineal simple se usa para <strong>predecir valores climáticos basados en datos históricos</strong>. Por ejemplo, para pronosticar la temperatura máxima diaria en función de la fecha del año y datos anteriores.</p></li>
+<li><p>En el <strong>sector inmobiliario</strong>, la regresión lineal simple se aplica para <strong>estimar el precio de una propiedad en función de características como el tamaño de la vivienda, la ubicación y el número de habitaciones</strong>. Esto ayuda a los compradores y vendedores a tomar decisiones informadas.</p></li>
+<li><p>En el <strong>marketing</strong> en línea, se utiliza para <strong>el impacto de las campañas publicitarias en las tasas de clics o conversiones</strong>. Esto ayuda a las empresas a asignar sus recursos publicitarios de manera eficiente.</p></li>
+<li><p>En la <strong>industria manufacturera</strong>, la regresión lineal simple se usa para <strong>controlar la calidad de los productos</strong>. Puede ayudar a identificar cómo las variables de proceso (como la temperatura o la velocidad) afectan la calidad del producto final.</p></li>
+</ol>
+</section>
+<section id="regresion-lineal-en-python">
+<h3>Regresión lineal en Python<a class="headerlink" href="#regresion-lineal-en-python" title="Permalink to this heading">#</a></h3>
+<p>La implementación de un modelo de regresión lineal en Python es una tarea esencial para el análisis de datos y la creación de modelos predictivos. Para llevar a cabo esta implementación, se utilizan bibliotecas como <strong>numpy</strong>, <strong>matplotlib</strong>, y <strong>scikit-learn</strong>, que facilitan el manejo de datos, la visualización y la construcción de modelos de regresión. En este apartado vamos a ver como implementar nuestros modelos y validarlos utilizando las distintas herramientas que tenemos.</p>
+<p>Para ello, vamos a utilizar el DataSet visto anteriormente, donde la variable dependiente sería los costes del seguro médico, mientras que el resto de las variables serían independientes.</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="1">Columna</th>
+      <th class="text-center my-table-header" colspan="1">Definición</th>
+      <th class="text-center my-table-header" colspan="1">Tipo de datos</th>
+      <th class="text-center my-table-header" colspan="1">Ejemplos</th>
+      <th class="text-center my-table-header" colspan="1">Número de nulos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr >
+      <td colspan="1">No</th>
+      <td colspan="1">Número de la columna</td>
+      <td colspan="1">Número</th>
+      <td colspan="1">22, 35, 48</td>
+      <td colspan="1">0</td>
+    </tr>
+    <tr >
+      <td colspan="1">Age</th>
+      <td colspan="1">Edad del beneficiario</td>
+      <td colspan="1">Número</th>
+      <td colspan="1">22.0, 33.0, 32.0</td>
+      <td colspan="1">29</td>
+    </tr>
+    <tr >
+      <td colspan="1">Sex</th>
+      <td colspan="1">Género del beneficiario</td>
+      <td colspan="1">Texto</th>
+      <td colspan="1">Male, female</td>
+      <td colspan="1">86</td>
+    </tr>
+    <tr >
+      <td colspan="1">Bmi</th>
+      <td colspan="1">Índice de masa corporal</td>
+      <td colspan="1">Número</th>
+      <td colspan="1">11, 20, 31</td>
+      <td colspan="1">98</td>
+    </tr>
+    <tr >
+      <td colspan="1">Children</th>
+      <td colspan="1">Hijos en el seguro</td>
+      <td colspan="1">Número</th>
+      <td colspan="1">0.0, 1.0, 3.0</td>
+      <td colspan="1">82</td>
+    </tr>
+    <tr >
+      <td colspan="1">Smoker</th>
+      <td colspan="1">Fumador</td>
+      <td colspan="1">Texto</th>
+      <td colspan="1">Yes, no</td>
+      <td colspan="1">48</td>
+    </tr>
+    <tr >
+      <td colspan="1">Region</th>
+      <td colspan="1">Zona del beneficiario</td>
+      <td colspan="1">Texto</th>
+      <td colspan="1">Southwest, southeast</td>
+      <td colspan="1">121</td>
+    </tr>
+    <tr class="table-warning">
+      <td colspan="1"><strong>Charges</strong></th>
+      <td colspan="1"><strong>Prima del seguro</strong></td>
+      <td colspan="1"><strong>Número</strong></th>
+      <td colspan="1"><strong>16884.92, 1725.55</strong></td>
+      <td colspan="1"><strong>55</strong></td>
+    </tr>
+  </tbody>
+</table></section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/sistemas_supervisados/regresion"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../analisis_datos.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Análisis exploratorio de datos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="entrenar_modelo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Entrenamiento del modelo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal">Regresión lineal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-esperada">Relación esperada</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-coeficientes">Interpretación de Coeficientes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-practica">Aplicación Práctica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-en-python">Regresión lineal en Python</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
