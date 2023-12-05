@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Ejercicios Dataframes 1 &#8212; Programación de inteligencia artificial</title>
+    <title>Ejercicios flask 1 &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -68,11 +68,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/ejercicios/pandas/ejercicios1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/ejercicios/flask/ejercicios1';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Ejercicios Dataframes 2" href="ejercicios2.html" />
-    <link rel="prev" title="Ejercicios Series" href="ejercicios_series.html" />
+    <link rel="next" title="Bibliografía" href="../../bibliografia.html" />
+    <link rel="prev" title="Ejercicios flask" href="ejercicios_index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,15 +190,15 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EJERCICIOS</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="ejercicios_index.html">Ejercicios pandas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ejercicios_series.html">Ejercicios Series</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ejercicios Dataframes 1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios2.html">Ejercicios Dataframes 2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ejercicios3.html">Ejercicios Dataframes 3</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/ejercicios2.html">Ejercicios Dataframes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/ejercicios3.html">Ejercicios Dataframes 3</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../flask/ejercicios_index.html">Ejercicios flask</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../flask/ejercicios1.html">Ejercicios flask 1</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ejercicios_index.html">Ejercicios flask</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ejercicios flask 1</a></li>
 </ul>
 </li>
 </ul>
@@ -291,7 +291,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Ejercicios Dataframes 1</h1>
+    <h1>Ejercicios flask 1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -305,66 +305,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ejercicios-dataframes-1">
-<h1>Ejercicios Dataframes 1<a class="headerlink" href="#ejercicios-dataframes-1" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ejercicios-flask-1">
+<h1>Ejercicios flask 1<a class="headerlink" href="#ejercicios-flask-1" title="Permalink to this heading">#</a></h1>
 <div class="admonition-ejercicio-1 admonition">
 <p class="admonition-title">Ejercicio 1</p>
-<p>Crea un nuevo DataFrame el cual tenga los índices por defecto, es decir, sin especificar por el usuario. Realiza las siguientes modificaciones:</p>
-<ul class="simple">
-<li><p>Modifica los índices del DataFrame, indicando tu los nuevos índices.</p></li>
-<li><p>Selecciona los datos de un índice en concreto del DataFrame.</p></li>
-<li><p>Obten el nombre de las filas y las columnas del DataFrame.</p></li>
-<li><p>Obten el tipo de datos de las columnas del DataFrame.</p></li>
-<li><p>Obten un primer vistazo de la información que contiene el DataFrame.</p></li>
-</ul>
+<p>Crea una pequeña web que muestre los datos de los portatiles. Estos se deben mostrar como un listado.</p>
 </div>
 <div class="admonition-ejercicio-2 admonition">
 <p class="admonition-title">Ejercicio 2</p>
-<p>Dado el siguiente diccionario:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">datos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;real&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.1415</span><span class="p">],</span> <span class="s1">&#39;entero&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;fecha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20170121&#39;</span><span class="p">)],</span> <span class="s1">&#39;cadena&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">]}</span>
-</pre></div>
-</div>
-<p>Crea un nuevo DataFrame y obten todas las columnas de tipo entero.</p>
+<p>Amplia la funcionalidad del ejercicio 1 creando un CRUD para estos datos.</p>
 </div>
 <div class="admonition-ejercicio-3 admonition">
 <p class="admonition-title">Ejercicio 3</p>
-<p>Dado el siguiente DataFrame:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nombre</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Oliva&#39;</span><span class="p">,</span> <span class="s1">&#39;Daniela&#39;</span><span class="p">,</span> <span class="s1">&#39;Juan&#39;</span><span class="p">,</span> <span class="s1">&#39;Germán&#39;</span><span class="p">,</span> <span class="s1">&#39;Edward&#39;</span><span class="p">,</span> <span class="s1">&#39;Alex&#39;</span><span class="p">,</span> <span class="s1">&#39;Julio&#39;</span><span class="p">,</span> 
-          <span class="s1">&#39;Edgar&#39;</span><span class="p">,</span> <span class="s1">&#39;Angie&#39;</span><span class="p">,</span> <span class="s1">&#39;Irlesa&#39;</span><span class="p">]</span>
-<span class="n">puntaje</span> <span class="o">=</span> <span class="p">[</span><span class="mf">11.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">15.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
-<span class="n">intentos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">califico</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sí&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;Sí&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;Sí&#39;</span><span class="p">,</span> <span class="s1">&#39;Sí&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;Sí&#39;</span><span class="p">]</span>
-
-<span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">]</span>
-
-<span class="n">jugadores</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;nombre&#39;</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span> <span class="s1">&#39;puntaje&#39;</span><span class="p">:</span> <span class="n">puntaje</span><span class="p">,</span> <span class="s1">&#39;intentos&#39;</span><span class="p">:</span> <span class="n">intentos</span><span class="p">,</span> <span class="s1">&#39;califico&#39;</span><span class="p">:</span> <span class="n">califico</span><span class="p">}</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">jugadores</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">indices</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Realiza las siguientes operaciones:</p>
-<ul class="simple">
-<li><p>Obtenen las primeras <strong>n</strong> filas.</p></li>
-<li><p>Obtenen las últimas <strong>n</strong> filas.</p></li>
-<li><p>Utiliza el método loc para seleccionar un subconjunto de filas y columnas de un DataFrame.</p></li>
-<li><p>Utiliza el método iloc para seleccionar un subconjunto de filas y columnas de un DataFrame.</p></li>
-<li><p>Ordena un DataFrame en función de los valores de una columna en orden ascendente y descendente.</p></li>
-<li><p>Utiliza operaciones de agregación como sum, mean o count en un DataFrame para resumir los datos de una columna específica.</p></li>
-</ul>
-</div>
-<div class="admonition-ejercicio-4 admonition">
-<p class="admonition-title">Ejercicio 4</p>
-<p>Dado el siguiente archivo csv con los datos de los empleados de una empresa:</p>
-<p><span class="xref myst">Empleados</span></p>
-<p>Realiza las siguientes operaciones:</p>
-<ul class="simple">
-<li><p>Obten el nombre de aquellos empleados que tienen un salario inferior a 3000 euros.</p></li>
-<li><p>Obten el nombre de los empleados cuyo nombre empiece por J.</p></li>
-<li><p>Obten el nombre y el apellido de los empleados cuyo apeliido no contenga una h.</p></li>
-<li><p>Ordena los empleados en base a su departamento.</p></li>
-<li><p>Obten el empleado que es el gerente de la empresa.</p></li>
-<li><p>Obten todos los empleados que están a cargo de un jefe.</p></li>
-</ul>
+<p>Utiliza pandas para volcar los datos del entregable (el de las transacciones) a tres tablas de una base de datos sqlite. Crea un CRUD de estos datos.</p>
 </div>
 </section>
 
@@ -381,7 +334,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./markdowns/ejercicios/pandas"
+            path: "./markdowns/ejercicios/flask"
         },
         predefinedOutput: true
     }
@@ -399,20 +352,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ejercicios_series.html"
+       href="ejercicios_index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Ejercicios Series</p>
+        <p class="prev-next-title">Ejercicios flask</p>
       </div>
     </a>
     <a class="right-next"
-       href="ejercicios2.html"
+       href="../../bibliografia.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ejercicios Dataframes 2</p>
+        <p class="prev-next-title">Bibliografía</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -179,14 +179,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/pandas/dataframes/gestion_avanzada_datos.html">Gestión avanzada de datos con Pandas</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../markdowns/flask/introduccion.html">APIS Rest</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../markdowns/flask/primeros_pasos.html">Flask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../markdowns/flask/jinja.html">Jinja2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../markdowns/flask/db.html">Base de datos</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EJERCICIOS</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios_series.html">Ejercicios Series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios1.html">Ejercicios Dataframes 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios2.html">Ejercicios Dataframes 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios3.html">Ejercicios Dataframes 3</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../markdowns/ejercicios/flask/ejercicios_index.html">Ejercicios flask</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/flask/ejercicios1.html">Ejercicios flask 1</a></li>
 </ul>
 </li>
 </ul>
@@ -339,7 +349,9 @@ document.write(`
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /home/nelo/.local/lib/python3.10/site-packages (2.1.0)
-Requirement already satisfied: numpy&gt;=1.22.4 in /home/nelo/.local/lib/python3.10/site-packages (from pandas) (1.24.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.22.4 in /home/nelo/.local/lib/python3.10/site-packages (from pandas) (1.24.3)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/nelo/.local/lib/python3.10/site-packages (from pandas) (2.8.2)
 Requirement already satisfied: pytz&gt;=2020.1 in /usr/lib/python3/dist-packages (from pandas) (2022.1)
 Requirement already satisfied: tzdata&gt;=2022.1 in /home/nelo/.local/lib/python3.10/site-packages (from pandas) (2023.3)
@@ -525,7 +537,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_31427/3147286076.py:1: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_21479/3147286076.py:1: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
   elemento = data[2]
 </pre></div>
 </div>

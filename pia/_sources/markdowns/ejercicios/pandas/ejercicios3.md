@@ -51,10 +51,10 @@ Dados los siguientes datos:
 
 Muestra:
 
-- Los registros que hay desde el año 2022 hasta el año actual.
-- Los registros que hay de marzo de 2022.
+- Los registros que hay desde el año 2020 hasta el año actual.
+- Los registros que hay de marzo de 2020.
 - Cual fue la última inspección del equipo 'Pump'.
-- Cuántos registros hay entre abril de 2021 y junio de 2021.
+- Cuántos registros hay entre abril de 2020 y junio de 2020.
 - HCuantos días han pasado desde la última inspección del equipo 'Pump'.
 - Muestra los últimos 30 registros desde el día actual.
 - Muestra todos los registros que se han generado en miércoles.

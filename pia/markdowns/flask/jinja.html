@@ -1,0 +1,902 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Jinja2 &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/js/notebook.js"></script>
+    <script src="../../_static/js/notebook.js"></script>
+    <script src="../../_static/js/notebook.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/flask/jinja';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Base de datos" href="db.html" />
+    <link rel="prev" title="Flask" href="primeros_pasos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PYTHON</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduccion.html">Lenguajes de programación</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Numpy.html">Numpy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/pandas.html">Pandas</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/series/series.html">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/dataframes/dataframes.html">DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/dataframes/dataframes_avanzado.html">DataFrames Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/dataframes/dataframes_dos_dataframes.html">Trabajar con varios DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/dataframes/otras_operaciones.html">Otras operaciones con DataFrames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pandas/dataframes/gestion_avanzada_datos.html">Gestión avanzada de datos con Pandas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="introduccion.html">APIS Rest</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="primeros_pasos.html">Flask</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Jinja2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db.html">Base de datos</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">EJERCICIOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ejercicios/pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ejercicios/pandas/ejercicios_series.html">Ejercicios Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ejercicios/pandas/ejercicios1.html">Ejercicios Dataframes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ejercicios/pandas/ejercicios2.html">Ejercicios Dataframes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ejercicios/pandas/ejercicios3.html">Ejercicios Dataframes 3</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ejercicios/flask/ejercicios_index.html">Ejercicios flask</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ejercicios/flask/ejercicios1.html">Ejercicios flask 1</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Jinja2</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-predeterminada">Configuración predeterminada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-estandar">Contexto estandar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlando-el-autoescape">Controlando el autoescape</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desactivar-el-autoescape-para-una-variable-especifica">Desactivar el autoescape para una variable específica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desactivar-el-autoescape-para-una-seccion-de-la-plantilla">Desactivar el autoescape para una sección de la plantilla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlar-el-autoescape-a-nivel-de-la-aplicacion">Controlar el autoescape a nivel de la aplicación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registrar-filtros">Registrar filtros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usando-el-decorador-app-template-filter">Usando el Decorador @app.template_filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usando-app-add-template-filter">Usando app.add_template_filter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context-processors">Context processors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming">Streaming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos">Ejemplos</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="jinja2">
+<h1><a class="reference external" href="https://jinja.palletsprojects.com/en/2.10.x/">Jinja2</a><a class="headerlink" href="#jinja2" title="Permalink to this heading">#</a></h1>
+<p>Flask utiliza plantillas basadas en el motor de plantillas Jinja2. Jinja2 es un potente motor de plantillas para Python que se integra de manera nativa con Flask y es ampliamente utilizado en el desarrollo web con este framework.</p>
+<p>Algunas características destacadas de Jinja2 y cómo se utilizan en Flask incluyen:</p>
+<ul class="simple">
+<li><p><strong>Sintaxis clara y expresiva</strong>: Jinja2 utiliza una sintaxis sencilla y legible que facilita la creación de plantillas. Por ejemplo, las variables se encierran entre dobles corchetes () y las estructuras de control como bucles y condicionales se manejan de manera intuitiva.</p></li>
+<li><p><strong>Herencia de plantillas</strong>: Jinja2 permite la herencia de plantillas, lo que significa que puedes definir una plantilla base con la estructura común de tu sitio y luego extenderla en plantillas secundarias para agregar contenido específico.</p></li>
+<li><p><strong>Filtros y macros</strong>: Jinja2 ofrece filtros que permiten manipular el contenido de las variables y macros que permiten definir bloques de contenido reutilizables.</p></li>
+<li><p><strong>Control de flujo</strong>: Puedes utilizar estructuras de control de flujo como bucles ({% for … %}) y condicionales ({% if … %}) en tus plantillas para manejar de manera dinámica la presentación de datos.</p></li>
+<li><p><strong>Inclusión de plantillas</strong>: Puedes incluir una plantilla dentro de otra mediante la directiva {% include ‘nombre_de_la_plantilla.html’ %}, lo que facilita la modularidad y la reutilización de código.</p></li>
+</ul>
+<p>Aquí hay un ejemplo mínimo de una plantilla en Jinja2 que podrías usar en Flask:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ titulo }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ titulo }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+            {% for item in lista %}
+                <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>{{ item }}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            {% endfor %}
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>En Flask, las plantillas Jinja2 se almacenan generalmente en el directorio <strong>templates en el directorio principal de tu aplicación</strong>, y Flask automáticamente busca plantillas en este directorio. La integración fluida entre Flask y Jinja2 permite la creación de interfaces web dinámicas y flexibles.</p>
+<section id="configuracion-predeterminada">
+<h2>Configuración predeterminada<a class="headerlink" href="#configuracion-predeterminada" title="Permalink to this heading">#</a></h2>
+<p>En Flask, la configuración predeterminada de Jinja2 se ajusta para adaptarse a las prácticas comunes y para proporcionar un entorno de desarrollo cómodo. A continuación, se muestran algunas de las configuraciones predeterminas de Jinja2 en Flask:</p>
+<ul class="simple">
+<li><p><strong>trim_blocks y lstrip_blocks</strong>: Ambos están establecidos en False por defecto, lo que significa que no se eliminarán automáticamente los espacios en blanco al comienzo y al final de los bloques de plantillas.</p></li>
+<li><p><strong>autoescape</strong>: Está establecido en True por defecto, lo que significa que las variables se escaparán automáticamente para evitar ataques de inyección de código. Sin embargo, si se detecta que una variable ya está marcada como segura (usando el filtro safe), no se aplicará el escape.</p></li>
+<li><p><strong>undefined</strong>: Por defecto, se utiliza el objeto StrictUndefined como el objeto undefined. Esto significa que acceder a variables no definidas en las plantillas generará una excepción UndefinedError.</p></li>
+<li><p><strong>loader</strong>: Flask configura automáticamente el cargador de plantillas para buscar en el directorio templates dentro de la aplicación.</p></li>
+</ul>
+<p>Estas configuraciones proporcionan un entorno seguro y razonable por defecto. Sin embargo, puedes personalizar estas opciones según tus necesidades específicas utilizando la propiedad <strong>jinja_options</strong> en tu aplicación Flask. Por ejemplo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Configuración personalizada de Jinja2</span>
+<span class="n">app</span><span class="o">.</span><span class="n">jinja_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;trim_blocks&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;lstrip_blocks&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;autoescape&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;undefined&#39;</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">jinja_options</span><span class="p">[</span><span class="s1">&#39;undefined&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>Esta configuración personalizada está configurando <strong>trim_blocks</strong>, <strong>lstrip_blocks</strong>, y <strong>autoescape</strong> a True. Además, utiliza el objeto undefined predeterminado de la aplicación Flask. Puedes ajustar estas opciones según tus preferencias y requisitos específicos del proyecto.</p>
+</section>
+<section id="contexto-estandar">
+<h2>Contexto estandar<a class="headerlink" href="#contexto-estandar" title="Permalink to this heading">#</a></h2>
+<p>En Flask, varias variables y objetos están disponibles por defecto en el contexto de Jinja2. Estas variables proporcionan información útil sobre la solicitud actual, la aplicación y otras configuraciones. Algunas de las variables y objetos más comunes incluyen:</p>
+<ul class="simple">
+<li><p><strong>request</strong>: Proporciona acceso a la solicitud HTTP actual. Puedes utilizarlo para acceder a parámetros de consulta, datos de formulario y otros detalles de la solicitud.</p></li>
+<li><p><strong>session</strong>: Si estás utilizando sesiones en Flask, puedes acceder a este objeto para almacenar y recuperar datos de la sesión.</p></li>
+<li><p><strong>g</strong>: Un objeto “global” que se puede utilizar para almacenar datos temporales durante el ciclo de vida de una solicitud. Especificado como “global” solo en el contexto de una solicitud específica.</p></li>
+<li><p><strong>url_for</strong>: Una función que te permite generar URLs para funciones de vista específicas en tu aplicación.</p></li>
+<li><p><strong>config</strong>: Acceso a la configuración de la aplicación, que se puede definir en el objeto de la aplicación Flask.</p></li>
+<li><p><strong>get_flashed_messages</strong>: Una función para recuperar mensajes intermitentes almacenados en la sesión.</p></li>
+<li><p><strong>app</strong>: Una referencia a la instancia de la aplicación Flask. Puedes acceder a esto para obtener información sobre la aplicación, como su nombre.</p></li>
+<li><p><strong>url_for</strong>: Una función que se utiliza para generar URLs. Puedes usarla para generar URLs dinámicamente basadas en el nombre de la función de vista.</p></li>
+</ul>
+<p>Estas variables están disponibles por defecto en el contexto de Jinja2 y pueden ser utilizadas en tus plantillas sin necesidad de configuración adicional. Aquí hay un ejemplo simple de cómo podrías utilizar algunas de estas variables en una plantilla:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ config[&#39;TITLE&#39;] }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Bienvenido a {{ config[&#39;TITLE&#39;] }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Esta es la ruta actual: {{ request.path }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Mensajes intermitentes: {{ get_flashed_messages() }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Estas variables facilitan el acceso a información clave en tus plantillas y son parte integral del flujo de trabajo típico de Flask.</p>
+</section>
+<section id="controlando-el-autoescape">
+<h2>Controlando el autoescape<a class="headerlink" href="#controlando-el-autoescape" title="Permalink to this heading">#</a></h2>
+<p>En Jinja2, el autoescape es una característica que protege automáticamente contra ataques de inyección de código HTML y garantiza que las variables renderizadas en las plantillas sean escapadas para prevenir scripts maliciosos. Flask, por defecto, habilita el autoescape en Jinja2 para garantizar la seguridad. Sin embargo, hay situaciones en las que puede ser necesario desactivar o controlar manualmente el autoescape.</p>
+<p>A continuación, se presentan algunas formas de controlar el autoescape en Jinja2 dentro de Flask.</p>
+<section id="desactivar-el-autoescape-para-una-variable-especifica">
+<h3>Desactivar el autoescape para una variable específica<a class="headerlink" href="#desactivar-el-autoescape-para-una-variable-especifica" title="Permalink to this heading">#</a></h3>
+<p>Si deseas desactivar el autoescape para una variable específica en una plantilla, puedes utilizar el modificador <strong>|safe</strong>. Esto indica a Jinja2 que confíe en el contenido y no aplique el escape:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ mi_variable | safe }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="desactivar-el-autoescape-para-una-seccion-de-la-plantilla">
+<h3>Desactivar el autoescape para una sección de la plantilla<a class="headerlink" href="#desactivar-el-autoescape-para-una-seccion-de-la-plantilla" title="Permalink to this heading">#</a></h3>
+<p>Si deseas desactivar el autoescape para una sección completa de la plantilla, puedes hacerlo utilizando los bloques <strong>{% autoescape %}</strong> y <strong>{% endautoescape %}</strong>:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% autoescape false %}
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ mi_variable }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+{% endautoescape %}
+</pre></div>
+</div>
+</section>
+<section id="controlar-el-autoescape-a-nivel-de-la-aplicacion">
+<h3>Controlar el autoescape a nivel de la aplicación<a class="headerlink" href="#controlar-el-autoescape-a-nivel-de-la-aplicacion" title="Permalink to this heading">#</a></h3>
+<p>En tu aplicación Flask, puedes configurar el autoescape globalmente para todas las plantillas. Puedes hacer esto modificando la propiedad autoescape del entorno de Jinja2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Markup</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Desactivar el autoescape globalmente</span>
+<span class="n">app</span><span class="o">.</span><span class="n">jinja_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;autoescape&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">mi_variable</span><span class="o">=</span><span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;&lt;script&gt;alert(&quot;¡Ataque!&quot;);&lt;/script&gt;&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Aquí, hemos configurado autoescape en False globalmente para todas las plantillas. Además, hemos utilizado Markup para marcar explícitamente la variable como segura.</p>
+<p>Recuerda que la seguridad es una consideración crucial al trabajar con plantillas y datos dinámicos. Siempre es preferible mantener el autoescape activado para prevenir ataques de inyección de código. Desactiva el autoescape solo cuando estés completamente seguro de que el contenido es seguro y de confianza.</p>
+</section>
+</section>
+<section id="registrar-filtros">
+<h2>Registrar filtros<a class="headerlink" href="#registrar-filtros" title="Permalink to this heading">#</a></h2>
+<p>En Flask, puedes registrar filtros personalizados en Jinja2 para extender las capacidades del sistema de plantillas. Puedes hacer esto utilizando el decorador <strong>app.template_filter</strong> o el método <strong>app.add_template_filter</strong>. Aquí te muestro cómo registrar filtros personalizados en tu aplicación Flask:</p>
+<section id="usando-el-decorador-app-template-filter">
+<h3>Usando el Decorador &#64;app.template_filter<a class="headerlink" href="#usando-el-decorador-app-template-filter" title="Permalink to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Definir un filtro personalizado con el decorador</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">template_filter</span><span class="p">(</span><span class="s1">&#39;nombre_del_filtro&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mi_filtro</span><span class="p">(</span><span class="n">valor</span><span class="p">):</span>
+    <span class="c1"># Lógica del filtro</span>
+    <span class="k">return</span> <span class="n">valor</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Luego, en tu plantilla Jinja2, puedes usar este filtro de la siguiente manera:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Filtro Personalizado<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ &quot;Hola, Mundo&quot; | nombre_del_filtro }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="usando-app-add-template-filter">
+<h3>Usando app.add_template_filter<a class="headerlink" href="#usando-app-add-template-filter" title="Permalink to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Definir la función del filtro</span>
+<span class="k">def</span> <span class="nf">mi_filtro</span><span class="p">(</span><span class="n">valor</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">valor</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+<span class="c1"># Registrar el filtro en la aplicación</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_template_filter</span><span class="p">(</span><span class="n">mi_filtro</span><span class="p">,</span> <span class="s1">&#39;nombre_del_filtro&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>El resultado en la plantilla será el mismo:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Filtro Personalizado<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ &quot;Hola, Mundo&quot; | nombre_del_filtro }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>En estos ejemplos, hemos registrado un filtro personalizado llamado nombre_del_filtro que convierte el texto a mayúsculas. Puedes adaptar la lógica del filtro según tus necesidades.</p>
+<p>Recuerda que los filtros personalizados te permiten extender las funcionalidades de Jinja2 y realizar manipulaciones en los datos antes de renderizarlos en la plantilla.</p>
+</section>
+</section>
+<section id="context-processors">
+<h2>Context processors<a class="headerlink" href="#context-processors" title="Permalink to this heading">#</a></h2>
+<p>Los <strong>“context processors”</strong> en Flask son funciones que se ejecutan antes de que se renderice cualquier plantilla y añaden variables al contexto global de Jinja2. Estas variables estarán disponibles en todas las plantillas de la aplicación. Los context processors son útiles para proporcionar datos comunes o configuración a todas las vistas.</p>
+<p>Para definir un context processor en Flask, puedes utilizar el decorador <strong>app.context_processor</strong>. Aquí hay un ejemplo de cómo puedes usar context processors en tu aplicación Flask:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Context processor para proporcionar datos comunes a todas las plantillas</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">context_processor</span>
+<span class="k">def</span> <span class="nf">inject_common_data</span><span class="p">():</span>
+    <span class="c1"># Puedes proporcionar cualquier dato que desees que esté disponible en todas las plantillas</span>
+    <span class="n">common_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;sitio_web_nombre&#39;</span><span class="p">:</span> <span class="s1">&#39;Mi Sitio Web&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;autor&#39;</span><span class="p">:</span> <span class="s1">&#39;John Doe&#39;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">common_data</span>
+
+<span class="c1"># Ruta de ejemplo</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="c1"># Renderiza la plantilla sin necesidad de pasar &#39;sitio_web_nombre&#39; y &#39;autor&#39; explicitamente</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En este ejemplo, el context processor <strong>inject_common_data</strong> añade las variables sitio_web_nombre y autor al contexto global de Jinja2. Estas variables estarán disponibles en todas las plantillas sin necesidad de pasarlas explícitamente en cada llamada a render_template.</p>
+<p>Y en tu plantilla (index.html), puedes acceder a estas variables directamente:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ sitio_web_nombre }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Bienvenido a {{ sitio_web_nombre }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Autor: {{ autor }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Esto permite tener datos comunes accesibles en todas las plantillas, lo que puede ser útil para la información del sitio, datos del usuario actualmente autenticado, o cualquier otro dato global que necesites compartir entre tus vistas.</p>
+</section>
+<section id="streaming">
+<h2>Streaming<a class="headerlink" href="#streaming" title="Permalink to this heading">#</a></h2>
+<p>El “streaming” en el contexto de Jinja2 y Flask se refiere a la capacidad de enviar la salida de una plantilla de manera incremental al cliente, en lugar de esperar a que se complete todo el procesamiento antes de enviarla por completo. Esto puede ser útil cuando se generan grandes cantidades de datos o se realizan operaciones costosas, permitiendo una respuesta más rápida al usuario.</p>
+<p>En Flask, puedes habilitar el streaming en una plantilla utilizando el objeto <strong>stream_with_context</strong> proporcionado por Flask. Aquí tienes un ejemplo básico:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">stream_with_context</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Ruta de ejemplo con streaming</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/streaming_example&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">streaming_example</span><span class="p">():</span>
+    <span class="c1"># Función generadora que simula la generación de datos</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Simula una operación costosa</span>
+            <span class="k">yield</span> <span class="sa">f</span><span class="s1">&#39;Número: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    
+    <span class="c1"># Utiliza stream_with_context para habilitar el streaming</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span><span class="n">stream_with_context</span><span class="p">(</span><span class="n">generate</span><span class="p">()),</span> <span class="n">content_type</span><span class="o">=</span><span class="s1">&#39;text/html&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En este ejemplo, la función <strong>generate</strong> es una función generadora que simula la generación de datos. La función <strong>stream_with_context</strong> se utiliza para habilitar el streaming, y se envía cada elemento generado al cliente tan pronto como esté disponible, en lugar de esperar a que se complete todo el proceso.</p>
+<p>En tu plantilla, puedes acceder a esta ruta como cualquier otra, por ejemplo:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Streaming Example<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Streaming Example<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            {% for mensaje in stream %}
+                {{ mensaje | safe }}
+            {% endfor %}
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>En este ejemplo, el bucle {% for mensaje in stream %} se encarga de mostrar cada mensaje enviado por el servidor en tiempo real.</p>
+</section>
+<section id="ejemplos">
+<h2>Ejemplos<a class="headerlink" href="#ejemplos" title="Permalink to this heading">#</a></h2>
+<p>Vamos a ver unos pocos ejemplos de como utilizar Jinja2 con flask. En el primer ejemplo vamos a cargar una plantilla para la ruta principal a la cual le pasamos el nombre de un usuario para que se muestre:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="c1"># Pasa una variable a la plantilla</span>
+    <span class="n">nombre</span> <span class="o">=</span> <span class="s2">&quot;Usuario&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;ejemplo_template.html&#39;</span><span class="p">,</span> <span class="n">nombre</span><span class="o">=</span><span class="n">nombre</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;IE=edge&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Ejemplo de Plantilla Jinja2 con Flask<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hola, {{ nombre }}!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Vamos a seguir con un ejemplo donde en vez de pasar una variable, pasemos varias:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="c1"># Pasa varias variables a la plantilla</span>
+    <span class="n">usuario</span> <span class="o">=</span> <span class="s2">&quot;Usuario&quot;</span>
+    <span class="n">edad</span> <span class="o">=</span> <span class="mi">25</span>
+    <span class="n">lenguajes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaScript&#39;</span><span class="p">,</span> <span class="s1">&#39;HTML&#39;</span><span class="p">,</span> <span class="s1">&#39;CSS&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;ejemplo_variables_template.html&#39;</span><span class="p">,</span> <span class="n">usuario</span><span class="o">=</span><span class="n">usuario</span><span class="p">,</span> <span class="n">edad</span><span class="o">=</span><span class="n">edad</span><span class="p">,</span> <span class="n">lenguajes</span><span class="o">=</span><span class="n">lenguajes</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;IE=edge&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Ejemplo de Variables Jinja2 con Flask<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hola, {{ usuario }}!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Edad: {{ edad }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lenguajes de programación favoritos:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+            {% for lenguaje in lenguajes %}
+                <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>{{ lenguaje }}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            {% endfor %}
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>date cuenta que también hemos utilizado el bucle for para recorrer los lenguajes y mostrarlo. Bien, todo funciona, ahora utilizemos diccionarios:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="c1"># Pasa un diccionario a la plantilla</span>
+    <span class="n">informacion_usuario</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;nombre&#39;</span><span class="p">:</span> <span class="s1">&#39;Usuario&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;edad&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="s1">&#39;lenguajes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaScript&#39;</span><span class="p">,</span> <span class="s1">&#39;HTML&#39;</span><span class="p">,</span> <span class="s1">&#39;CSS&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;ejemplo_diccionario_template.html&#39;</span><span class="p">,</span> <span class="n">informacion_usuario</span><span class="o">=</span><span class="n">informacion_usuario</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;IE=edge&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Ejemplo de Diccionario Jinja2 con Flask<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hola, {{ informacion_usuario.nombre }}!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Edad: {{ informacion_usuario.edad }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lenguajes de programación favoritos:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+            {% for lenguaje in informacion_usuario.lenguajes %}
+                <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>{{ lenguaje }}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            {% endfor %}
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Ya por último, veremos un ejemplo de uso de condicionales:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="c1"># Pasa un diccionario a la plantilla</span>
+    <span class="n">informacion_usuario</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;nombre&#39;</span><span class="p">:</span> <span class="s1">&#39;Usuario&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;edad&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="s1">&#39;lenguajes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaScript&#39;</span><span class="p">,</span> <span class="s1">&#39;HTML&#39;</span><span class="p">,</span> <span class="s1">&#39;CSS&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;ejemplo_condicional_template.html&#39;</span><span class="p">,</span> <span class="n">informacion_usuario</span><span class="o">=</span><span class="n">informacion_usuario</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;es&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+        &lt;title&gt;Ejemplo de Condicional Jinja2 con Flask&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hola, {{ informacion_usuario.nombre }}!&lt;/h1&gt;
+
+        {% if informacion_usuario.edad &lt; 18 %}
+            &lt;p&gt;Eres menor de edad.&lt;/p&gt;
+        {% elif informacion_usuario.edad &gt;= 18 and informacion_usuario.edad &lt; 30 %}
+            &lt;p&gt;Eres un joven adulto.&lt;/p&gt;
+        {% else %}
+            &lt;p&gt;Eres mayor de 30 años.&lt;/p&gt;
+        {% endif %}
+
+        &lt;p&gt;Lenguajes de programación favoritos:&lt;/p&gt;
+        &lt;ul&gt;
+            {% for lenguaje in informacion_usuario.lenguajes %}
+                &lt;li&gt;{{ lenguaje }}&lt;/li&gt;
+            {% endfor %}
+        &lt;/ul&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/flask"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="primeros_pasos.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Flask</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="db.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Base de datos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-predeterminada">Configuración predeterminada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-estandar">Contexto estandar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controlando-el-autoescape">Controlando el autoescape</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desactivar-el-autoescape-para-una-variable-especifica">Desactivar el autoescape para una variable específica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desactivar-el-autoescape-para-una-seccion-de-la-plantilla">Desactivar el autoescape para una sección de la plantilla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlar-el-autoescape-a-nivel-de-la-aplicacion">Controlar el autoescape a nivel de la aplicación</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registrar-filtros">Registrar filtros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usando-el-decorador-app-template-filter">Usando el Decorador @app.template_filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usando-app-add-template-filter">Usando app.add_template_filter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context-processors">Context processors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming">Streaming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos">Ejemplos</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

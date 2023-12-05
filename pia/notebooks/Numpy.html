@@ -181,14 +181,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/pandas/dataframes/gestion_avanzada_datos.html">Gestión avanzada de datos con Pandas</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../markdowns/flask/introduccion.html">APIS Rest</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../markdowns/flask/primeros_pasos.html">Flask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../markdowns/flask/jinja.html">Jinja2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../markdowns/flask/db.html">Base de datos</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">EJERCICIOS</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios_index.html">Ejercicios pandas</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios_series.html">Ejercicios Series</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios1.html">Ejercicios Dataframes 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios2.html">Ejercicios Dataframes 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/pandas/ejercicios3.html">Ejercicios Dataframes 3</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../markdowns/ejercicios/flask/ejercicios_index.html">Ejercicios flask</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../markdowns/ejercicios/flask/ejercicios1.html">Ejercicios flask 1</a></li>
 </ul>
 </li>
 </ul>
@@ -487,8 +497,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.36665843e-316, 0.00000000e+000, 2.66139646e-316, 2.66128974e-316,
-       2.37151510e-322])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.47933827e-316, 0.00000000e+000, 1.49219683e-316, 1.50818321e-316,
+       6.90577829e-310])
 </pre></div>
 </div>
 </div>
@@ -554,7 +564,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([11, 95, 84, 53, 81, 40, 61, 82, 92, 19])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([41, 10,  7, 93, 18, 29, 75, 48,  6, 17])
 </pre></div>
 </div>
 </div>
@@ -566,7 +576,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([11, 19, 40, 53, 61, 81, 82, 84, 92, 95])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 6,  7, 10, 17, 18, 29, 41, 48, 75, 93])
 </pre></div>
 </div>
 </div>
@@ -586,7 +596,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([91, 24, 47, 56, 88, 67, 67,  3, 57, 95])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([36,  4, 80, 12, 40, 93, 12,  6, 36, 20])
 </pre></div>
 </div>
 </div>
@@ -631,7 +641,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([17, 96, 57, 65, 69, 48, 39, 61, 14, 62])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([83, 65, 23, 75, 53, 97, 36, 73, 86, 65])
 </pre></div>
 </div>
 </div>
@@ -643,7 +653,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([17, 96, 57, 39, 61, 14, 62])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([83, 65, 23, 36, 73, 86, 65])
 </pre></div>
 </div>
 </div>
@@ -659,7 +669,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[98 12 51 84  1 86 54 32 64 28 49 90]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[98 72  3 69 39 41 80 44 77 51  5 84]
 </pre></div>
 </div>
 </div>
@@ -671,9 +681,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[98, 12, 51, 84],
-       [ 1, 86, 54, 32],
-       [64, 28, 49, 90]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[98, 72,  3, 69],
+       [39, 41, 80, 44],
+       [77, 51,  5, 84]])
 </pre></div>
 </div>
 </div>
@@ -703,7 +713,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[42 84 98 30 65 72 98 71 36 95  9 38]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[60 63 77 61 24 15 88 26 36 55 20 86]]
 (1, 12)
 </pre></div>
 </div>
@@ -718,7 +728,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[42 84 98 30 65 72 98 71 36 95  9 38]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[60 63 77 61 24 15 88 26 36 55 20 86]]
 (1, 12)
 </pre></div>
 </div>
@@ -733,18 +743,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[42]
- [84]
- [98]
- [30]
- [65]
- [72]
- [98]
- [71]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[60]
+ [63]
+ [77]
+ [61]
+ [24]
+ [15]
+ [88]
+ [26]
  [36]
- [95]
- [ 9]
- [38]]
+ [55]
+ [20]
+ [86]]
 (12, 1)
 </pre></div>
 </div>
@@ -848,9 +858,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[6, 2, 5, 8],
-       [2, 9, 5, 2],
-       [2, 3, 3, 3]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2, 3, 3],
+       [3, 3, 4, 2],
+       [4, 6, 8, 4]])
 </pre></div>
 </div>
 </div>
@@ -862,7 +872,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, 2, 2, 2, 3, 3, 3])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 3, 3, 3, 4, 2, 4, 4])
 </pre></div>
 </div>
 </div>
@@ -874,7 +884,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6, 8, 9])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6, 8])
 </pre></div>
 </div>
 </div>
@@ -886,7 +896,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6, 2, 8, 2, 2, 2])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, 4, 2, 4, 6, 8, 4])
 </pre></div>
 </div>
 </div>
@@ -898,7 +908,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([6, 5, 5, 3, 3, 3])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3, 3, 3, 3, 4, 4, 6, 4])
 </pre></div>
 </div>
 </div>
@@ -910,9 +920,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ True, False,  True,  True],
-       [False,  True,  True, False],
-       [False, False, False, False]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[False, False, False, False],
+       [False, False, False, False],
+       [False,  True,  True, False]])
 </pre></div>
 </div>
 </div>
@@ -928,7 +938,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 1, 2, 2, 2, 2]), array([1, 0, 3, 0, 1, 2, 3]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 0, 0, 0, 1, 1, 1, 1, 2, 2]), array([0, 1, 2, 3, 0, 1, 2, 3, 0, 3]))
 </pre></div>
 </div>
 </div>
@@ -942,12 +952,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 0)
+(0, 1)
+(0, 2)
+(0, 3)
 (1, 0)
+(1, 1)
+(1, 2)
 (1, 3)
 (2, 0)
-(2, 1)
-(2, 2)
 (2, 3)
 </pre></div>
 </div>
@@ -983,7 +996,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([27, 18, 80, 29, 24])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([92, 20, 35, 55, 64])
 </pre></div>
 </div>
 </div>
@@ -996,8 +1009,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9, 7],
-       [5, 2]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[5, 1],
+       [8, 7]])
 </pre></div>
 </div>
 </div>
@@ -1010,8 +1023,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2, 4],
-       [0, 7]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[5, 7],
+       [4, 0]])
 </pre></div>
 </div>
 </div>
@@ -1023,10 +1036,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9, 7],
-       [5, 2],
-       [2, 4],
-       [0, 7]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[5, 1],
+       [8, 7],
+       [5, 7],
+       [4, 0]])
 </pre></div>
 </div>
 </div>
@@ -1038,8 +1051,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9, 7, 2, 4],
-       [5, 2, 0, 7]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[5, 1, 5, 7],
+       [8, 7, 4, 0]])
 </pre></div>
 </div>
 </div>
@@ -1052,9 +1065,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[60, 14, 89, 30, 77, 84, 30, 41, 45],
-       [12, 90, 96, 74, 18, 78, 77, 47, 54],
-       [40, 19, 32, 49, 77, 14,  1, 79,  8]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[61, 85, 41, 23, 97, 53, 83, 87, 72],
+       [44,  9, 18, 57, 43, 61, 64, 22, 29],
+       [13, 61, 90, 41,  7,  2, 98,  2, 30]])
 </pre></div>
 </div>
 </div>
@@ -1066,15 +1079,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[60, 14, 89],
-        [12, 90, 96],
-        [40, 19, 32]]),
- array([[30, 77, 84],
-        [74, 18, 78],
-        [49, 77, 14]]),
- array([[30, 41, 45],
-        [77, 47, 54],
-        [ 1, 79,  8]])]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[61, 85, 41],
+        [44,  9, 18],
+        [13, 61, 90]]),
+ array([[23, 97, 53],
+        [57, 43, 61],
+        [41,  7,  2]]),
+ array([[83, 87, 72],
+        [64, 22, 29],
+        [98,  2, 30]])]
 </pre></div>
 </div>
 </div>
@@ -1086,13 +1099,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[60, 14],
-        [12, 90],
-        [40, 19]]),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[61, 85],
+        [44,  9],
+        [13, 61]]),
  array([], shape=(3, 0), dtype=int64),
- array([[89, 30, 77, 84, 30, 41, 45],
-        [96, 74, 18, 78, 77, 47, 54],
-        [32, 49, 77, 14,  1, 79,  8]])]
+ array([[41, 23, 97, 53, 83, 87, 72],
+        [18, 57, 43, 61, 64, 22, 29],
+        [90, 41,  7,  2, 98,  2, 30]])]
 </pre></div>
 </div>
 </div>
@@ -1105,9 +1118,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[91, 72, 61, 74],
-       [25,  9, 63, 93],
-       [79, 27, 20,  6]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[49, 29, 96,  6],
+       [31, 89, 42, 89],
+       [14, 50, 11, 20]])
 </pre></div>
 </div>
 </div>
@@ -1120,7 +1133,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([91, 72, 61, 74])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([49, 29, 96,  6])
 </pre></div>
 </div>
 </div>
@@ -1133,7 +1146,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0, 72, 61, 74])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0, 29, 96,  6])
 </pre></div>
 </div>
 </div>
@@ -1145,9 +1158,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0, 72, 61, 74],
-       [25,  9, 63, 93],
-       [79, 27, 20,  6]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0, 29, 96,  6],
+       [31, 89, 42, 89],
+       [14, 50, 11, 20]])
 </pre></div>
 </div>
 </div>
@@ -1249,7 +1262,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([137, 105])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([101,  16])
 </pre></div>
 </div>
 </div>
@@ -1261,7 +1274,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([197,  45])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([41, 76])
 </pre></div>
 </div>
 </div>
@@ -1533,7 +1546,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.24404285, 0.84068012, 0.62021039])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.06183036, 0.23510236, 0.16523116])
 </pre></div>
 </div>
 </div>
@@ -1573,9 +1586,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.59313907, 0.21540961],
-       [0.58580348, 0.24707608],
-       [0.9637444 , 0.49948447]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.00580424, 0.33496734],
+       [0.56925558, 0.01427276],
+       [0.75338307, 0.66578875]])
 </pre></div>
 </div>
 </div>
@@ -1591,8 +1604,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2, 2, 0],
-       [3, 0, 2, 3]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3, 1, 2, 4],
+       [3, 0, 3, 3]])
 </pre></div>
 </div>
 </div>
@@ -1713,9 +1726,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[57, 89],
-       [54, 78],
-       [25, 38]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[35, 10],
+       [96, 15],
+       [73, 43]])
 </pre></div>
 </div>
 </div>
@@ -1727,8 +1740,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[57, 89, 54],
-       [78, 25, 38]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[35, 10, 96],
+       [15, 73, 43]])
 </pre></div>
 </div>
 </div>
@@ -1740,8 +1753,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[57, 54, 25],
-       [89, 78, 38]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[35, 96, 73],
+       [10, 15, 43]])
 </pre></div>
 </div>
 </div>
@@ -1753,8 +1766,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[57, 54, 25],
-       [89, 78, 38]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[35, 96, 73],
+       [10, 15, 43]])
 </pre></div>
 </div>
 </div>

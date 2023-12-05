@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Programación de inteligencia artificial</title>
+    <title>APIS Rest &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -68,9 +68,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/utils/header_with_exec';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/flask/introduccion';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Flask" href="primeros_pasos.html" />
+    <link rel="prev" title="Gestión avanzada de datos con Pandas" href="../pandas/dataframes/gestion_avanzada_datos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,7 +170,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../introduccion.html">Lenguajes de programación</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">HERRAMIENTAS DE PROGRAMACIÓN</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/Numpy.html">Numpy</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../pandas/pandas.html">Pandas</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pandas/series/series.html">Series</a></li>
@@ -179,10 +181,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../pandas/dataframes/gestion_avanzada_datos.html">Gestión avanzada de datos con Pandas</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../flask/introduccion.html">APIS Rest</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../flask/primeros_pasos.html">Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../flask/jinja.html">Jinja2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../flask/db.html">Base de datos</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">APIS Rest</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="primeros_pasos.html">Flask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jinja.html">Jinja2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db.html">Base de datos</a></li>
 </ul>
 </li>
 </ul>
@@ -291,7 +293,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>APIS Rest</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -300,9 +302,11 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-una-api-rest">Métodos de una API Rest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principio-de-idempotencia">Principio de idempotencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-python-para-crear-un-api-rest">Frameworks Python para crear un API Rest</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -313,7 +317,111 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="apis-rest">
+<h1>APIS Rest<a class="headerlink" href="#apis-rest" title="Permalink to this heading">#</a></h1>
+<p>Las API REST, que significa “Interfaz de Programación de Aplicaciones basada en Transferencia de Estado Representacional” en inglés, constituyen un enfoque arquitectónico para el desarrollo de servicios web que ha ganado amplia aceptación en la industria de la tecnología. Estas API ofrecen una forma estándar y eficiente para que diferentes sistemas se comuniquen entre sí a través de la web.</p>
+<p>En esencia, una API REST se basa en los principios del protocolo HTTP (Hypertext Transfer Protocol) y utiliza métodos estándar como GET, POST, PUT y DELETE para realizar operaciones sobre recursos. La comunicación entre el cliente y el servidor se lleva a cabo mediante solicitudes y respuestas, donde la representación del estado de un recurso se transfiere de manera uniforme, generalmente en formato JSON o XML.</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/01.png"><img alt="../../_images/01.png" class="bg-primary align-center" src="../../_images/01.png" style="width: 80%;" /></a>
+</br>
+<p>Este enfoque ligero y flexible facilita la construcción de aplicaciones escalables y modularmente diseñadas. Las API REST han ganado popularidad gracias a su simplicidad, facilidad de uso y su capacidad para admitir la integración sin problemas entre sistemas heterogéneos. En la actualidad, son fundamentales para el desarrollo de aplicaciones modernas, ya que permiten la interconexión y la interoperabilidad de manera eficiente en el vasto paisaje digital.</p>
+<section id="metodos-de-una-api-rest">
+<h2>Métodos de una API Rest<a class="headerlink" href="#metodos-de-una-api-rest" title="Permalink to this heading">#</a></h2>
+<p>Las API REST utilizan varios métodos HTTP estándar para realizar operaciones en recursos. Aquí hay una descripción breve de los métodos más comunes:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">MÉTODOS DE UNA API REST</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="left-header" scope="row">GET</th>
+      <td  colspan="3">Se utiliza para recuperar información de un recurso en el servidor. Por ejemplo, al realizar una solicitud GET a la URL de un recurso, se obtiene una representación de ese recurso.</td>
+    </tr>
+     <tr>
+      <th class="left-header" scope="row">POST</th>
+      <td  colspan="3">Se emplea para enviar datos al servidor para crear un nuevo recurso. La información enviada con una solicitud POST generalmente se utiliza para actualizar o crear un recurso en el servidor.</td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">PUT</th>
+      <td  colspan="3">Se utiliza para actualizar un recurso en el servidor. Al enviar una solicitud PUT a la URL de un recurso, se reemplaza completamente con la información proporcionada en la solicitud. </td>
+    </tr>
+    <th class="left-header" scope="row">DELETE</th>
+      <td  colspan="3">Se utiliza para eliminar un recurso en el servidor. Al enviar una solicitud DELETE a la URL de un recurso, se solicita la eliminación de ese recurso.</td>
+    </tr>
+     <tr>
+      <th scope="row" class="left-header">PATCH</th>
+      <td  colspan="3">Similar a PUT, pero se utiliza para realizar actualizaciones parciales en un recurso. En lugar de reemplazar completamente el recurso, PATCH aplica cambios específicos.</td>
+    </tr>
+    <tr>
+      <th scope="row" class="left-header">OPTIONS</th>
+      <td  colspan="3">Se utiliza para obtener información sobre las opciones y requisitos asociados con un recurso, o la comunicación con el servidor en general.</td>
+    </tr>
+    <tr>
+      <th scope="row" class="left-header">HEAD</th>
+      <td  colspan="3">Similar a GET, pero solicita solo los encabezados de la respuesta, sin el cuerpo de la respuesta. Se utiliza para obtener información sobre un recurso sin recuperar toda su representación.</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+<section id="principio-de-idempotencia">
+<h2>Principio de idempotencia<a class="headerlink" href="#principio-de-idempotencia" title="Permalink to this heading">#</a></h2>
+<p>La idempotencia es un principio fundamental en el diseño de API REST que establece que realizar una operación varias veces debe tener el mismo efecto que realizarla una sola vez. En otras palabras, <strong>si una solicitud es idempotente, su resultado no cambia, independientemente de cuántas veces se realice</strong>.</p>
+<p>En el contexto de una API REST, esto significa que, al realizar una solicitud HTTP idempotente, el estado del sistema no se ve afectado por solicitudes duplicadas. Este principio proporciona beneficios importantes en términos de robustez, confiabilidad y facilidad de manejo de errores, especialmente en entornos donde las comunicaciones pueden ser propensas a interrupciones o errores de red.</p>
+<p>Algunos de los métodos HTTP comunes que son idempotentes incluyen:</p>
+<ul class="simple">
+<li><p><strong>GET</strong>: Obtener información no debería tener efectos secundarios, por lo que es inherentemente idempotente. Hacer múltiples solicitudes GET al mismo recurso no debería cambiar su estado.</p></li>
+<li><p><strong>PUT</strong>: Actualizar un recurso con PUT debería ser idempotente. Si se realiza la misma solicitud PUT varias veces, el resultado debería ser el mismo que si se realiza una sola vez.</p></li>
+<li><p><strong>DELETE</strong>: Eliminar un recurso también debería ser idempotente. Si se intenta eliminar un recurso que ya ha sido eliminado, la respuesta debería ser la misma que si la eliminación se realizara por primera vez.</p></li>
+</ul>
+<p>Es importante destacar que aunque los métodos mencionados tienden a ser idempotentes, no todos los métodos HTTP cumplen con este principio. Por ejemplo, los métodos <strong>POST</strong> y <strong>PATCH</strong> no son idempotentes de forma predeterminada, ya que las solicitudes repetidas pueden tener efectos diferentes en el estado del sistema.</p>
+<p>El diseño y la implementación cuidadosa de operaciones idempotentes en una API REST contribuyen a la previsibilidad y la integridad del sistema, especialmente en situaciones donde las solicitudes pueden experimentar fallos, duplicaciones o demoras en la red.</p>
+</section>
+<section id="frameworks-python-para-crear-un-api-rest">
+<h2>Frameworks Python para crear un API Rest<a class="headerlink" href="#frameworks-python-para-crear-un-api-rest" title="Permalink to this heading">#</a></h2>
+<p>Hay varios frameworks en Python que facilitan el desarrollo de APIs REST. Cada uno tiene sus propias características y ventajas. Algunos de los frameworks más populares para construir APIs REST en Python incluyen:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">FRAMEWORKS PYTHON PARA CREAR UN API REST</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="left-header" scope="row">Django Rest Framework (DRF)</th>
+      <td  colspan="3">Una potente y flexible herramienta que se integra con el popular framework web Django. Proporciona una gran cantidad de características, como autenticación, autorización, manejo de serializers y vistas basadas en clases.</td>
+    </tr>
+     <tr>
+      <th class="left-header" scope="row">Flask-RESTful</th>
+      <td  colspan="3">Construido sobre el ligero framework web Flask, Flask-RESTful simplifica la creación de APIs RESTful al proporcionar funcionalidades específicas para este propósito, como recursos, campos, y manejo de solicitudes y respuestas.</td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">FastAPI</th>
+      <td  colspan="3">Un framework moderno y rápido que utiliza Python 3.7+ y basa su funcionalidad en el estándar de tipado de Python. Ofrece una generación de documentación automática, validación de tipos, y un rendimiento excepcional.</td>
+    </tr>
+    <th class="left-header" scope="row">Tornado</th>
+      <td  colspan="3">Aunque es conocido principalmente como un framework web asíncrono, Tornado también puede utilizarse para construir APIs RESTful eficientes, especialmente en situaciones que requieren manejo asíncrono.</td>
+    </tr>
+     <tr>
+      <th scope="row" class="left-header">Falcon</th>
+      <td  colspan="3">Diseñado para ser liviano y rápido, Falcon se centra en proporcionar lo esencial para construir APIs RESTful sin agregar demasiada complejidad. Es especialmente adecuado para aplicaciones donde la eficiencia es crucial.</td>
+    </tr>
+    <tr>
+      <th scope="row" class="left-header">Bottle</th>
+      <td  colspan="3">Un framework micro que es fácil de aprender y usar. Aunque no es tan completo como algunos de los otros frameworks, es una opción sólida para proyectos pequeños o cuando se necesita algo simple y rápido.</td>
+    </tr>
+    <tr>
+      <th scope="row" class="left-header">Pyramid</th>
+      <td  colspan="3">Aunque es más conocido como un framework web completo, Pyramid también puede utilizarse para construir APIs RESTful gracias a su enfoque modular y su flexibilidad.</td>
+    </tr>
+  </tbody>
+</table>
+<p>La elección del framework dependerá de los requisitos específicos de tu proyecto, tus preferencias personales y el nivel de complejidad que estés buscando. Django Rest Framework y Flask-RESTful son particularmente populares y ampliamente utilizados en la comunidad de desarrollo web en Python.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -327,7 +435,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./markdowns/utils"
+            path: "./markdowns/flask"
         },
         predefinedOutput: true
     }
@@ -344,6 +452,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../pandas/dataframes/gestion_avanzada_datos.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Gestión avanzada de datos con Pandas</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="primeros_pasos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Flask</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -358,9 +484,11 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-una-api-rest">Métodos de una API Rest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principio-de-idempotencia">Principio de idempotencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks-python-para-crear-un-api-rest">Frameworks Python para crear un API Rest</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
