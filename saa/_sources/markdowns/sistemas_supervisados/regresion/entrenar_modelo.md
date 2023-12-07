@@ -237,38 +237,7 @@ Podemos representar con una gráfica la línea que ha calculado nuestro modelo y
 Llegados a este punto, nos vamos a centrar solo en tres métricas, el **RMSE**, el **MAPE** y el **R²**.
 ```
 
-## Validación cruzada
-Una alternativa para evaluar nuestros modelos es utilizar la validación cruzada. La validación cruzada es una técnica fundamental en el campo del aprendizaje automático y la estadística que se utiliza para evaluar el rendimiento de un modelo predictivo. Su propósito principal es abordar la variabilidad en la estimación del rendimiento del modelo y garantizar que la evaluación sea robusta y generalizable. Este método implica dividir el conjunto de datos en diferentes subconjuntos, realizando múltiples rondas de entrenamiento y prueba en distintas particiones.
 
-En su forma más común, la validación cruzada **k-fold** divide el conjunto de datos en **k partes** iguales, utilizando **k-1 partes** para entrenar el modelo y la parte restante para evaluar su rendimiento. Este proceso se repite **k veces**, de modo que cada subconjunto se utiliza como conjunto de prueba exactamente una vez. Al final, se promedian los resultados de todas las iteraciones para obtener una métrica de rendimiento global.
-
-```{image} ../../../images/sistemas_supervisados/regresion/05.png
-:class: bg-primary
-:align: center
-:width: 80%
-```
-</br>
-
-Una ventaja clave de la validación cruzada es su capacidad para proporcionar una estimación más precisa del rendimiento del modelo en comparación con una única división de datos. Además, ayuda a mitigar el riesgo de sobreajuste al evaluar el modelo en múltiples configuraciones de datos. Esta técnica es especialmente útil cuando el tamaño del conjunto de datos es limitado, ya que maximiza la información utilizada tanto para entrenar como para evaluar el modelo.
-
-Por ejemplo, vamos a relizar la validación cruzada de nuestro modelo con un total de 10 validaciones:
-
-```{code-cell}
-from sklearn.model_selection import cross_val_score
-
-scores = cross_val_score(reg, X, y, scoring="neg_mean_absolute_percentage_error", cv=10)
-
-scores
-
-```
-
-La puntuación del modelo y la desviación vienen dadas por:
-
-```{code-cell}
-print("%0.2f accuracy with a standard deviation of %0.2f" % (-scores.mean(), scores.std()))
-```
-
-Parece ser que la puntuación del modelo no mejora, por lo tanto, ho hemos avanzado nada. Pero, ¿Como podemos reducir este error? En los siguientes apartados veremos un conjunto de técnicas que harán que nuestro error mejore y tengamos un modelo más confiable.
 
 
 

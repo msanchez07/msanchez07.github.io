@@ -181,6 +181,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="modelos/regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modelos/random_forest.html">Random forest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modelos/ensamble_modelos.html">Ensamble de modelos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="estandarizar_y_normalizar.html">Estandarizar y normalizar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validar_modelo.html">Validar un modelo</a></li>
 </ul>
 </li>
 </ul>
@@ -298,7 +300,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-del-modelo">Validación del modelo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion-de-modelos-de-regresion">Métricas de evaluación de modelos de regresión</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicar-modelo-al-ejemplo-de-los-seguros">Aplicar modelo al ejemplo de los seguros</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-cruzada">Validación cruzada</a></li>
 </ul>
             </nav>
         </div>
@@ -653,46 +654,6 @@ MAPE: 0.51
 <p>Llegados a este punto, nos vamos a centrar solo en tres métricas, el <strong>RMSE</strong>, el <strong>MAPE</strong> y el <strong>R²</strong>.</p>
 </div>
 </section>
-<section id="validacion-cruzada">
-<h2>Validación cruzada<a class="headerlink" href="#validacion-cruzada" title="Permalink to this heading">#</a></h2>
-<p>Una alternativa para evaluar nuestros modelos es utilizar la validación cruzada. La validación cruzada es una técnica fundamental en el campo del aprendizaje automático y la estadística que se utiliza para evaluar el rendimiento de un modelo predictivo. Su propósito principal es abordar la variabilidad en la estimación del rendimiento del modelo y garantizar que la evaluación sea robusta y generalizable. Este método implica dividir el conjunto de datos en diferentes subconjuntos, realizando múltiples rondas de entrenamiento y prueba en distintas particiones.</p>
-<p>En su forma más común, la validación cruzada <strong>k-fold</strong> divide el conjunto de datos en <strong>k partes</strong> iguales, utilizando <strong>k-1 partes</strong> para entrenar el modelo y la parte restante para evaluar su rendimiento. Este proceso se repite <strong>k veces</strong>, de modo que cada subconjunto se utiliza como conjunto de prueba exactamente una vez. Al final, se promedian los resultados de todas las iteraciones para obtener una métrica de rendimiento global.</p>
-<a class="bg-primary reference internal image-reference" href="../../../_images/05.png"><img alt="../../../_images/05.png" class="bg-primary align-center" src="../../../_images/05.png" style="width: 80%;" /></a>
-</br>
-<p>Una ventaja clave de la validación cruzada es su capacidad para proporcionar una estimación más precisa del rendimiento del modelo en comparación con una única división de datos. Además, ayuda a mitigar el riesgo de sobreajuste al evaluar el modelo en múltiples configuraciones de datos. Esta técnica es especialmente útil cuando el tamaño del conjunto de datos es limitado, ya que maximiza la información utilizada tanto para entrenar como para evaluar el modelo.</p>
-<p>Por ejemplo, vamos a relizar la validación cruzada de nuestro modelo con un total de 10 validaciones:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
-
-<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_absolute_percentage_error&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="n">scores</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.47228407, -0.45610038, -0.4311499 , -0.51238639, -0.47700388,
-       -0.48940038, -0.48260175, -0.45880937, -0.44544081, -0.57950976])
-</pre></div>
-</div>
-</div>
-</div>
-<p>La puntuación del modelo y la desviación vienen dadas por:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%0.2f</span><span class="s2"> accuracy with a standard deviation of </span><span class="si">%0.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="o">-</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.48 accuracy with a standard deviation of 0.04
-</pre></div>
-</div>
-</div>
-</div>
-<p>Parece ser que la puntuación del modelo no mejora, por lo tanto, ho hemos avanzado nada. Pero, ¿Como podemos reducir este error? En los siguientes apartados veremos un conjunto de técnicas que harán que nuestro error mejore y tengamos un modelo más confiable.</p>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -763,7 +724,6 @@ MAPE: 0.51
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-del-modelo">Validación del modelo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-evaluacion-de-modelos-de-regresion">Métricas de evaluación de modelos de regresión</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicar-modelo-al-ejemplo-de-los-seguros">Aplicar modelo al ejemplo de los seguros</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-cruzada">Validación cruzada</a></li>
 </ul>
   </nav></div>
 

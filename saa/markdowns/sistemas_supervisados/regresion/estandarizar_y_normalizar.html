@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Estandarizar y normalizar &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/regresion/estandarizar_y_normalizar';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Validar un modelo" href="validar_modelo.html" />
+    <link rel="prev" title="Ensamble de modelos" href="modelos/ensamble_modelos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTELIGENCIA ARTIFICIAL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SISTEMAS DE APRENDIZAJE SUPERVISADO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduccion.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analisis_datos.html">Análisis exploratorio de datos</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="regresion.html">Problemas de regresión</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entrenar_modelo.html">Entrenamiento del modelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/arboles_decision.html">Árboles de decisión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/svm.html">Máquinas de vectores de soporte (SVM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/random_forest.html">Random forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos/ensamble_modelos.html">Ensamble de modelos</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Estandarizar y normalizar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validar_modelo.html">Validar un modelo</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/r2.html">Coeficiente de Determinación (<span class="math notranslate nohighlight">\(R^2\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mape.html">Error Porcentual Absoluto Medio (MAPE)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Estandarizar y normalizar</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estandarizacion-de-los-datos">Estandarización de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-estandarizar-los-datos">Ventajas de estandarizar los datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-estandarizar-datos">Como estandarizar datos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-de-datos">Normalización de datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-normalizar-los-datos">Ventajas de normalizar los datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-normalizar-datos">Como normalizar datos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-usar-estandarizacion-y-cuando-normalizacion">Cuando usar estandarización y cuando normalización</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estandarizacion">Estandarización</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion">Normalización</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estandarizar-y-normalizar">
+<h1>Estandarizar y normalizar<a class="headerlink" href="#estandarizar-y-normalizar" title="Permalink to this heading">#</a></h1>
+<p>La estandarización y normalización son prácticas fundamentales que permiten mejorar la eficacia y la interpretación de los modelos. Estos procesos son esenciales para garantizar que los datos utilizados en los modelos estadísticos, algoritmos de aprendizaje automático o cualquier otra aplicación analítica estén en una escala coherente y comparable.</p>
+<p>Por ejemplo, supongamos que tienes un conjunto de datos con dos características, la edad de las personas en años y sus ingresos anuales en miles de dólares. Estos dos atributos tienen magnitudes muy diferentes, y podrían afectar la capacidad de ciertos algoritmos para aprender patrones efectivamente.</p>
+<p>La estandarización implica <strong>ajustar los datos para que tengan una media de cero</strong> y una <strong>desviación estándar de uno</strong>, mientras que la normalización generalmente se refiere a <strong>escalar los datos en un rango específico, como [0, 1]</strong>. Ambos métodos son esenciales para mitigar problemas derivados de las diferencias en la escala y la variabilidad de los datos, lo que puede afectar negativamente el rendimiento de los modelos.</p>
+<p>La importancia de estos procesos repercute en la obtención de resultados más consistentes, interpretación más clara de los resultados y, en última instancia, modelos más robustos y efectivos.</p>
+<section id="estandarizacion-de-los-datos">
+<h2>Estandarización de los datos<a class="headerlink" href="#estandarizacion-de-los-datos" title="Permalink to this heading">#</a></h2>
+<p>La estandarización de datos es un proceso fundamental en el análisis de datos y el desarrollo de modelos estadísticos y de aprendizaje automático. Consiste en ajustar los valores de las variables para que sigan una escala común, generalmente centrándolos en una media de cero y escalándolos de acuerdo con su desviación estándar. Este proceso tiene como objetivo principal eliminar las diferencias en la escala de las variables, lo que puede ser crucial para el correcto funcionamiento de muchos algoritmos.</p>
+<p>Al estandarizar los datos, se logra que todas las variables tengan una media de cero y una desviación estándar de uno. Este proceso es especialmente relevante cuando las variables de entrada de un modelo tienen unidades y escalas diferentes, ya que ayuda a que el modelo sea más robusto y menos sensible a las variaciones en las magnitudes de las variables.</p>
+<p>La estandarización facilita la comparación y la interpretación de los coeficientes en modelos lineales, mejora la convergencia en algoritmos de optimización y puede tener un impacto positivo en la eficacia de muchos algoritmos de aprendizaje automático. En resumen, es un paso crucial para garantizar la consistencia y la fiabilidad de los resultados analíticos.</p>
+<section id="ventajas-de-estandarizar-los-datos">
+<h3>Ventajas de estandarizar los datos<a class="headerlink" href="#ventajas-de-estandarizar-los-datos" title="Permalink to this heading">#</a></h3>
+<p>La estandarización de datos es un paso importante en el preprocesamiento de datos que tiene varios propósitos y beneficios en el análisis de datos y en la construcción de modelos, especialmente en el contexto de algoritmos de aprendizaje automático. Aquí hay algunas razones clave para realizar la estandarización de datos:</p>
+<ul class="simple">
+<li><p><strong>Facilita la Comparación</strong>: Al estandarizar datos, todas las variables <strong>tienen la misma escala, lo que facilita la comparación directa entre ellas</strong>. Esto es esencial cuando trabajas con modelos que utilizan medidas de distancia, como k-means o algoritmos basados en gradiente.</p></li>
+<li><p><strong>Mejora la Convergencia</strong>: Muchos algoritmos de optimización, como el descenso de gradiente, <strong>convergen más rápido en datos estandarizados</strong>. La estandarización ayuda a que el algoritmo alcance el mínimo global de manera más eficiente al garantizar que las variables contribuyan de manera equitativa al proceso de optimización.</p></li>
+<li><p><strong>Evita Problemas Numéricos</strong>: Al estandarizar datos, se reducen los <strong>problemas relacionados con la escala de las variables, como la pérdida de precisión numérica o la inestabilidad numérica</strong> en cálculos que involucran números muy grandes o muy pequeños.</p></li>
+<li><p><strong>Interpretación Mejorada</strong>: La estandarización <strong>facilita la interpretación de coeficientes en modelos lineales</strong>. Los coeficientes estandarizados representan el cambio en la variable de respuesta en unidades de desviación estándar, lo que hace que la interpretación sea más intuitiva y comparable entre diferentes variables.</p></li>
+<li><p><strong>Robustez del Modelo</strong>: La estandarización puede hacer que <strong>los modelos sean más robustos a las variaciones en la escala y la distribución de los datos</strong>. Esto significa que el modelo puede <strong>generalizar mejor a datos nuevos y desconocidos</strong>.</p></li>
+<li><p><strong>Previene el Sesgo por Escala</strong>: Algunos algoritmos pueden verse afectados por diferencias en la escala de las variables, dando más peso a las variables con magnitudes más grandes. La estandarización <strong>ayuda a evitar este sesgo y a garantizar que todas las variables contribuyan de manera equitativa al modelo</strong>.</p></li>
+</ul>
+</section>
+<section id="como-estandarizar-datos">
+<h3>Como estandarizar datos<a class="headerlink" href="#como-estandarizar-datos" title="Permalink to this heading">#</a></h3>
+<p>A continuación se muestra un ejemplo de como estandarizar los datos con los que contamos. Posteriormente, estos datos se mostrarán en una gráfica:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Crear datos de ejemplo</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">datos_originales</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">10</span>  <span class="c1"># Datos con media 10 y desviación estándar 5</span>
+
+<span class="c1"># Inicializar el objeto StandardScaler</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="c1"># Estandarizar los datos</span>
+<span class="n">datos_estandarizados</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">datos_originales</span><span class="p">)</span>
+
+<span class="c1"># Crear un gráfico de dispersión para los datos originales</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">datos_originales</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">datos_originales</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Datos Originales&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Característica 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Característica 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Crear un gráfico de dispersión para los datos estandarizados</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">datos_estandarizados</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">datos_estandarizados</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estandarizado&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Datos Estandarizados&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Característica 1 (Estandarizada)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Característica 2 (Estandarizada)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9d486233622d8c48e7afc75f97541e15dac5defe9ceee1b1f20ebf351af5285c.png" src="../../../_images/9d486233622d8c48e7afc75f97541e15dac5defe9ceee1b1f20ebf351af5285c.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="normalizacion-de-datos">
+<h2>Normalización de datos<a class="headerlink" href="#normalizacion-de-datos" title="Permalink to this heading">#</a></h2>
+<p>La normalización de datos emerge como una práctica fundamental para transformar las variables en escalas específicas, proporcionando una perspectiva uniforme y comparativa. Este proceso es esencial para mitigar desafíos asociados con disparidades en las magnitudes y rangos de las variables, permitiendo una interpretación más coherente y potenciando el rendimiento de diversos algoritmos y técnicas analíticas.</p>
+<p>La normalización se refiere al ajuste sistemático de los valores de las variables para que sigan una escala común, típicamente situándolos dentro de un rango específico, como [0, 1]. Este procedimiento, a menudo crítico en el preprocesamiento de datos, busca eliminar sesgos derivados de diferencias en las unidades o magnitudes de las características, asegurando así una comparación justa y equitativa entre ellas.</p>
+<section id="ventajas-de-normalizar-los-datos">
+<h3>Ventajas de normalizar los datos<a class="headerlink" href="#ventajas-de-normalizar-los-datos" title="Permalink to this heading">#</a></h3>
+<p>La normalización de datos proporciona varias ventajas en el análisis de datos y la construcción de modelos, especialmente en el contexto de algoritmos de aprendizaje automático. Aquí algunas de las ventajas clave:</p>
+<ul class="simple">
+<li><p><strong>Comparación Justa</strong>: La normalización asegura que todas las variables tengan la misma escala, lo que facilita la comparación directa entre ellas. Esto es crucial cuando se utilizan algoritmos que se basan en medidas de distancia, como k-means o algoritmos basados en gradiente.</p></li>
+<li><p><strong>Mejora de la Convergencia</strong>: Al igual que en la estandarización, la normalización puede mejorar la convergencia de algoritmos de optimización, como el descenso de gradiente. Facilita que el algoritmo alcance el mínimo global de manera más eficiente al garantizar que las variables contribuyan de manera equitativa al proceso de optimización.</p></li>
+<li><p><strong>Evita Problemas Numéricos</strong>: Normalizar los datos ayuda a evitar problemas numéricos asociados con diferencias en la escala de las variables, como la pérdida de precisión numérica o la inestabilidad numérica en cálculos que involucran números muy grandes o muy pequeños.</p></li>
+<li><p><strong>Interpretación Mejorada</strong>: Al igual que con la estandarización, la normalización facilita la interpretación de coeficientes en modelos lineales. Los coeficientes normalizados representan el cambio en la variable de respuesta en unidades específicas, lo que hace que la interpretación sea más intuitiva y comparable entre diferentes variables.</p></li>
+<li><p><strong>Mayor Robustez del Modelo</strong> : La normalización puede hacer que los modelos sean más robustos a las variaciones en la escala y la distribución de los datos. Esto mejora la generalización del modelo a datos nuevos y desconocidos.</p></li>
+<li><p><strong>Previene Sesgo por Escala</strong>: Evita que algunas variables tengan un impacto desproporcionado en modelos que son sensibles a las diferencias en la escala, asegurando que todas las variables contribuyan de manera equitativa.</p></li>
+<li><p><strong>Adecuada para Algoritmos Sensibles a la Escala</strong> : Algunos algoritmos, como las Máquinas de Soporte Vectorial (SVM) y los métodos basados en distancia, pueden beneficiarse significativamente de la normalización, ya que su rendimiento puede depender fuertemente de la escala de las variables.</p></li>
+</ul>
+</section>
+<section id="como-normalizar-datos">
+<h3>Como normalizar datos<a class="headerlink" href="#como-normalizar-datos" title="Permalink to this heading">#</a></h3>
+<p>A continuación se muestra un ejemplo de como normalizar los datos con los que contamos. Posteriormente, estos datos se mostrarán en una gráfica:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+
+<span class="c1"># Generar datos de ejemplo</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Crear un objeto MinMaxScaler</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+
+<span class="c1"># Ajustar y transformar los datos</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Visualizar los resultados</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Datos Originales&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Característica&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Objetivo&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Datos Escalados (MinMaxScaler)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Característica (Escalada)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Objetivo&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/79fbb436a0e639af53fac6f40a98f085d5c1557767713becb5e449858bc8d8f4.png" src="../../../_images/79fbb436a0e639af53fac6f40a98f085d5c1557767713becb5e449858bc8d8f4.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="cuando-usar-estandarizacion-y-cuando-normalizacion">
+<h2>Cuando usar estandarización y cuando normalización<a class="headerlink" href="#cuando-usar-estandarizacion-y-cuando-normalizacion" title="Permalink to this heading">#</a></h2>
+<p>La elección entre estandarización y normalización depende del contexto específico de tus datos y del algoritmo o método que estés utilizando. Aquí hay algunas pautas generales:</p>
+<section id="estandarizacion">
+<h3>Estandarización<a class="headerlink" href="#estandarizacion" title="Permalink to this heading">#</a></h3>
+<p>La estandarización es especialmente útil cuando <strong>tus datos siguen una distribución normal o se aproximan a ella</strong>. Esto se debe a que la estandarización transforma los datos para que tengan una media de cero y una desviación estándar de uno, lo que es beneficioso para muchos algoritmos que asumen una distribución normal de los datos.</p>
+<p>A su vez, la estandarización <strong>es crucial para algoritmos que se basan en medidas de distancia</strong>, como el k-means, o en algoritmos de optimización, como el descenso de gradiente en regresión logística o máquinas de soporte vectorial (SVM).</p>
+</section>
+<section id="normalizacion">
+<h3>Normalización<a class="headerlink" href="#normalizacion" title="Permalink to this heading">#</a></h3>
+<p>La normalización es más adecuada cuando los datos <strong>no siguen una distribución normal</strong>. Puedes utilizar métodos como Min-Max para escalar los datos al intervalo [0, 1] o métodos robustos si tus datos contienen valores atípicos.</p>
+<p>Además, <strong>si necesitas que tus datos estén en un rango específico y deseas preservar la forma de la distribución original</strong>, la normalización puede ser más apropiada.</p>
+<p>Por otro lado, algunos algoritmos, como las redes neuronales, pueden beneficiarse de la normalización, especialmente cuando se utilizan funciones de activación que son sensibles a la escala de las entradas.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/sistemas_supervisados/regresion"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modelos/ensamble_modelos.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ensamble de modelos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="validar_modelo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Validar un modelo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estandarizacion-de-los-datos">Estandarización de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-estandarizar-los-datos">Ventajas de estandarizar los datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-estandarizar-datos">Como estandarizar datos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-de-datos">Normalización de datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-normalizar-los-datos">Ventajas de normalizar los datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-normalizar-datos">Como normalizar datos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-usar-estandarizacion-y-cuando-normalizacion">Cuando usar estandarización y cuando normalización</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estandarizacion">Estandarización</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion">Normalización</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

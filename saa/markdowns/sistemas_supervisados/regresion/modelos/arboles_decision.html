@@ -181,6 +181,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_forest.html">Random forest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ensamble_modelos.html">Ensamble de modelos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../estandarizar_y_normalizar.html">Estandarizar y normalizar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validar_modelo.html">Validar un modelo</a></li>
 </ul>
 </li>
 </ul>
@@ -347,9 +349,29 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 7562.26
-MAPE: 0.36
-R2: 0.58
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">UnboundLocalError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">regression</span> <span class="kn">import</span> <span class="n">calculate_error</span><span class="p">,</span> <span class="n">get_train_test_validation</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">get_train_test_validation</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">reg</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nn">File /mnt/Datos/proyectos/Especialidad BigDataIA/repositorios/sistemas_aprendizaje_automatico/apuntes_web/markdowns/sistemas_supervisados/regresion/modelos/../../../../code/regression.py:35,</span> in <span class="ni">get_train_test_validation</span><span class="nt">(path)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="k">def</span> <span class="nf">get_train_test_validation</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">35</span>     <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">get_X_y</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nn">File /mnt/Datos/proyectos/Especialidad BigDataIA/repositorios/sistemas_aprendizaje_automatico/apuntes_web/markdowns/sistemas_supervisados/regresion/modelos/../../../../code/regression.py:15,</span> in <span class="ni">get_X_y</span><span class="nt">(path)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">if</span> <span class="n">path</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">PATH_TO_CSV</span> <span class="o">=</span> <span class="n">path</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">PATH_TO_CSV</span> <span class="o">+</span> <span class="s1">&#39;insurance_preprocesed.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;No&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;charges&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="ne">UnboundLocalError</span>: cannot access local variable &#39;PATH_TO_CSV&#39; where it is not associated with a value
 </pre></div>
 </div>
 </div>
@@ -460,13 +482,6 @@ R2: 0.58
 <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
 <span class="n">calculate_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 9478.32
-MAPE: 1.17
-R2: 0.35
 </pre></div>
 </div>
 </div>

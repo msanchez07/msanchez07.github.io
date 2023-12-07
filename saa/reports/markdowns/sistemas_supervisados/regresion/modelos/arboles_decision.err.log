@@ -33,41 +33,26 @@ calculate_error(y_val, y_pred)
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mTypeError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[2], line 10[0m
+[0;31mUnboundLocalError[0m                         Traceback (most recent call last)
+Cell [0;32mIn[2], line 4[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mregression[39;00m [38;5;28;01mimport[39;00m calculate_error, get_train_test_validation
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtree[39;00m [38;5;28;01mimport[39;00m DecisionTreeRegressor
+[0;32m----> 4[0m X_train, X_test, X_val, y_train, y_test, y_val [38;5;241m=[39m [43mget_train_test_validation[49m[43m([49m[43m)[49m
+[1;32m      6[0m reg [38;5;241m=[39m DecisionTreeRegressor()
 [1;32m      7[0m reg[38;5;241m.[39mfit(X_train, y_train)
-[1;32m      8[0m y_pred [38;5;241m=[39m reg[38;5;241m.[39mpredict(X_val)
-[0;32m---> 10[0m [43mcalculate_error[49m[43m([49m[43my_val[49m[43m,[49m[43m [49m[43my_pred[49m[43m)[49m
 
-File [0;32m/mnt/Datos/proyectos/Especialidad BigDataIA/repositorios/sistemas_aprendizaje_automatico/apuntes_web/markdowns/sistemas_supervisados/regresion/modelos/../../../../code/regression.py:13[0m, in [0;36mcalculate_error[0;34m(y_val, y_pred)[0m
-[1;32m     11[0m [38;5;28;01mdef[39;00m [38;5;21mcalculate_error[39m(y_val, y_pred):
-[1;32m     12[0m     [38;5;66;03m#calcular RMSE[39;00m
-[0;32m---> 13[0m     rmse [38;5;241m=[39m [43mmean_absolute_error[49m[43m([49m[43my_val[49m[43m,[49m[43m [49m[43my_pred[49m[43m,[49m[43m [49m[43msquared[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m
-[1;32m     14[0m     [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mMAE: [39m[38;5;124m"[39m [38;5;241m+[39m [38;5;28mstr[39m([38;5;28mround[39m(rmse, [38;5;241m2[39m)))
-[1;32m     16[0m     mape [38;5;241m=[39m mean_absolute_percentage_error(y_val, y_pred)
+File [0;32m/mnt/Datos/proyectos/Especialidad BigDataIA/repositorios/sistemas_aprendizaje_automatico/apuntes_web/markdowns/sistemas_supervisados/regresion/modelos/../../../../code/regression.py:35[0m, in [0;36mget_train_test_validation[0;34m(path)[0m
+[1;32m     33[0m [38;5;28;01mdef[39;00m [38;5;21mget_train_test_validation[39m(path[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+[0;32m---> 35[0m     X, y [38;5;241m=[39m [43mget_X_y[49m[43m([49m[43mpath[49m[43m)[49m
+[1;32m     37[0m     X_train, X_test, y_train, y_test [38;5;241m=[39m train_test_split(X, y, test_size[38;5;241m=[39m[38;5;241m0.2[39m, random_state[38;5;241m=[39m[38;5;241m1[39m)
+[1;32m     38[0m     X_train, X_val, y_train, y_val [38;5;241m=[39m train_test_split(X_train, y_train, test_size[38;5;241m=[39m[38;5;241m0.25[39m, random_state[38;5;241m=[39m[38;5;241m1[39m)
 
-File [0;32m~/miniconda3/lib/python3.11/site-packages/sklearn/utils/_param_validation.py:189[0m, in [0;36mvalidate_params.<locals>.decorator.<locals>.wrapper[0;34m(*args, **kwargs)[0m
-[1;32m    186[0m func_sig [38;5;241m=[39m signature(func)
-[1;32m    188[0m [38;5;66;03m# Map *args/**kwargs to the function signature[39;00m
-[0;32m--> 189[0m params [38;5;241m=[39m [43mfunc_sig[49m[38;5;241;43m.[39;49m[43mbind[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
-[1;32m    190[0m params[38;5;241m.[39mapply_defaults()
-[1;32m    192[0m [38;5;66;03m# ignore self/cls and positional/keyword markers[39;00m
+File [0;32m/mnt/Datos/proyectos/Especialidad BigDataIA/repositorios/sistemas_aprendizaje_automatico/apuntes_web/markdowns/sistemas_supervisados/regresion/modelos/../../../../code/regression.py:15[0m, in [0;36mget_X_y[0;34m(path)[0m
+[1;32m     13[0m [38;5;28;01mif[39;00m path:
+[1;32m     14[0m     PATH_TO_CSV [38;5;241m=[39m path
+[0;32m---> 15[0m df [38;5;241m=[39m pd[38;5;241m.[39mread_csv([43mPATH_TO_CSV[49m [38;5;241m+[39m [38;5;124m'[39m[38;5;124minsurance_preprocesed.csv[39m[38;5;124m'[39m)
+[1;32m     16[0m df [38;5;241m=[39m df[38;5;241m.[39mdrop([[38;5;124m'[39m[38;5;124mNo[39m[38;5;124m'[39m], axis[38;5;241m=[39m[38;5;241m1[39m)
+[1;32m     17[0m X [38;5;241m=[39m df[38;5;241m.[39mcopy()[38;5;241m.[39mdrop([[38;5;124m'[39m[38;5;124mcharges[39m[38;5;124m'[39m], axis[38;5;241m=[39m[38;5;241m1[39m)
 
-File [0;32m~/miniconda3/lib/python3.11/inspect.py:3212[0m, in [0;36mSignature.bind[0;34m(self, *args, **kwargs)[0m
-[1;32m   3207[0m [38;5;28;01mdef[39;00m [38;5;21mbind[39m([38;5;28mself[39m, [38;5;241m/[39m, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
-[1;32m   3208[0m [38;5;250m    [39m[38;5;124;03m"""Get a BoundArguments object, that maps the passed `args`[39;00m
-[1;32m   3209[0m [38;5;124;03m    and `kwargs` to the function's signature.  Raises `TypeError`[39;00m
-[1;32m   3210[0m [38;5;124;03m    if the passed arguments can not be bound.[39;00m
-[1;32m   3211[0m [38;5;124;03m    """[39;00m
-[0;32m-> 3212[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_bind[49m[43m([49m[43margs[49m[43m,[49m[43m [49m[43mkwargs[49m[43m)[49m
-
-File [0;32m~/miniconda3/lib/python3.11/inspect.py:3201[0m, in [0;36mSignature._bind[0;34m(self, args, kwargs, partial)[0m
-[1;32m   3199[0m         arguments[kwargs_param[38;5;241m.[39mname] [38;5;241m=[39m kwargs
-[1;32m   3200[0m     [38;5;28;01melse[39;00m:
-[0;32m-> 3201[0m         [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m(
-[1;32m   3202[0m             [38;5;124m'[39m[38;5;124mgot an unexpected keyword argument [39m[38;5;132;01m{arg!r}[39;00m[38;5;124m'[39m[38;5;241m.[39mformat(
-[1;32m   3203[0m                 arg[38;5;241m=[39m[38;5;28mnext[39m([38;5;28miter[39m(kwargs))))
-[1;32m   3205[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_bound_arguments_cls([38;5;28mself[39m, arguments)
-
-[0;31mTypeError[0m: got an unexpected keyword argument 'squared'
+[0;31mUnboundLocalError[0m: cannot access local variable 'PATH_TO_CSV' where it is not associated with a value
 
