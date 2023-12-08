@@ -98,7 +98,7 @@ def saludo():
 ```
 
 ### Archivo de configuración
-Swagger utiliza un archivo de configuración llamado Swagger/OpenAPI Specification (OAS) para describir y documentar APIs. Este archivo generalmente tiene formato JSON o YAML. A continuación, se presentan algunos de los parámetros comunes en un archivo de configuración Swagger:
+Swagger utiliza un archivo de configuración llamado [Swagger/OpenAPI Specification (OAS)](https://swagger.io/specification/) para describir y documentar APIs. Este archivo generalmente tiene formato JSON o YAML. A continuación, se presentan algunos de los parámetros comunes en un archivo de configuración Swagger:
 
 1. **swagger**: La versión de Swagger que estás utilizando. Puede ser "2.0" para Swagger 2.0.
 
