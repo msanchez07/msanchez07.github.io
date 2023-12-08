@@ -15,3 +15,7 @@ Amplia la funcionalidad del ejercicio 1 creando un CRUD para estos datos.
 
 Utiliza pandas para volcar los datos del entregable (el de las transacciones) a tres tablas de una base de datos sqlite. Crea un CRUD de estos datos.
 ::::
+
+::::{admonition} Ejercicio 4
+Documenta con swagger la funcionalidad del ejercicio 2.
+::::
