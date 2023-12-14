@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Curva ROC &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/clasificacion/curva_roc';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Modelos de clasificación" href="modelos.html" />
+    <link rel="prev" title="Matriz de confusión" href="matriz_confusion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTELIGENCIA ARTIFICIAL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SISTEMAS DE APRENDIZAJE SUPERVISADO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduccion.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analisis_datos.html">Análisis exploratorio de datos</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../regresion/regresion.html">Problemas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/entrenar_modelo.html">Entrenamiento del modelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/arboles_decision.html">Árboles de decisión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/svm.html">Máquinas de vectores de soporte (SVM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/random_forest.html">Random forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/ensamble_modelos.html">Ensamble de modelos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/estandarizar_y_normalizar.html">Estandarizar y normalizar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/validar_modelo.html">Validar un modelo</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="introduccion.html">Problemas de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_binario.html">Entrenando un clsificador binario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matriz_confusion.html">Matriz de confusión</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Curva ROC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos.html">Modelos de clasificación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/r2.html">Coeficiente de Determinación (<span class="math notranslate nohighlight">\(R^2\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mape.html">Error Porcentual Absoluto Medio (MAPE)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Curva ROC</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-curva-roc">Calcular curva ROC</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="curva-roc">
+<h1>Curva ROC<a class="headerlink" href="#curva-roc" title="Permalink to this heading">#</a></h1>
+<p>La Curva ROC (Receiver Operating Characteristic) es una herramienta fundamental en la evaluación de modelos de clasificación en el ámbito del aprendizaje automático y la estadística. Esta curva proporciona una representación gráfica de la capacidad de un modelo para discriminar entre dos clases, generalmente la positiva y la negativa. Su origen se remonta al ámbito militar y la detección de señales, pero ha encontrado una aplicación significativa en la evaluación de algoritmos de clasificación en diversos campos.</p>
+<p>En su esencia, la Curva ROC ilustra <strong>la relación entre la tasa de verdaderos positivos (sensibilidad) y la tasa de falsos positivos</strong>, proporcionando un marco visual para comprender cómo varía el rendimiento del modelo a medida que se ajusta su umbral de decisión. Cuanto más se acerque la curva ROC al área bajo la curva (AUC) de 1.0, mejor será la capacidad del modelo para discriminar entre las clases, mientras que una curva diagonal (AUC de 0.5) indica un rendimiento similar al azar.</p>
+<a class="bg-primary reference internal image-reference" href="../../../_images/05.png"><img alt="../../../_images/05.png" class="bg-primary align-center" src="../../../_images/05.png" style="width: 65%;" /></a>
+</br>
+<p>Una de las ventajas clave de la Curva ROC es su independencia de umbrales específicos, lo que la hace particularmente valiosa en situaciones donde la distribución de clases o los costos asociados con los errores de clasificación pueden variar. Además, la Curva ROC proporciona una forma intuitiva de comparar el rendimiento de diferentes modelos, ya que un modelo con una curva ROC más alejada de la diagonal generalmente se considera más efectivo.</p>
+<p>En la práctica, la interpretación de la Curva ROC y su área bajo la curva no solo ofrece información sobre la capacidad de clasificación del modelo, sino que también permite a los practicantes ajustar sus modelos según las necesidades específicas de la aplicación.</p>
+<section id="calcular-curva-roc">
+<h2>Calcular curva ROC<a class="headerlink" href="#calcular-curva-roc" title="Permalink to this heading">#</a></h2>
+<p>Para calcular la curva ROC En scikit-learn, puedes utilizar la función roc_curve y visualizarla utilizando la biblioteca matplotlib. Vamos a ver esto en nuestro ejemplo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test_3</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+
+<span class="c1"># Visualizar la Curva ROC</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tasa de Falsos Positivos (FPR)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Tasa de Verdaderos Positivos (TPR)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Curva ROC&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="bg-primary reference internal image-reference" href="../../../_images/06.png"><img alt="../../../_images/06.png" class="bg-primary align-center" src="../../../_images/06.png" style="width: 65%;" /></a>
+</br>
+<p>La Curva ROC representa la relación entre la <strong>Tasa de Verdaderos Positivos</strong> (TPR o Sensibilidad) en el eje <strong>y</strong> y la <strong>Tasa de Falsos Positivos</strong> (FPR) en el eje <strong>x</strong>. Cada punto en la curva corresponde a un umbral de decisión diferente. Es decir, la línea muestra cómo cambia la capacidad del modelo para acertar cuando ajustamos el umbral para decidir qué es “sí” y qué es “no”. Se compara cuántas cosas “sí” acierta con cuántas veces se equivoca al decir “sí” cuando debería ser “no” .</p>
+<p>El <strong>caso ideal en la curva ROC es el (0,1)</strong>, donde la TPR es 1 (todos los positivos se clasifican correctamente) y el FPR es 0 (no hay falsos positivos). Si la curva fuera perfecta, estaría en la esquina superior izquierda, donde acierta todo lo que debería y no se equivoca en nada.</p>
+<p>Por otro lado, <strong>la línea diagonal desde (0,0) a (1,1)</strong> representa el rendimiento de un clasificador aleatorio. Un clasificador que simplemente adivina al azar tendría una curva ROC que sigue esta línea. Si nuestro modelo está por encima de esta línea, está haciendo algo útil.</p>
+<p>Otro factor a tener en cuenta es el AUC, que <strong>mide el área bajo la Curva ROC</strong> y proporciona una única métrica resumen del rendimiento del modelo. Un AUC de 1.0 indica un rendimiento perfecto, mientras que un AUC de 0.5 sugiere un rendimiento similar al azar. Puedes utilizar el AUC para comparar el rendimiento relativo de diferentes modelos de clasificación. Un modelo con un AUC más alto generalmente se considera mejor en términos de discriminación entre las clases.</p>
+<p>Si queremos medir el rendimiento del modelo, hay que tener en cuenta que <strong>cuanto más arriba y a la izquierda esté la curva, mejor</strong>. Eso significa que el modelo es bueno para distinguir entre las cosas que estamos buscando y las que no.</p>
+<p>Eso si, debes tener en cuenta que la curva no nos dice exactamente dónde poner el límite para decir “sí” o “no”. Eso depende de lo que sea más importante para nosotros: ¿Queremos estar seguros de acertar todo, incluso si a veces decimos “sí” cuando deberíamos decir “no”, o estamos bien con algunos errores si generalmente acertamos?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/sistemas_supervisados/clasificacion"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="matriz_confusion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Matriz de confusión</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="modelos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Modelos de clasificación</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-curva-roc">Calcular curva ROC</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

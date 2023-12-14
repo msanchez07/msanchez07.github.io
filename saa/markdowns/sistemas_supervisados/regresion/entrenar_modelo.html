@@ -185,10 +185,18 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="validar_modelo.html">Validar un modelo</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../clasificacion/introduccion.html">Problemas de clasificación</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../clasificacion/entrenar_clasificador_binario.html">Entrenando un clsificador binario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../clasificacion/matriz_confusion.html">Matriz de confusión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../clasificacion/curva_roc.html">Curva ROC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../clasificacion/modelos.html">Modelos de clasificación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../clasificacion/entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
@@ -363,7 +371,7 @@ document.write(`
 </div>
 <p>En nuestro ejemplo, primero hemos separado la variable dependiente del resto de características, para posteriormente utilizar la función <strong><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">train_test_split</a></strong>, que divide los datos en dos conjuntos, uno de entrenamiento y otro de prueba. Esto se hace dos veces para poder generar los tres conjuntos indicados anteriormente. Date cuenta de que hemos introducido dos parámetros adicionales a los datos, <strong>test_size</strong>, que indica que porcentaje de los datos se van a utilizar para datos de prueba y <strong>random_state</strong>, que se para de forma aleatoria y no de forma secuencial estos datos.</p>
 <p>Al final, nos tienen que quedar los siguientes Datasets:</p>
-<a class="bg-primary reference internal image-reference" href="../../../_images/03.png"><img alt="../../../_images/03.png" class="bg-primary align-center" src="../../../_images/03.png" style="width: 80%;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../../_images/031.png"><img alt="../../../_images/031.png" class="bg-primary align-center" src="../../../_images/031.png" style="width: 80%;" /></a>
 <p>¿Pero para que se utiliza cada uno de estos Datasets? A continuación, vamos a explicar la función de estos y como se tienen que utilizar:</p>
 <ul class="simple">
 <li><p><strong>Conjunto de entrenamiento</strong>: Imagina que estás enseñando a un modelo a reconocer diferentes tipos de frutas. El conjunto de entrenamiento es como un conjunto de ejemplos que le das para aprender. Por ejemplo, muestra a los niños imágenes de manzanas, naranjas y plátanos para que puedan reconocer las características de cada fruta. Computacionalmente, el conjunto de entrenamiento es el mismo que los datos que usa para “entrenar” el modelo. Das ejemplos con sus características (atributos) y respuestas (etiquetas). El modelo aprende a reconocer patrones y relaciones en estos ejemplos mientras ajusta sus parámetros internos.</p></li>
@@ -647,7 +655,7 @@ MAPE: 0.51
 </div>
 <p>Como podemos observar, no se han obtenido unos buenos resultados en cuanto al cálculo del coste de los seguros. Si por ejemplo nos centramos en el RMSE, podemos observar que el los costes se nos han desviado en un valor promedio de 6427.98 dolares (Recordemos que la media estaba en torno a 13311.26 dolares).</p>
 <p>Podemos representar con una gráfica la línea que ha calculado nuestro modelo y los puntos reales que se quieren predecir, para representar en cuanto ha fallado nuestra predicción de forma visual:</p>
-<a class="bg-primary reference internal image-reference" href="../../../_images/04.png"><img alt="../../../_images/04.png" class="bg-primary align-center" src="../../../_images/04.png" style="width: 80%;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../../_images/041.png"><img alt="../../../_images/041.png" class="bg-primary align-center" src="../../../_images/041.png" style="width: 80%;" /></a>
 </br>
 <div class="important admonition">
 <p class="admonition-title">Nota</p>

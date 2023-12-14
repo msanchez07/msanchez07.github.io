@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Matriz de confusión &#8212; Programación de inteligencia artificial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/notebook.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script src="../../../_static/js/notebook.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/clasificacion/matriz_confusion';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Curva ROC" href="curva_roc.html" />
+    <link rel="prev" title="Entrenando un clsificador binario" href="entrenar_clasificador_binario.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Programación de inteligencia artificial - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Programación de inteligencia artificial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">INTELIGENCIA ARTIFICIAL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">SISTEMAS DE APRENDIZAJE SUPERVISADO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduccion.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analisis_datos.html">Análisis exploratorio de datos</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../regresion/regresion.html">Problemas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/entrenar_modelo.html">Entrenamiento del modelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/arboles_decision.html">Árboles de decisión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/svm.html">Máquinas de vectores de soporte (SVM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/random_forest.html">Random forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/ensamble_modelos.html">Ensamble de modelos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/estandarizar_y_normalizar.html">Estandarizar y normalizar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/validar_modelo.html">Validar un modelo</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="introduccion.html">Problemas de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_binario.html">Entrenando un clsificador binario</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Matriz de confusión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curva_roc.html">Curva ROC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelos.html">Modelos de clasificación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/r2.html">Coeficiente de Determinación (<span class="math notranslate nohighlight">\(R^2\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mape.html">Error Porcentual Absoluto Medio (MAPE)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Matriz de confusión</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-obtener-la-matriz-de-confusion">Como obtener la matriz de confusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad">Sensibilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f1">F1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-usar-cada-metrica">Cuando usar cada métrica</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="matriz-de-confusion">
+<h1>Matriz de confusión<a class="headerlink" href="#matriz-de-confusion" title="Permalink to this heading">#</a></h1>
+<p>La matriz de confusión es una herramienta esencial en el campo de la evaluación de modelos de clasificación en aprendizaje automático. Se trata de una tabla que permite visualizar y analizar el rendimiento de un modelo al comparar sus predicciones con las clases reales de un conjunto de datos. Esta matriz organiza la información en cuatro cuadrantes: verdaderos positivos (VP), verdaderos negativos (VN), falsos positivos (FP) y falsos negativos (FN). Cada uno de estos elementos proporciona información valiosa sobre la capacidad del modelo para clasificar correctamente las instancias de cada clase.</p>
+<a class="bg-primary reference internal image-reference" href="../../../_images/03.png"><img alt="../../../_images/03.png" class="bg-primary align-center" src="../../../_images/03.png" style="width: 55%;" /></a>
+</br>
+<p>En el cuadrante de verdaderos positivos, se encuentran las instancias correctamente clasificadas como positivas por el modelo. Los verdaderos negativos representan las instancias correctamente clasificadas como negativas. Por otro lado, los falsos positivos son instancias que el modelo clasifica incorrectamente como positivas, mientras que los falsos negativos son instancias que deberían ser positivas pero son clasificadas incorrectamente como negativas. Estos elementos permiten evaluar aspectos como la precisión, sensibilidad y especificidad del modelo, proporcionando una visión más completa de su rendimiento.</p>
+<p>La interpretación de la matriz de confusión es crucial para comprender las fortalezas y debilidades del modelo, así como para ajustar y mejorar su rendimiento. Además, a partir de la matriz de confusión, se derivan métricas importantes como la precisión, la sensibilidad (recall) y la especificidad, que son fundamentales para evaluar la eficacia de un modelo en la tarea de clasificación.</p>
+<section id="como-obtener-la-matriz-de-confusion">
+<h2>Como obtener la matriz de confusión<a class="headerlink" href="#como-obtener-la-matriz-de-confusion" title="Permalink to this heading">#</a></h2>
+<p>Para obtener la matriz de confusión, primero, debes entrenar tu modelo de aprendizaje automático utilizando el conjunto de datos, en este caso MNIST. Como ya hemos indicado antes, vamos a utilizar un árbol de decisión para este proposito. Después de entrenar tu modelo, utiliza conjuntos de datos separados (por ejemplo, conjunto de validación o prueba) para hacer predicciones. Estas predicciones serán comparadas con las etiquetas reales para evaluar el rendimiento del modelo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test_3</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">cm</span>
+</pre></div>
+</div>
+<div class="highlight-raw notranslate"><div class="highlight"><pre><span></span>  array([[8784,  206]
+         [ 152,  858]])
+</pre></div>
+</div>
+<p>También puedes visualizar esta matriz para obtener una comprensión más clara del rendimiento del modelo. Esto te ayudará a identificar qué dígitos se clasifican correctamente y cuáles pueden ser fuente de confusión para el modelo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_test_3</span><span class="p">),</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_test_3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicciones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Etiquetas Reales&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="bg-primary reference internal image-reference" href="../../../_images/04.png"><img alt="../../../_images/04.png" class="bg-primary align-center" src="../../../_images/04.png" style="width: 65%;" /></a>
+</br>
+<p>Cada fila de una matriz de confusión representa una clase real , mientras que cada columna representa una clase prevista .La primera fila de esta matriz considera imágenes no 3 (la clase negativa ): 8784 de ellas fueron clasificadas correctamente como no 3 (se llaman verdaderos negativos ), mientras que las 206 restantes fueron clasificadas erróneamente como 3 ( falsos positivos , también llamados errores tipo I ).La segunda fila considera las imágenes de 3 (la clase positiva ): 152 fueron clasificadas erróneamente como no 3 ( falsos negativos , también llamados errores de tipo II ), mientras que las 858 restantes fueron clasificadas correctamente como 3 ( verdaderos positivos ). Un clasificador perfecto solo tendría verdaderos positivos y verdaderos negativos, por lo que tu matriz de confusión tendría valores distintos de cero solo en su diagonal principal (de arriba a la izquierda a abajo a la derecha).</p>
+<p>La matriz de confusión brinda mucha información, pero a veces es posible que prefieras una métrica más concisa. Para esto podemos usar la precisión, que  es una métrica comúnmente derivada de la matriz de confusión y se define como la proporción de predicciones correctas (verdaderos positivos y verdaderos negativos) respecto al total de predicciones. Puedes calcular la precisión utilizando la fórmula:</p>
+<div class="math notranslate nohighlight">
+\[precision=\frac{VP+VN}{TI}\]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><strong>VP</strong>: Verdaderos positivos.</p></li>
+<li><p><strong>VN</strong>: Verdaderos negativos.</p></li>
+<li><p><strong>TI</strong>: Total de instancias.</p></li>
+</ul>
+<p>El siguiente código calcula la precisión de nuestro modelo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_score</span>
+
+<span class="n">precision_score</span><span class="p">(</span><span class="n">y_test_3</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-raw notranslate"><div class="highlight"><pre><span></span>0.806390977443609
+</pre></div>
+</div>
+<p>Vaya, parece que tenemos una precisión bastante buena pero recuerda que la precisión por sí sola puede no ser suficiente para evaluar completamente el rendimiento del modelo, especialmente en conjuntos de datos desbalanceados. Puedes considerar otras métricas como la sensibilidad (recall), la especificidad y la F1-score para obtener una evaluación más completa.</p>
+</section>
+<section id="sensibilidad">
+<h2>Sensibilidad<a class="headerlink" href="#sensibilidad" title="Permalink to this heading">#</a></h2>
+<p>La sensibilidad, también conocida como recall o tasa de verdaderos positivos, es una métrica que mide la proporción de instancias positivas reales que fueron correctamente identificadas por el modelo. Se calcula utilizando la fórmula:</p>
+<div class="math notranslate nohighlight">
+\[recall=\frac{VP}{VP + FN}\]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><strong>VP</strong>: Verdaderos positivos.</p></li>
+<li><p><strong>FN</strong>: Falsos negativos.</p></li>
+</ul>
+<p>El siguiente código utiliza la función recall_score de scikit-learn para calcular la sensibilidad directamente:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">recall_score</span>
+
+<span class="n">recall_score</span><span class="p">(</span><span class="n">y_test_3</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-raw notranslate"><div class="highlight"><pre><span></span>0.8495049504950495
+</pre></div>
+</div>
+<p>La sensibilidad es especialmente útil en situaciones donde identificar positivos verdaderos es crítico y los falsos negativos son costosos o tienen un impacto significativo en el problema en cuestión.</p>
+</section>
+<section id="f1">
+<h2>F1<a class="headerlink" href="#f1" title="Permalink to this heading">#</a></h2>
+<p>La puntuación F1, también conocida como medida F1 o F1-score, es una métrica que combina tanto la precisión como la sensibilidad (recall) en una sola métrica. Se calcula utilizando la fórmula:</p>
+<div class="math notranslate nohighlight">
+\[especificidad=2*\frac{Precision * Sensibilidad}{Precision + Sensibilidad}\]</div>
+<p>Para calcular esto podemos usar sickit-learn:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
+
+<span class="n">f1_score</span><span class="p">(</span><span class="n">y_test_3</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-raw notranslate"><div class="highlight"><pre><span></span>0.8273866923818707
+</pre></div>
+</div>
+<p>La puntuación F1 es especialmente útil cuando hay un desequilibrio en las clases y se desea tener en cuenta tanto la precisión como la sensibilidad en la evaluación del modelo.</p>
+</section>
+<section id="cuando-usar-cada-metrica">
+<h2>Cuando usar cada métrica<a class="headerlink" href="#cuando-usar-cada-metrica" title="Permalink to this heading">#</a></h2>
+<p>La elección entre precision, recall y la puntuación F1 depende del contexto específico del problema y de las implicaciones prácticas de los errores de clasificación en tu aplicación. Aquí hay algunas consideraciones generales:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">MÉTRICAS DE EVALUACIÓN DE LA MATRIZ DE CONFUSIÓN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="left-header" scope="row">Precision</th>
+      <td  colspan="3">La precision es útil cuando los falsos positivos son costosos o tienen consecuencias significativas. Por ejemplo, en un sistema de detección de spam, podrías priorizar la precision para asegurarte de que los correos electrónicos clasificados como "no spam" realmente no lo sean.</td>
+    </tr>
+     <tr>
+      <th class="left-header" scope="row">Recall (Sensibilidad)</th>
+      <td  colspan="3"> El recall es importante cuando los falsos negativos son costosos o críticos. Por ejemplo, en un sistema de diagnóstico médico, querrías maximizar el recall para garantizar que no se pierda ninguna instancia positiva, aunque esto pueda resultar en algunos falsos positivos.</td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">Puntuación F1</th>
+      <td  colspan="3">La puntuación F1 es útil cuando buscas un equilibrio entre precision y recall. Si tanto los falsos positivos como los falsos negativos son importantes en tu aplicación, y deseas encontrar un punto medio, la puntuación F1 es una métrica balanceada. También lo puedes usar para comparar modelos de clasificación.</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./markdowns/sistemas_supervisados/clasificacion"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="entrenar_clasificador_binario.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Entrenando un clsificador binario</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="curva_roc.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Curva ROC</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-obtener-la-matriz-de-confusion">Como obtener la matriz de confusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad">Sensibilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f1">F1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-usar-cada-metrica">Cuando usar cada métrica</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Manuel Sánchez Gomis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
