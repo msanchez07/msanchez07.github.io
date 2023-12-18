@@ -71,8 +71,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/clasificacion/modelos';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Clasificador multiclase" href="entrenar_clasificador_multiclase.html" />
-    <link rel="prev" title="Curva ROC" href="curva_roc.html" />
+    <link rel="next" title="Regresión logística" href="regresion_logistica.html" />
+    <link rel="prev" title="Clasificador multiclase" href="entrenar_clasificador_multiclase.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,17 +186,22 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="introduccion.html">Problemas de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_binario.html">Entrenando un clsificador binario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_binario.html">Entrenando un clasificador binario</a></li>
 <li class="toctree-l2"><a class="reference internal" href="matriz_confusion.html">Matriz de confusión</a></li>
 <li class="toctree-l2"><a class="reference internal" href="curva_roc.html">Curva ROC</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Modelos de clasificación</a></li>
 <li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Modelos de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="regresion_logistica.html">Regresión logística</a></li>
+<li class="toctree-l3"><a class="reference internal" href="descenso_gradiente.html">Descenso de Gradiente</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../grid_search.html">Búsqueda de hiperparámetros</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
@@ -305,7 +310,6 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificadores-binarios">Clasificadores binarios</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificadores-multiclase">Clasificadores multiclase</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-logistica">Regresión logística</a></li>
 </ul>
             </nav>
         </div>
@@ -327,7 +331,7 @@ document.write(`
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">Regresión logística</a></p>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html">Support Vector Machines (SVM)</a></p>
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html">Árboles de Decisión</a></p>
-<p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html">SGDClassifiery</a></p>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html">Descenso de Gradiente Estocástico</a></p>
 </section>
 <section id="clasificadores-multiclase">
 <h2>Clasificadores multiclase<a class="headerlink" href="#clasificadores-multiclase" title="Permalink to this heading">#</a></h2>
@@ -337,10 +341,8 @@ document.write(`
 <p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">Random forest</a></p>
 <p>Muchos de estos modelos ya los hemos comentado en la parte de regresión, así que vamos a ver aquellos no explicados.</p>
 </section>
-<section id="regresion-logistica">
-<h2>Regresión logística<a class="headerlink" href="#regresion-logistica" title="Permalink to this heading">#</a></h2>
-<p>La regresión logística es una técnica fundamental en estadísticas y aprendizaje automático que se emplea para abordar problemas de clasificación. A pesar de su nombre, la regresión logística se utiliza para predecir la probabilidad de que una instancia pertenezca a una categoría específica. Este modelo es particularmente efectivo en situaciones donde la variable de salida es binaria, es decir, tiene dos posibles resultados, como “éxito” o “fracaso”. A través de la función logística, transforma una combinación lineal de características de entrada en una probabilidad, permitiendo decisiones informadas sobre la pertenencia a una categoría particular. La regresión logística es conocida por su simplicidad, interpretabilidad y capacidad para adaptarse a diversos escenarios, lo que la convierte en una herramienta valiosa en la construcción de modelos de clasificación.</p>
-</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -374,20 +376,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="curva_roc.html"
+       href="entrenar_clasificador_multiclase.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Curva ROC</p>
+        <p class="prev-next-title">Clasificador multiclase</p>
       </div>
     </a>
     <a class="right-next"
-       href="entrenar_clasificador_multiclase.html"
+       href="regresion_logistica.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Clasificador multiclase</p>
+        <p class="prev-next-title">Regresión logística</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -408,7 +410,6 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificadores-binarios">Clasificadores binarios</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificadores-multiclase">Clasificadores multiclase</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-logistica">Regresión logística</a></li>
 </ul>
   </nav></div>
 

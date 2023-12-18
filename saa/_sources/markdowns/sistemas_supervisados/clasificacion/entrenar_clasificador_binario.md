@@ -1,4 +1,4 @@
-# Entrenando un clsificador binario
+# Entrenando un clasificador binario
 Vamos a simplificar un poco el problema y nos centraremos en la distinción de un solo dígito, específicamente el "3". La tarea consiste en desarrollar un modelo capaz de discernir si una imagen pertenece o no a la clase de dígitos "3". Esto será un ejemplo de clasificador binario, ya que solo tenemos dos posibilidades, si o no.
 
 Vamos a crear los vectores objetivo, previa división en train, test, validation:

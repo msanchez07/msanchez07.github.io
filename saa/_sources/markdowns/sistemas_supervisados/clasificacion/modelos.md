@@ -12,7 +12,7 @@ Los modelos de clasificación binarios están dedicados a abordar problemas de c
 
 [Árboles de Decisión](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
 
-[SGDClassifiery](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html)
+[Descenso de Gradiente Estocástico](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html)
 
 
 ## Clasificadores multiclase
@@ -26,5 +26,3 @@ Estos modelos no se limitan a respuestas "sí" o "no", sino qut tienen la capaci
 
 Muchos de estos modelos ya los hemos comentado en la parte de regresión, así que vamos a ver aquellos no explicados.
 
-## Regresión logística
-La regresión logística es una técnica fundamental en estadísticas y aprendizaje automático que se emplea para abordar problemas de clasificación. A pesar de su nombre, la regresión logística se utiliza para predecir la probabilidad de que una instancia pertenezca a una categoría específica. Este modelo es particularmente efectivo en situaciones donde la variable de salida es binaria, es decir, tiene dos posibles resultados, como "éxito" o "fracaso". A través de la función logística, transforma una combinación lineal de características de entrada en una probabilidad, permitiendo decisiones informadas sobre la pertenencia a una categoría particular. La regresión logística es conocida por su simplicidad, interpretabilidad y capacidad para adaptarse a diversos escenarios, lo que la convierte en una herramienta valiosa en la construcción de modelos de clasificación.

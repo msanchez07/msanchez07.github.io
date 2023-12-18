@@ -8,16 +8,27 @@ La elección del algoritmo de clasificación en un contexto multiclase puede var
 A continuación veremos las distintas técnicas para entrenar modelos multiclase, los cuales se basan en los clasificadores binarios.
 
 
-
 ## OvR
-Una de las estrategias que podemos seguir es la **OvR, también conocida como "One-vs-All" o "One-against-All"**. Esta estrategia entrena un clasificador binario para cada clase en el conjunto de datos. Cada clasificador permite distinguir una clase específica de las demás, considerando esa clase como la positiva y agrupando todas las demás clases como la clase negativa. Durante la predicción, se selecciona la clase con la mayor puntuación entre todos los clasificadores. Por ejemplo, en el caso de MNIST podemos implementar un clasificador por cada dígito. OvR es eficiente y fácil de implementar, especialmente cuando el número de clases es grande.
+Una de las estrategias que podemos seguir es la **OvR, también conocida como "One-vs-All" o "One-against-All"**. Esta estrategia entrena un clasificador binario para cada clase en el conjunto de datos. Cada clasificador permite distinguir una clase específica de las demás, considerando esa clase como la positiva y agrupando todas las demás clases como la clase negativa. 
 
+Por ejemplo, dado un problema de clasificación de clases múltiples con ejemplos para cada clase 'morado ', 'azul', 'naranja' y 'verde'. Esto podría dividirse en cuatro conjuntos de datos de clasificación binaria de la siguiente manera:
 
-Por ejemplo, dado un problema de clasificación de clases múltiples con ejemplos para cada clase ' rojo ', ' azul ' y ' verde '. Esto podría dividirse en tres conjuntos de datos de clasificación binaria de la siguiente manera:
+- Problema de clasificación binaria 1 : morado versus [naranja, verde, azul]
+- Problema de clasificación binaria 2 : verde vs [azul, naranja, morado]
+- Problema de clasificación binaria 3 : azul vs [verde, morado, naranja]
+- Problema de clasificación binaria 4 : naranja vs [morado, azul, verde]
 
-- Problema de clasificación binaria 1 : rojo versus [azul, verde]
-- Problema de clasificación binaria 2 : azul vs [rojo, verde]
-- Problema de clasificación binaria 3 : verde vs [rojo, azul]
+</br>
+
+```{image} ../../../images/sistemas_supervisados/clasificacion/07.png
+:class: bg-primary
+:align: center
+:width: 35%
+```
+
+</br>
+
+Durante la predicción, se selecciona la clase con la mayor puntuación entre todos los clasificadores. 
 
 Una posible desventaja de este enfoque es que requiere la creación de un modelo para cada clase. Por ejemplo, tres clases requieren tres modelos. Esto podría ser un problema para conjuntos de datos grandes (por ejemplo, millones de filas), modelos lentos (por ejemplo, redes neuronales) o números muy grandes de clases (por ejemplo, cientos de clases).
 
@@ -25,16 +36,31 @@ Una posible desventaja de este enfoque es que requiere la creación de un modelo
 ## OvO
 Otra estrategia que podemos seguir es la **OvO, tambié conocida como "One vs One"**, donde se entrena un clasificador binario para cada par único de clases. Es decir, si hay *N*  clases se entrenan $\frac{N*(N-1)}{2}$  clasificadores. 
 
-Cada clasificador OvO se entrena solo con datos pertenecientes a las dos clases que está tratando de distinguir. Durante la predicción, cada clasificador vota por la clase que cree que es correcta, y la clase que recibe más votos se elige como la predicción final. Aunque puede ser más costoso computacionalmente, OvO es útil cuando los clasificadores binarios son eficientes y el conjunto de datos es grande. 
+Cada clasificador OvO se entrena solo con datos pertenecientes a las dos clases que está tratando de distinguir. 
 
-Por ejemplo, considere un problema de clasificación de clases múltiples con cuatro clases: ' rojo ', ' azul ' y ' verde ', ' amarillo '. Esto podría dividirse en seis conjuntos de datos de clasificación binaria de la siguiente manera:
+Por ejemplo, considera un problema de clasificación de clases múltiples con cuatro clases: 'morado ', 'azul', 'naranja' y 'verde'. Esto podría dividirse en seis conjuntos de datos de clasificación binaria de la siguiente manera:
 
-- Problema de clasificación binaria 1 : rojo versus azul
-- Problema de clasificación binaria 2 : rojo versus verde
-- Problema de clasificación binaria 3 : rojo versus amarillo
+- Problema de clasificación binaria 1 : morado versus naranja
+- Problema de clasificación binaria 2 : morado versus verde
+- Problema de clasificación binaria 3 : morado versus azul
 - Problema de clasificación binaria 4 : azul versus verde
-- Problema de clasificación binaria 5 : azul versus amarillo
-- Problema de clasificación binaria 6 : verde versus amarillo
+- Problema de clasificación binaria 5 : azul versus naranja
+- Problema de clasificación binaria 6 : verde versus naranja
+
+</br>
+
+```{image} ../../../images/sistemas_supervisados/clasificacion/08.png
+:class: bg-primary
+:align: center
+:width: 30%
+```
+
+</br>
+
+Durante la predicción, cada clasificador vota por la clase que cree que es correcta, y la clase que recibe más votos se elige como la predicción final. 
+
+Aunque puede ser más costoso computacionalmente, OvO es útil cuando los clasificadores binarios son eficientes y el conjunto de datos es grande. 
+
 
 ## Entrenar modelo
 La elección entre OvR y OvO depende de varios factores, como el tamaño del conjunto de datos, la eficiencia computacional y el rendimiento deseado. En la práctica, algunos algoritmos, como Support Vector Machines (SVM), son inherentemente OvO, mientras que otros, como Regresión Logística Multinomial, pueden implementarse de manera eficiente como OvR.
@@ -126,5 +152,5 @@ len(ovr_clf.estimators_)
 ```
 
 ```{admonition} Nota
-Si entrenamos un clasificadore SGDClassifier optará por hacer una estratégia OvR. Haz esta prueba.
+Hay algunos modelos que funcionan mejor con la clasificación binaria y otros que funcionan mejor con la clasificación multiclase. 
 ```

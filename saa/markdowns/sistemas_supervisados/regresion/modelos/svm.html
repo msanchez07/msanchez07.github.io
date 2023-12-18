@@ -186,17 +186,22 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../clasificacion/introduccion.html">Problemas de clasificación</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../clasificacion/entrenar_clasificador_binario.html">Entrenando un clsificador binario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../clasificacion/entrenar_clasificador_binario.html">Entrenando un clasificador binario</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../clasificacion/matriz_confusion.html">Matriz de confusión</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../clasificacion/curva_roc.html">Curva ROC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../clasificacion/modelos.html">Modelos de clasificación</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../clasificacion/entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../clasificacion/modelos.html">Modelos de clasificación</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../clasificacion/regresion_logistica.html">Regresión logística</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../clasificacion/descenso_gradiente.html">Descenso de Gradiente</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../grid_search.html">Búsqueda de hiperparámetros</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
@@ -324,7 +329,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="maquinas-de-vectores-de-soporte-svm">
 <h1>Máquinas de vectores de soporte (SVM)<a class="headerlink" href="#maquinas-de-vectores-de-soporte-svm" title="Permalink to this heading">#</a></h1>
 <p>Las Máquinas de Vectores de Soporte (SVM) son un tipo de algoritmo de aprendizaje supervisado utilizado tanto en problemas de clasificación como en regresión. El objetivo principal de una SVM es encontrar un hiperplano en un espacio de características que mejor separe los puntos de datos de diferentes clases o se ajuste de manera óptima a los datos en el caso de regresión. El término “vectores de soporte” se refiere a los puntos de datos que son fundamentales para definir el hiperplano óptimo.</p>
-<a class="bg-primary reference internal image-reference" href="../../../../_images/08.png"><img alt="../../../../_images/08.png" class="bg-primary align-center" src="../../../../_images/08.png" style="width: 80%;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../../../_images/081.png"><img alt="../../../../_images/081.png" class="bg-primary align-center" src="../../../../_images/081.png" style="width: 80%;" /></a>
 <p>En el caso de clasificación, el hiperplano busca maximizar la distancia entre las clases, lo que se conoce como el margen. Las SVM son particularmente efectivas en espacios de alta dimensión y pueden utilizar funciones de kernel para transformar los datos, permitiendo así abordar problemas no lineales.</p>
 <p>Las SVM son conocidas por su capacidad para generalizar bien en conjuntos de datos de entrenamiento pequeños y por su capacidad para manejar datos de alta dimensionalidad. La optimización de las SVM involucra la minimización de la función de pérdida, que penaliza las instancias mal clasificadas, y la maximización del margen entre las clases.</p>
 <p>En el contexto de regresión, las SVM buscan encontrar un hiperplano que minimice la diferencia entre las predicciones y los valores reales, permitiendo cierta flexibilidad al introducir una “ventana de tolerancia” alrededor de las predicciones. Este enfoque permite utilizar las SVM de manera efectiva para problemas de regresión.</p>
@@ -379,17 +384,17 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Lineal (Linear)</strong>: Este kernel es apropiado cuando los datos son linealmente separables o cuando se sospecha que un modelo lineal es suficientemente complejo para describir la relación entre las variables. Es computacionalmente menos intensivo en comparación con kernels no lineales y puede ser una buena elección cuando hay muchas características.</p></li>
 </ul>
-<a class="bg-primary reference internal image-reference" href="../../../../_images/10.png"><img alt="../../../../_images/10.png" class="bg-primary align-center" src="../../../../_images/10.png" style="width: 60%;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../../../_images/101.png"><img alt="../../../../_images/101.png" class="bg-primary align-center" src="../../../../_images/101.png" style="width: 60%;" /></a>
 </br>
 <ul class="simple">
 <li><p><strong>Polinómico (Polynomial)</strong>: Si se sospecha que la relación entre las variables es polinómica, el kernel polinómico podría ser una elección adecuada. Sin embargo, es importante tener cuidado con la elección del grado del polinomio, ya que valores muy altos pueden llevar a modelos sobreajustados.</p></li>
 </ul>
-<a class="bg-primary reference internal image-reference" href="../../../../_images/11.png"><img alt="../../../../_images/11.png" class="bg-primary align-center" src="../../../../_images/11.png" style="width: 60%;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../../../_images/111.png"><img alt="../../../../_images/111.png" class="bg-primary align-center" src="../../../../_images/111.png" style="width: 60%;" /></a>
 </br>
 <ul class="simple">
 <li><p><strong>Radial (RBF - Radial Basis Function)</strong>: El kernel RBF es bastante versátil y se utiliza comúnmente cuando la relación entre las variables no es claramente lineal o polinómica. Es útil cuando no se tiene información previa sobre la forma de la relación y puede capturar patrones más complejos. Sin embargo, el RBF tiende a ser más sensible a los hiperparámetros, como el ancho del kernel (gamma).</p></li>
 </ul>
-<a class="bg-primary reference internal image-reference" href="../../../../_images/12.png"><img alt="../../../../_images/12.png" class="bg-primary align-center" src="../../../../_images/12.png" style="width: 60%;" /></a>
+<a class="bg-primary reference internal image-reference" href="../../../../_images/121.png"><img alt="../../../../_images/121.png" class="bg-primary align-center" src="../../../../_images/121.png" style="width: 60%;" /></a>
 </br>
 <ul class="simple">
 <li><p><strong>Sigmoidal (Sigmoid)</strong>: Este kernel puede ser útil en situaciones donde la relación entre las variables es similar a una función sigmoide. Se utiliza en problemas de clasificación binaria, pero no es tan común como los kernels lineal, polinómico o RBF.</p></li>
@@ -399,14 +404,14 @@ document.write(`
 <h3>Parámetro de regularización (C)<a class="headerlink" href="#parametro-de-regularizacion-c" title="Permalink to this heading">#</a></h3>
 <p>El parámetro de regularización (C) controla el equilibrio entre dos objetivos fundamentales: maximizar el margen entre las clases y minimizar la clasificación errónea de instancias de entrenamiento. Un valor más alto de C penaliza más fuertemente las clasificaciones erróneas, lo que puede conducir a un margen más estrecho pero una clasificación más precisa. Por otro lado, un valor más bajo de C permite un margen más amplio, sacrificando precisión en la clasificación por una mayor tolerancia a errores.</p>
 <p>Visualmente, puedes entender la influencia de C en el margen y la clasificación observando cómo cambia la frontera de decisión de la SVM:</p>
-<img alt="../../../../_images/13.png" class="bg-primary align-center" src="../../../../_images/13.png" />
+<img alt="../../../../_images/131.png" class="bg-primary align-center" src="../../../../_images/131.png" />
 <p>Observarás que a medida que C aumenta, la SVM se vuelve más estricta en la clasificación de los puntos y ajusta una frontera de decisión más ajustada para minimizar los errores, mientras que un valor más bajo de C permite un margen más amplio y una mayor tolerancia a errores.</p>
 <p>Experimentar con diferentes valores de C es esencial para encontrar un equilibrio adecuado en la SVM, evitando sobreajuste o subajuste en función de la complejidad del problema y la cantidad de ruido en los datos.</p>
 </section>
 <section id="epsilon">
 <h3>Epsilon (ε)<a class="headerlink" href="#epsilon" title="Permalink to this heading">#</a></h3>
 <p>El hiperparámetro epsilon (ε) define el tamaño de la “ventana de tolerancia” alrededor de la línea de regresión. En otras palabras, ϵ establece la cantidad de error que se permite en las predicciones sin penalizar excesivamente el modelo. Dentro de esta ventana de tolerancia, no hay penalización para las instancias de entrenamiento, mientras que las instancias que quedan fuera de la ventana se ven penalizadas.</p>
-<img alt="../../../../_images/14.png" class="bg-primary align-center" src="../../../../_images/14.png" />
+<img alt="../../../../_images/141.png" class="bg-primary align-center" src="../../../../_images/141.png" />
 <p>Los gráficos muestran cómo la línea de regresión varía al cambiar el tamaño de la ventana de tolerancia. Un valor más alto de ϵ permite un ajuste más flexible, mientras que un valor más bajo hace que el modelo sea más rígido y penaliza las desviaciones de la línea de regresión.</p>
 <p>Experimentar con diferentes valores de ϵ es crucial para adaptar el modelo a la naturaleza específica de los datos y la cantidad de ruido presente. Un ϵ demasiado pequeño puede resultar en un modelo demasiado ajustado, mientras que un ϵ demasiado grande puede dar lugar a un modelo que no se ajusta lo suficientemente bien a los datos.</p>
 </section>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Entrenando un clasificador binario &#8212; Programación de inteligencia artificial</title>
+    <title>Descenso de Gradiente &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -68,11 +68,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/clasificacion/entrenar_clasificador_binario';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/clasificacion/descenso_gradiente';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Matriz de confusión" href="matriz_confusion.html" />
-    <link rel="prev" title="Problemas de clasificación" href="introduccion.html" />
+    <link rel="next" title="Búsqueda de hiperparámetros" href="../grid_search.html" />
+    <link rel="prev" title="Regresión logística" href="regresion_logistica.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,13 +186,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="introduccion.html">Problemas de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Entrenando un clasificador binario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_binario.html">Entrenando un clasificador binario</a></li>
 <li class="toctree-l2"><a class="reference internal" href="matriz_confusion.html">Matriz de confusión</a></li>
 <li class="toctree-l2"><a class="reference internal" href="curva_roc.html">Curva ROC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="modelos.html">Modelos de clasificación</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="modelos.html">Modelos de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="regresion_logistica.html">Regresión logística</a></li>
-<li class="toctree-l3"><a class="reference internal" href="descenso_gradiente.html">Descenso de Gradiente</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Descenso de Gradiente</a></li>
 </ul>
 </li>
 </ul>
@@ -298,7 +298,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Entrenando un clasificador binario</h1>
+    <h1>Descenso de Gradiente</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -308,7 +308,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medir-la-precision-con-validacion-cruzada">Medir la precisión con validación cruzada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descenso-de-gradiente-estocastico">Descenso de Gradiente Estocástico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros">Hiperparámetros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss">loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">learning_rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-iter-no-change">n_iter_no_change</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -320,53 +326,106 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="entrenando-un-clasificador-binario">
-<h1>Entrenando un clasificador binario<a class="headerlink" href="#entrenando-un-clasificador-binario" title="Permalink to this heading">#</a></h1>
-<p>Vamos a simplificar un poco el problema y nos centraremos en la distinción de un solo dígito, específicamente el “3”. La tarea consiste en desarrollar un modelo capaz de discernir si una imagen pertenece o no a la clase de dígitos “3”. Esto será un ejemplo de clasificador binario, ya que solo tenemos dos posibilidades, si o no.</p>
-<p>Vamos a crear los vectores objetivo, previa división en train, test, validation:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span> 
-<span class="n">y_test_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Este código marcará como verdadero aquellos elementos que esten etiquetados como 3, y falso el resto.</p>
-<p>Una vez hecho esto, vamos a elegir un clsificador y entrenar nuestro modelo. En este caso optaremos por un árbol de decisión:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
-
-<span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_3</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Perfecto, ya tenemos el modelo entrenado, ahora tendremos que ver si este funciona de forma correcta. Para ello, podemos elegir un elemento de nuestros datos correspondiente a un 3 y ver si lo clasifica bien:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="k">def</span> <span class="nf">plot_digit</span><span class="p">(</span><span class="n">image_data</span><span class="p">):</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">image_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-
-<span class="n">some_digit</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
-<span class="n">plot_digit</span><span class="p">(</span><span class="n">some_digit</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">some_digit</span><span class="p">])</span>
-</pre></div>
-</div>
-<div class="highlight-raw notranslate"><div class="highlight"><pre><span></span>array([ True])
-</pre></div>
-</div>
-<p>Perfecto! Ahora vamos a evaluar el rendimiento del modelo.</p>
-<section id="medir-la-precision-con-validacion-cruzada">
-<h2>Medir la precisión con validación cruzada<a class="headerlink" href="#medir-la-precision-con-validacion-cruzada" title="Permalink to this heading">#</a></h2>
-<p>Anteriormente ya hemos visto como funciona la validación cruzada y como medir el rendimiento de los modelos con ella. Vamos a validar nuestro modelo con un total de tres iteraciones:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
-<span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_3</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-raw notranslate"><div class="highlight"><pre><span></span>array([0.96015, 0.9602 , 0.9627 ])
-</pre></div>
-</div>
-<p>¡Madre mía! Más del 95% en cada uno de los pliegues, ¿es esto posible? Lógicamente no, el problema es muy simple, si nos paramos a pensar, el 10% de los valores pertenecen a un 3 y si incias que no es un 3 el valor que estás prediciendo, acertarás el 90% de las veces, por lo tanto, la precisión generalmente no es la única ni la medida de desempeño preferida para evaluar clasificadores, especialmente en casos donde el conjunto de datos presenta desbalances entre las clases.</p>
-<p>Llegados a este punto, vamos a ver las distintas métricas utilizadas para la clasificación.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="descenso-de-gradiente">
+<h1>Descenso de Gradiente<a class="headerlink" href="#descenso-de-gradiente" title="Permalink to this heading">#</a></h1>
+<p>El Descenso de Gradiente Estocástico (SGD) es un algoritmo de optimización utilizado en aprendizaje automático para ajustar los parámetros de un modelo de manera eficiente.</p>
+<p>Para entender como funciona, lo primero que debemos hacer es entender como funciona el descenso del gradiente. El Descenso de Gradiente es un algoritmo de optimización utilizado para minimizar la <strong>función de pérdida de un modelo</strong>. La función de pérdida mide la discrepancia entre las predicciones del modelo y los valores reales del conjunto de datos.</p>
+<p>Imagina que estás en lo alto de una gran colina y tu meta es llegar al punto más bajo, que sería como encontrar el lugar ideal en términos de eficiencia o éxito. Puedes pensar en esta colina como la superficie de una función, donde la altura en cada punto refleja el nivel de “pérdida” o “error” en la tarea que estás realizando. En este escenario, tu objetivo es descender por la colina para minimizar esa pérdida y llegar al punto más bajo, que simboliza el mejor rendimiento posible.</p>
+<a class="bg-primary reference internal image-reference" href="../../../_images/11.png"><img alt="../../../_images/11.png" class="bg-primary align-center" src="../../../_images/11.png" style="width: 65%;" /></a>
+</br>
+<p>En la práctica, se inicia el proceso con una inicialización aleatoria. Luego, de manera iterativa, se mejora gradualmente ajustando esos parámetros en pequeños pasos. En cada paso, el objetivo es reducir la función de coste, como el Error Cuadrático Medio (MSE), con el fin de llevar al algoritmo hacia la convergencia.</p>
+<p>Uno de los parámetros más importantes en el descenso del gradiente es el número de pasos, ya que si introducimos un número de pasos muy elevados, se tendrán que hacer muchas iteraciones.</p>
+<a class="bg-primary reference internal image-reference" href="../../../_images/12.png"><img alt="../../../_images/12.png" class="bg-primary align-center" src="../../../_images/12.png" style="width: 65%;" /></a>
+</br>
+<p>Por otro lado, si el número de pasos es muy bajo, pueden ocasionarse situaciones extrañas e incluso realizarse un salto de lado en la curva.</p>
+<a class="bg-primary reference internal image-reference" href="../../../_images/13.png"><img alt="../../../_images/13.png" class="bg-primary align-center" src="../../../_images/13.png" style="width: 65%;" /></a>
+</br>
+<p>Otro problema a tener en cuenta es el del mínimo local. Es una situación en la optimización donde un algoritmo puede quedar atrapado en un punto que es un mínimo relativo pero no el mínimo global de una función. En otras palabras, es como estar en la parte más baja de una colina en lugar de estar en la base de la montaña.</p>
+<p>Imagina que estás tratando de encontrar la parte más baja de una cadena montañosa en la oscuridad. Puedes terminar en una depresión local (un mínimo local), pensando que has alcanzado el punto más bajo, pero en realidad, hay un valle más profundo (el mínimo global) que no has explorado.</p>
+<a class="bg-primary reference internal image-reference" href="../../../_images/14.png"><img alt="../../../_images/14.png" class="bg-primary align-center" src="../../../_images/14.png" style="width: 65%;" /></a>
+</br>
+<p>Este problema puede surgir cuando la función que están tratando de minimizar tiene múltiples puntos bajos, y el algoritmo elige uno cercano en lugar del punto más bajo en general. Es un desafío común en la optimización y puede afectar la eficacia de los algoritmos en la búsqueda de soluciones óptimas.</p>
+<section id="descenso-de-gradiente-estocastico">
+<h2>Descenso de Gradiente Estocástico<a class="headerlink" href="#descenso-de-gradiente-estocastico" title="Permalink to this heading">#</a></h2>
+<p>El Descenso de Gradiente Estocástico es una variante del Descenso de Gradiente que utiliza una muestra aleatoria de datos en cada iteración. Esto lo hace particularmente eficiente cuando se trabaja con grandes conjuntos de datos.</p>
+<p>En lugar de calcular el gradiente usando todo el conjunto de datos, elegimos una muestra aleatoria en cada iteración. Esto introduce un elemento estocástico y acelera el proceso de aprendizaje.</p>
+<p>Posteriormente, ajustamos los parámetros utilizando la muestra seleccionada, de manera similar al Descenso de Gradiente convencional.</p>
+<p>Estos pasos se deben repetir a lo largo de varias iteraciones hasta que los parámetros convergen.</p>
+<p>En scikit-learn podemos utilizar la clase <code class="docutils literal notranslate"><span class="pre">SGDClassifier</span></code>. Este clasificador es particularmente útil para problemas de clasificación binaria y multiclase en conjuntos de datos grandes.</p>
+<section id="hiperparametros">
+<h3>Hiperparámetros<a class="headerlink" href="#hiperparametros" title="Permalink to this heading">#</a></h3>
+<p>A continuación se muestran algunos de los hiperparámetros que podemos utilizar en el descenso del gradiente estocástico:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">HIPERPARÁMETROS DE UN SGDCLASSIFIER</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="left-header" scope="row">loss</th>
+      <td  colspan="3">Especifica la función de pérdida a ser optimizada. Puede ser "hinge" para SVM lineal, "log" para regresión logística, "modified_huber" para clasificación binaria, entre otras opciones.</td>
+    </tr>
+     <tr>
+      <th class="left-header" scope="row">penalty</th>
+      <td  colspan="3">Especifica la norma utilizada en la penalización. Puede ser "l2" para la norma L2 (ridge), "l1" para la norma L1 (lasso), o "elasticnet" para una combinación de ambas.</td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">alpha</th>
+      <td  colspan="3">Parámetro de regularización que controla la fuerza de la penalización. Valores más altos aumentan la regularización.</td>
+    </tr>
+    <th class="left-header" scope="row">learning_rate</th>
+      <td  colspan="3">Controla la tasa de aprendizaje utilizada en las actualizaciones de peso.</td>
+    </tr>
+    <th class="left-header" scope="row">eta0</th>
+      <td  colspan="3">Tasa de aprendizaje inicial para la opción "constant". No utilizado para otros esquemas de aprendizaje.</td>
+    </tr>
+      <th class="left-header" scope="row">max_iter</th>
+      <td  colspan="3">Número máximo de iteraciones (pases sobre los datos) durante el entrenamiento.</td>
+    </tr>
+    </tr>
+      <th class="left-header" scope="row">shuffle</th>
+      <td  colspan="3">Indica si se deben barajar los datos en cada época.</td>
+    </tr>
+    </tr>
+      <th class="left-header" scope="row">n_iter_no_change</th>
+      <td  colspan="3">Número de épocas sin mejora después de las cuales se detendrá el entrenamiento.</td>
+    </tr>
+    </tr>
+      <th class="left-header" scope="row">random_state</th>
+      <td  colspan="3">Semilla utilizada para reproducir resultados aleatorios.</td>
+    </tr>
+  </tbody>
+</table>
+<p>Vamos a ver como afectan algunos de estos parámetros al entrenamiento del modelo.</p>
+</section>
+<section id="loss">
+<h3>loss<a class="headerlink" href="#loss" title="Permalink to this heading">#</a></h3>
+<p>El parámetro loss en el SGDClassifier de scikit-learn especifica la función de pérdida que se utilizará durante el entrenamiento para guiar la optimización de los pesos del modelo. La elección de la función de pérdida afecta directamente la naturaleza del aprendizaje del modelo y puede ser crucial para el rendimiento en diferentes tipos de problemas:</p>
+<ul class="simple">
+<li><p><strong>hinge</strong>: Utilizado comúnmente en SVM lineales para problemas de clasificación binaria y multiclase.</p></li>
+<li><p><strong>log_loss</strong>: Aplicable a problemas de clasificación binaria y multiclase.</p></li>
+<li><p><strong>modified_huber</strong>: Principalmente en problemas de clasificación binaria.</p></li>
+</ul>
+<p>En general, “hinge” y “log_loss” son opciones sólidas para problemas de clasificación, pero puede ser útil experimentar con varias funciones de pérdida para encontrar la más adecuada para tu conjunto de datos específico.</p>
+</section>
+<section id="learning-rate">
+<h3>learning_rate<a class="headerlink" href="#learning-rate" title="Permalink to this heading">#</a></h3>
+<p>El parámetro learning_rate en el SGDClassifier de scikit-learn controla la tasa de aprendizaje durante el entrenamiento. La tasa de aprendizaje es un hiperparámetro crucial que afecta la magnitud de los ajustes de los pesos del modelo en cada iteración del Descenso de Gradiente Estocástico (SGD). Aquí hay algunas opciones comunes para el parámetro learning_rate y sus características:</p>
+<ul class="simple">
+<li><p><strong>optional</strong>: Es una buena elección predeterminada y funciona bien en muchos casos. Puede adaptarse a cambios en la geometría de la función de pérdida durante el entrenamiento.</p></li>
+<li><p><strong>constant</strong>: Útil cuando la geometría de la función de pérdida no cambia significativamente durante el entrenamiento. Puede requerir ajuste manual de la tasa de aprendizaje.</p></li>
+<li><p><strong>invscaling</strong>: Puede ser beneficioso para converger hacia el mínimo de manera más suave a medida que avanza el entrenamiento.</p></li>
+<li><p><strong>adaptive</strong>: Puede ser útil cuando las características tienen escalas diferentes y se desea una adaptación más precisa.</p></li>
+</ul>
+</section>
+<section id="n-iter-no-change">
+<h3>n_iter_no_change<a class="headerlink" href="#n-iter-no-change" title="Permalink to this heading">#</a></h3>
+<p>El parámetro n_iter_no_change en el SGDClassifier de scikit-learn es un hiperparámetro que especifica el número de épocas (iteraciones) durante las cuales se permite que la función de pérdida en el conjunto de validación no mejore antes de detener el entrenamiento.</p>
+<p>Un valor bajo de n_iter_no_change puede ser útil para evitar entrenamientos prolongados. Si el rendimiento del modelo en el conjunto de validación no mejora significativamente después de un número limitado de épocas, detener el entrenamiento puede ahorrar tiempo computacional.</p>
+<p>En algunos casos, un modelo puede continuar ajustándose demasiado a los datos de entrenamiento y empeorar en datos nuevos (sobreajuste). Limitar el número de épocas sin mejoras puede ayudar a detener el entrenamiento antes de que el modelo se sobreajuste.</p>
+<p>n_iter_no_change puede ser crucial para la eficiencia del entrenamiento. En problemas donde el modelo converge rápidamente y no hay ganancias significativas después de cierto punto, detener el entrenamiento puede ser beneficioso.</p>
+</section>
 </section>
 </section>
 
@@ -401,20 +460,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="introduccion.html"
+       href="regresion_logistica.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Problemas de clasificación</p>
+        <p class="prev-next-title">Regresión logística</p>
       </div>
     </a>
     <a class="right-next"
-       href="matriz_confusion.html"
+       href="../grid_search.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Matriz de confusión</p>
+        <p class="prev-next-title">Búsqueda de hiperparámetros</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -433,7 +492,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medir-la-precision-con-validacion-cruzada">Medir la precisión con validación cruzada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descenso-de-gradiente-estocastico">Descenso de Gradiente Estocástico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros">Hiperparámetros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss">loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">learning_rate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-iter-no-change">n_iter_no_change</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

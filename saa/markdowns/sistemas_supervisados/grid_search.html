@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Análisis exploratorio de datos &#8212; Programación de inteligencia artificial</title>
+    <title>Búsqueda de hiperparámetros &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -68,11 +68,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/analisis_datos';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/grid_search';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Problemas de regresión" href="regresion/regresion.html" />
-    <link rel="prev" title="Proyecto de aprendizaje supervisado" href="proyecto_supervisado.html" />
+    <link rel="next" title="Anexo: Métricas de regresión" href="../anexos/metricas/metricas_regresion.html" />
+    <link rel="prev" title="Descenso de Gradiente" href="clasificacion/descenso_gradiente.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="introduccion.html">Introducción</a></li>
 <li class="toctree-l1"><a class="reference internal" href="proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisis_datos.html">Análisis exploratorio de datos</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="regresion/regresion.html">Problemas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="regresion/entrenar_modelo.html">Entrenamiento del modelo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="regresion/modelos/arboles_decision.html">Árboles de decisión</a></li>
@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="grid_search.html">Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Búsqueda de hiperparámetros</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
 <ul class="nav bd-sidenav">
@@ -298,7 +298,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Análisis exploratorio de datos</h1>
+    <h1>Búsqueda de hiperparámetros</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -308,8 +308,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-eda-en-el-aprendizaje-automatico">Importancia del EDA en el aprendizaje automático</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-primer-vistazo-a-los-datos">Un primer vistazo a los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-el-grid-search">Como funciona el Grid Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridsearchcv">GridSearchCV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-mas-importantes">Parámetros más importantes</a></li>
 </ul>
             </nav>
         </div>
@@ -321,99 +322,88 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos">
-<h1>Análisis exploratorio de datos<a class="headerlink" href="#analisis-exploratorio-de-datos" title="Permalink to this heading">#</a></h1>
-<p>Un elemento fundamental para que nuestro modelo tenga éxito, es el análisis exploratorio de datos (EDA, por sus siglas en inglés). Imagina que los datos son el mapa de un territorio desconocido, y el EDA es la brújula que te guía a través de él.</p>
-<p>El análisis exploratorio de datos es como desempacar un regalo; revela información valiosa que puede no ser evidente a simple vista. A menudo, los datos contienen patrones, relaciones y tendencias que pueden inspirar decisiones informadas y la creación de modelos más precisos. En este capítulo, exploraremos cómo el EDA es una fase crucial en el flujo de trabajo de aprendizaje automático, ya que puede influir en las decisiones que tomamos durante todo el proceso.</p>
-<p>En este apartado, descubriremos cómo examinar y visualizar datos, identificar valores atípicos, comprender la distribución de los atributos y descubrir posibles correlaciones. Veremos cómo las herramientas y técnicas del análisis exploratorio de datos se convierten en tu compañero de confianza en el camino hacia la creación de modelos exitosos.</p>
-<p>El análisis exploratorio de datos es el primer paso para desentrañar los secretos que los datos almacenan, y este capítulo te guiará a través de todo el proceso. ¡Comencemos a explorar y a desenterrar los tesoros ocultos en tus datos!</p>
-<section id="importancia-del-eda-en-el-aprendizaje-automatico">
-<h2>Importancia del EDA en el aprendizaje automático<a class="headerlink" href="#importancia-del-eda-en-el-aprendizaje-automatico" title="Permalink to this heading">#</a></h2>
-<p>El proceso de aprendizaje automático se basa en extraer patrones y relaciones de los datos, para luego aplicar estos patrones en nuevos datos para hacer predicciones. Sin embargo, este proceso no puede ser exitoso si no entendemos adecuadamente los datos que alimentamos a nuestros modelos. Aquí es donde entra en juego el EDA.</p>
-<p>El EDA nos permite familiarizarnos con los datos a un nivel profundo. Esto implica explorar las características y atributos presentes en los datos, comprender su significado y entender su rango y distribución. Esta familiaridad nos proporciona información esencial para tomar decisiones informadas sobre cómo diseñar y ajustar nuestros modelos.</p>
-<p>A menudo, los datos contienen patrones, tendencias y correlaciones que no son evidentes a simple vista. El EDA nos permite descubrir estos patrones ocultos, lo que puede influir en las decisiones sobre qué características son relevantes para el modelo y cómo se deben transformar o normalizar los datos.</p>
-<p>Otros elementos a tener en cuenta son los valores atípicos y el ruido. Estos elementos pueden tener un impacto significativo en la calidad y la precisión de nuestros modelos. El EDA nos ayuda a identificar estos valores atípicos y el ruido, lo que permite tomar medidas para manejarlos adecuadamente, ya sea eliminándolos, transformándolos o realizando imputaciones.</p>
-<p>Además de todo esto, el EDA también es útil para seleccionar y extraer características relevantes para la construcción del modelo. Al comprender la correlación y la importancia de diferentes atributos, podemos tomar decisiones informadas sobre cuáles incluir en el modelo y cuáles excluir.
-Finalmente, al explorar y comprender los datos, podemos identificar posibles fuentes de sesgo y errores. Esto es crucial para garantizar que nuestro modelo no esté basado en datos sesgados y que pueda generalizar de manera efectiva a nuevos datos.</p>
-<p>En resumen, el Análisis Exploratorio de Datos es el cimiento sobre el cual se construye todo el proceso de aprendizaje automático. Al comprender los datos, identificar patrones y tomar decisiones informadas sobre cómo preprocesarlos, el EDA garantiza que los modelos resultantes sean más precisos, generalizables y confiables. Es la puerta de entrada al mundo complejo pero emocionante del aprendizaje automático y un paso que no debe subestimarse. En los siguientes apartados, exploraremos cómo llevar a cabo un EDA efectivo y cómo sus resultados influirán en el éxito de nuestros modelos.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="busqueda-de-hiperparametros">
+<h1>Búsqueda de hiperparámetros<a class="headerlink" href="#busqueda-de-hiperparametros" title="Permalink to this heading">#</a></h1>
+<p>A lo largo de las distinas secciones hemos visto distintos algoritomos de aprendizaje automático que se configuran mediante hiperparámetros. Como ya se ha dicho, estos deben ser ajustados, el problema viene dado en que muchos de estos tienen rangos muy grandes, llegando incluso al infinito. Es por eso que existen técnica que ayudan a encontrar estos parámetros. Una de ellas es el GridSearch.</p>
+<p>El “Grid Search” o búsqueda en cuadrícula es una técnica utilizada en aprendizaje automático (machine learning) para encontrar los mejores hiperparámetros para un modelo.  La idea detrás de la búsqueda en cuadrícula es definir una cuadrícula de posibles valores para los hiperparámetros que se desean ajustar y evaluar el rendimiento del modelo para cada combinación de estos valores. Luego, se selecciona la combinación que produce el mejor rendimiento según alguna métrica predefinida, como la precisión, el área bajo la curva ROC, la F1-score, entre otras.</p>
+<a class="bg-primary reference internal image-reference" href="../../_images/021.png"><img alt="../../_images/021.png" class="bg-primary align-center" src="../../_images/021.png" style="width: 55%;" /></a>
+</br>
+<p>Por ejemplo, si estás trabajando con un algoritmo de clasificación como Support Vector Machines (SVM) y tienes dos hiperparámetros que deseas ajustar, C y gamma, podrías definir una cuadrícula de valores para ambos, y el algoritmo de búsqueda en cuadrícula probaría todas las combinaciones posibles de valores de C y gamma para encontrar la combinación que maximiza el rendimiento del modelo en tu conjunto de datos.</p>
+<p>La búsqueda en cuadrícula puede ser una herramienta eficaz, pero puede volverse computacionalmente costosa, especialmente cuando se tienen muchos hiperparámetros o cuando cada combinación requiere entrenar y evaluar el modelo en múltiples iteraciones.</p>
+<section id="como-funciona-el-grid-search">
+<h2>Como funciona el Grid Search<a class="headerlink" href="#como-funciona-el-grid-search" title="Permalink to this heading">#</a></h2>
+<p>La búsqueda en cuadrícula funciona de manera sistemática al explorar un conjunto predefinido de valores de hiperparámetros para encontrar la combinación que optimiza el rendimiento del modelo. Aquí hay una descripción general de cómo funciona:</p>
+<ol class="arabic simple">
+<li><p><strong>Definición de la cuadrícula de hiperparámetros</strong>: Selecciona los hiperparámetros que deseas ajustar.
+Especifica una cuadrícula de posibles valores para cada hiperparámetro. Por ejemplo, si estás ajustando los hiperparámetros C y gamma para un SVM, puedes definir una cuadrícula con varios valores de C y gamma.</p></li>
+<li><p><strong>Creación de combinaciones</strong>: Genera todas las posibles combinaciones de valores de hiperparámetros utilizando la cuadrícula definida. Esto crea un conjunto de combinaciones que se evaluarán.</p></li>
+<li><p><strong>Entrenamiento y evaluación del modelo</strong>: Por cada combinación de hiperparámetros, entrena el modelo utilizando esos valores en un conjunto de entrenamiento. Evalúa el rendimiento del modelo en un conjunto de validación o mediante alguna métrica específica.</p></li>
+<li><p><strong>Selección del mejor modelo</strong>: Registra el rendimiento para cada combinación de hiperparámetros.
+Selecciona la combinación que produce el mejor rendimiento según la métrica objetivo (puede ser precisión, F1-score, AUC, etc.).</p></li>
+</ol>
 </section>
-<section id="un-primer-vistazo-a-los-datos">
-<h2>Un primer vistazo a los datos<a class="headerlink" href="#un-primer-vistazo-a-los-datos" title="Permalink to this heading">#</a></h2>
-<p>La calidad de los resultados del EDA depende en gran medida de la calidad de los datos con los que trabajamos. Para poder desarrollar los conceptos de este capítulo, vamos a contar con el conjunto de datos proporcionado por el DataSet Medical Cost Personal DataSets1. Este DataSet cuenta con 1338 filas y 8 columnas, las cuales se describen en la siguiente tabla:</p>
+<section id="gridsearchcv">
+<h2><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">GridSearchCV</a><a class="headerlink" href="#gridsearchcv" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> es una función proporcionada por la biblioteca scikit-learn en Python que realiza la búsqueda en cuadrícula junto con la validación cruzada (cross-validation).</p>
+<p>El siguiente código muestra un ejemplo para esta función para un SVC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]}</span>
+<span class="n">svm</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+
+<span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">svm</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+
+<span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">best_params</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>En este códogio el algoritmo está intentando encontrar los mejores parámetros (previamente definidos como un diccionario) para el modelo SVC.</p>
+<p>Para ello, entrena el modelo utilizando la validación cruzada. Una vez encontrados, podemos ver cuales son mediante la propiedad <code class="docutils literal notranslate"><span class="pre">best_params_</span></code>.</p>
+<p>Por otro lado, con <code class="docutils literal notranslate"><span class="pre">best_estimator_</span></code> podemos acceder a la propiedad que nos dice el mejor modelo de todos los entrenados.</p>
+<p>Finalmente, podemos hacer el test con el algoritmo para ver los resultados.</p>
+</section>
+<section id="parametros-mas-importantes">
+<h2>Parámetros más importantes<a class="headerlink" href="#parametros-mas-importantes" title="Permalink to this heading">#</a></h2>
+<p>El <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> actua igual que cualquier otro modelo de la libreria scikit-learn. A continuación se listan los hiperparámetros más importantes:</p>
 <table class="table table-bordered my-table-border">
   <thead>
     <tr class="my-table-header">
-      <th class="text-center my-table-header" colspan="1">Columna</th>
-      <th class="text-center my-table-header" colspan="1">Definición</th>
-      <th class="text-center my-table-header" colspan="1">Tipo de datos</th>
-      <th class="text-center my-table-header" colspan="1">Ejemplos</th>
-      <th class="text-center my-table-header" colspan="1">Número de nulos</th>
+      <th class="text-center my-table-header" colspan="4">HIPERPARÁMETROS DE UN GRID SEARCH CV</th>
     </tr>
   </thead>
   <tbody>
-    <tr >
-      <td colspan="1">No</th>
-      <td colspan="1">Número de la columna</td>
-      <td colspan="1">Número</th>
-      <td colspan="1">22, 35, 48</td>
-      <td colspan="1">0</td>
+    <tr>
+      <th class="left-header" scope="row">estimator</th>
+      <td  colspan="3">Este parámetro recibe el modelo que estás utilizando. Puede ser un clasificador, un regresor u otro tipo de modelo de scikit-learn. 
+      </td>
     </tr>
-    <tr >
-      <td colspan="1">Age</th>
-      <td colspan="1">Edad del beneficiario</td>
-      <td colspan="1">Número</th>
-      <td colspan="1">22.0, 33.0, 32.0</td>
-      <td colspan="1">29</td>
+     <tr>
+      <th class="left-header" scope="row">param_grid</th>
+      <td  colspan="3">Este es el diccionario que define la cuadrícula de hiperparámetros que se probarán. Cada clave del diccionario es el nombre del hiperparámetro, y los valores son listas de posibles valores que se probarán.</td>
     </tr>
-    <tr >
-      <td colspan="1">Sex</th>
-      <td colspan="1">Género del beneficiario</td>
-      <td colspan="1">Texto</th>
-      <td colspan="1">Male, female</td>
-      <td colspan="1">86</td>
+    <tr>
+      <th class="left-header" scope="row">scoring</th>
+      <td  colspan="3">Este parámetro especifica la métrica de evaluación que se utilizará para seleccionar el mejor modelo. Puedes elegir entre diversas métricas, como 'accuracy', 'precision', 'recall', 'f1', etc.</td>
     </tr>
-    <tr >
-      <td colspan="1">Bmi</th>
-      <td colspan="1">Índice de masa corporal</td>
-      <td colspan="1">Número</th>
-      <td colspan="1">11, 20, 31</td>
-      <td colspan="1">98</td>
+    <th class="left-header" scope="row">cv</th>
+      <td  colspan="3">Indica el número de divisiones en la validación cruzada. Un valor común es 5 para validación cruzada de 5 pliegues.</td>
     </tr>
-    <tr >
-      <td colspan="1">Children</th>
-      <td colspan="1">Hijos en el seguro</td>
-      <td colspan="1">Número</th>
-      <td colspan="1">0.0, 1.0, 3.0</td>
-      <td colspan="1">82</td>
+    <th class="left-header" scope="row">n_jobs</th>
+      <td  colspan="3">Especifica el número de hilos para realizar la búsqueda en paralelo. Si tienes acceso a múltiples núcleos de CPU, puedes establecer n_jobs en un valor mayor que 1 para acelerar el proceso.</td>
     </tr>
-    <tr >
-      <td colspan="1">Smoker</th>
-      <td colspan="1">Fumador</td>
-      <td colspan="1">Texto</th>
-      <td colspan="1">Yes, no</td>
-      <td colspan="1">48</td>
-    </tr>
-    <tr >
-      <td colspan="1">Region</th>
-      <td colspan="1">Zona del beneficiario</td>
-      <td colspan="1">Texto</th>
-      <td colspan="1">Southwest, southeast</td>
-      <td colspan="1">121</td>
-    </tr>
-    <tr class="table-warning">
-      <td colspan="1"><strong>Charges</strong></th>
-      <td colspan="1"><strong>Prima del seguro</strong></td>
-      <td colspan="1"><strong>Número</strong></th>
-      <td colspan="1"><strong>16884.92, 1725.55</strong></td>
-      <td colspan="1"><strong>55</strong></td>
+      <th class="left-header" scope="row">verbose</th>
+      <td  colspan="3">Controla la cantidad de mensajes que se imprimen durante la búsqueda en cuadrícula. Un valor mayor que 0 proporciona más información sobre el proceso.</td>
     </tr>
   </tbody>
 </table>
-<p>La columna o variable resaltada es nuestra variable objetivo, es decir, el valor que queremos predecir mediante nuestro modelo. Muchos de los análisis y cálculos que se van a desarrollar estarán centralizados en esta variable.</p>
-<div class="note admonition">
-<p class="admonition-title">Nota</p>
-<p>En el capítulo anterior listamos un gran número de herramientas y plataformas para resolver problemas de aprendizaje automático. Todas estas herramientas y plataformas pueden utilizarse para resolver problemas de aprendizaje supervisado, pero nosotros nos vamos a centrar en Scikit-learn, Matplotlib, Seaborn, Pandas y Numpy.</p>
-</div>
 </section>
 </section>
 
@@ -448,20 +438,20 @@ Finalmente, al explorar y comprender los datos, podemos identificar posibles fue
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="proyecto_supervisado.html"
+       href="clasificacion/descenso_gradiente.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Proyecto de aprendizaje supervisado</p>
+        <p class="prev-next-title">Descenso de Gradiente</p>
       </div>
     </a>
     <a class="right-next"
-       href="regresion/regresion.html"
+       href="../anexos/metricas/metricas_regresion.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Problemas de regresión</p>
+        <p class="prev-next-title">Anexo: Métricas de regresión</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -480,8 +470,9 @@ Finalmente, al explorar y comprender los datos, podemos identificar posibles fue
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-eda-en-el-aprendizaje-automatico">Importancia del EDA en el aprendizaje automático</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-primer-vistazo-a-los-datos">Un primer vistazo a los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-el-grid-search">Como funciona el Grid Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gridsearchcv">GridSearchCV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros-mas-importantes">Parámetros más importantes</a></li>
 </ul>
   </nav></div>
 

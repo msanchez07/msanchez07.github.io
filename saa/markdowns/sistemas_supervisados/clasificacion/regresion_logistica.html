@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Entrenando un clasificador binario &#8212; Programación de inteligencia artificial</title>
+    <title>Regresión logística &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -68,11 +68,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/clasificacion/entrenar_clasificador_binario';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/clasificacion/regresion_logistica';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Matriz de confusión" href="matriz_confusion.html" />
-    <link rel="prev" title="Problemas de clasificación" href="introduccion.html" />
+    <link rel="next" title="Descenso de Gradiente" href="descenso_gradiente.html" />
+    <link rel="prev" title="Modelos de clasificación" href="modelos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,12 +186,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="introduccion.html">Problemas de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Entrenando un clasificador binario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_binario.html">Entrenando un clasificador binario</a></li>
 <li class="toctree-l2"><a class="reference internal" href="matriz_confusion.html">Matriz de confusión</a></li>
 <li class="toctree-l2"><a class="reference internal" href="curva_roc.html">Curva ROC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="modelos.html">Modelos de clasificación</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="regresion_logistica.html">Regresión logística</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="modelos.html">Modelos de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Regresión logística</a></li>
 <li class="toctree-l3"><a class="reference internal" href="descenso_gradiente.html">Descenso de Gradiente</a></li>
 </ul>
 </li>
@@ -298,7 +298,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Entrenando un clasificador binario</h1>
+    <h1>Regresión logística</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -308,7 +308,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medir-la-precision-con-validacion-cruzada">Medir la precisión con validación cruzada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros-de-la-regresion-logistica">Hiperparámetros de la Regresión logística</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efectos-de-penalty-en-la-regresion-logistica">Efectos de penalty en la Regresión logística</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efectos-de-c-en-la-regresion-logistica">Efectos de C en la Regresión logística</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solver">Solver</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -320,53 +325,80 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="entrenando-un-clasificador-binario">
-<h1>Entrenando un clasificador binario<a class="headerlink" href="#entrenando-un-clasificador-binario" title="Permalink to this heading">#</a></h1>
-<p>Vamos a simplificar un poco el problema y nos centraremos en la distinción de un solo dígito, específicamente el “3”. La tarea consiste en desarrollar un modelo capaz de discernir si una imagen pertenece o no a la clase de dígitos “3”. Esto será un ejemplo de clasificador binario, ya que solo tenemos dos posibilidades, si o no.</p>
-<p>Vamos a crear los vectores objetivo, previa división en train, test, validation:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span> 
-<span class="n">y_test_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Este código marcará como verdadero aquellos elementos que esten etiquetados como 3, y falso el resto.</p>
-<p>Una vez hecho esto, vamos a elegir un clsificador y entrenar nuestro modelo. En este caso optaremos por un árbol de decisión:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
-
-<span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_3</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Perfecto, ya tenemos el modelo entrenado, ahora tendremos que ver si este funciona de forma correcta. Para ello, podemos elegir un elemento de nuestros datos correspondiente a un 3 y ver si lo clasifica bien:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="k">def</span> <span class="nf">plot_digit</span><span class="p">(</span><span class="n">image_data</span><span class="p">):</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">image_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-
-<span class="n">some_digit</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
-<span class="n">plot_digit</span><span class="p">(</span><span class="n">some_digit</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">some_digit</span><span class="p">])</span>
-</pre></div>
-</div>
-<div class="highlight-raw notranslate"><div class="highlight"><pre><span></span>array([ True])
-</pre></div>
-</div>
-<p>Perfecto! Ahora vamos a evaluar el rendimiento del modelo.</p>
-<section id="medir-la-precision-con-validacion-cruzada">
-<h2>Medir la precisión con validación cruzada<a class="headerlink" href="#medir-la-precision-con-validacion-cruzada" title="Permalink to this heading">#</a></h2>
-<p>Anteriormente ya hemos visto como funciona la validación cruzada y como medir el rendimiento de los modelos con ella. Vamos a validar nuestro modelo con un total de tres iteraciones:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
-<span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_3</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-raw notranslate"><div class="highlight"><pre><span></span>array([0.96015, 0.9602 , 0.9627 ])
-</pre></div>
-</div>
-<p>¡Madre mía! Más del 95% en cada uno de los pliegues, ¿es esto posible? Lógicamente no, el problema es muy simple, si nos paramos a pensar, el 10% de los valores pertenecen a un 3 y si incias que no es un 3 el valor que estás prediciendo, acertarás el 90% de las veces, por lo tanto, la precisión generalmente no es la única ni la medida de desempeño preferida para evaluar clasificadores, especialmente en casos donde el conjunto de datos presenta desbalances entre las clases.</p>
-<p>Llegados a este punto, vamos a ver las distintas métricas utilizadas para la clasificación.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="regresion-logistica">
+<h1>Regresión logística<a class="headerlink" href="#regresion-logistica" title="Permalink to this heading">#</a></h1>
+<p>La regresión logística es una técnica fundamental en estadísticas y aprendizaje automático que se emplea para abordar problemas de clasificación. A pesar de su nombre, la regresión logística se utiliza para predecir la probabilidad de que una instancia pertenezca a una categoría específica. Este modelo es particularmente efectivo en situaciones donde la variable de salida es binaria, es decir, tiene dos posibles resultados, como “éxito” o “fracaso”.</p>
+<a class="bg-primary reference internal image-reference" href="../../../_images/09.png"><img alt="../../../_images/09.png" class="bg-primary align-center" src="../../../_images/09.png" style="width: 85%;" /></a>
+</br>
+<p>La regresión logística modela la relación entre las características de entrada (predictores) y la probabilidad de pertenecer a una clase específica. Utiliza la función logística (también conocida como sigmoid) para transformar la salida a un rango entre 0 y 1, que puede interpretarse como la probabilidad.</p>
+<p>Con base en la probabilidad estimada, se establece una frontera de decisión. Si la probabilidad es mayor que un umbral (generalmente 0.5), se clasifica como una clase; de lo contrario, se clasifica como la otra clase.</p>
+<section id="hiperparametros-de-la-regresion-logistica">
+<h2>Hiperparámetros de la Regresión logística<a class="headerlink" href="#hiperparametros-de-la-regresion-logistica" title="Permalink to this heading">#</a></h2>
+<p>A continuación se muestran algunos de los hiperparámetros que podemos utilizar en la regresión logística:</p>
+<table class="table table-bordered my-table-border">
+  <thead>
+    <tr class="my-table-header">
+      <th class="text-center my-table-header" colspan="4">HIPERPARÁMETROS DE UNA REGRESIÓN LOGÍSTICA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="left-header" scope="row">penalty</th>
+      <td  colspan="3">Especifica la norma utilizada en la penalización. Puede ser "l1", "l2", "elasticnet" o "none". La penalización es útil para evitar el sobreajuste.</td>
+    </tr>
+     <tr>
+      <th class="left-header" scope="row">C</th>
+      <td  colspan="3">Inversa de la fuerza de regularización. Valores más pequeños especifican una regularización más fuerte.</td>
+    </tr>
+    <tr>
+      <th class="left-header" scope="row">solver</th>
+      <td  colspan="3">Algoritmo a utilizar en la optimización. Algunas opciones comunes son "liblinear", "newton-cg", "lbfgs", "sag" y "saga".</td>
+    </tr>
+    <th class="left-header" scope="row">max_iter</th>
+      <td  colspan="3">Número máximo de iteraciones para la convergencia del algoritmo.</td>
+    </tr>
+    <th class="left-header" scope="row">fit_intercept</th>
+      <td  colspan="3">Indica si debe calcularse o no la intersección (también conocida como sesgo o bias).</td>
+    </tr>
+      <th class="left-header" scope="row">class_weight</th>
+      <td  colspan="3">Puede tomar valores como "balanced" para ajustar automáticamente los pesos de las clases según la frecuencia de las mismas.</td>
+    </tr>
+    </tr>
+      <th class="left-header" scope="row">random_state</th>
+      <td  colspan="3">Semilla utilizada por el generador de números pseudoaleatorios.</td>
+    </tr>
+    </tr>
+      <th class="left-header" scope="row">multi_class</th>
+      <td  colspan="3">Indica cómo manejar problemas de clasificación multiclase. Puede ser "ovr" (One-vs-Rest) o "multinomial" (Softmax).</td>
+    </tr>
+  </tbody>
+</table>
+<p>Vamos a ver como afectan algunos de estos parámetros al entrenamiento del modelo.</p>
+<section id="efectos-de-penalty-en-la-regresion-logistica">
+<h3>Efectos de penalty en la Regresión logística<a class="headerlink" href="#efectos-de-penalty-en-la-regresion-logistica" title="Permalink to this heading">#</a></h3>
+<p>El parámetro penalty en la regresión logística <strong>controla la aplicación de la regularización para prevenir el sobreajuste</strong>. La regularización es una técnica que penaliza los coeficientes del modelo, evitando que tomen valores extremadamente grandes. En scikit-learn, dos valores comunes para el parámetro penalty son ‘l1’ (regularización L1) y ‘l2’ (regularización L2).</p>
+<p>Introducir un penalización L1 favorece la dispersión de los coeficientes y puede conducir a la selección de características (algunos coeficientes se vuelven exactamente cero). <strong>Esto es útil cuando se sospecha que algunas características son irrelevantes o ruido</strong>.</p>
+<p>Por otro lado, introducir un penalización L2 favorece coeficientes más equilibrados y <strong>puede ayudar a evitar el sobreajuste</strong>. L2 no conduce a la selección de características, ya que todos los coeficientes tienden a ser no nulos.</p>
+</section>
+<section id="efectos-de-c-en-la-regresion-logistica">
+<h3>Efectos de C en la Regresión logística<a class="headerlink" href="#efectos-de-c-en-la-regresion-logistica" title="Permalink to this heading">#</a></h3>
+<p>El parámetro C en la regresión logística controla la fuerza de regularización aplicada al modelo. <strong>La regularización es una técnica utilizada para prevenir el sobreajuste al penalizar los coeficientes del modelo cuando son demasiado grandes</strong>. El parámetro C es la inversa de la fuerza de regularización; por lo tanto, valores más pequeños de C indican una regularización más fuerte, mientras que valores mayores permiten una regularización más débil.</p>
+<a class="bg-primary reference internal image-reference" href="../../../_images/10.png"><img alt="../../../_images/10.png" class="bg-primary align-center" src="../../../_images/10.png" style="width: 85%;" /></a>
+</br>
+<p>Cuando C es pequeña, la regularización es fuerte, lo que significa que los coeficientes del modelo se ven más afectados y se les penaliza por tener valores grandes. Esto puede resultar en un modelo más simple y menos propenso al sobreajuste. Es útil cuando se sospecha que hay demasiado ruido o variables irrelevantes en los datos.</p>
+<p>Por otro lado, cuando C es grande, la regularización es débil, lo que permite que los coeficientes del modelo tengan valores más grandes. En este caso, el modelo se ajustará más a los datos de entrenamiento, incluso a características ruidosas, y podría ser más propenso al sobreajuste si los datos de entrenamiento son ruidosos o si hay demasiadas características.</p>
+</section>
+<section id="solver">
+<h3>Solver<a class="headerlink" href="#solver" title="Permalink to this heading">#</a></h3>
+<p>El parámetro solver en la regresión logística controla el algoritmo utilizado para optimizar los pesos del modelo durante el proceso de entrenamiento. Diferentes algoritmos pueden comportarse de manera diferente en términos de velocidad de convergencia y eficiencia, y la elección del solver puede afectar el rendimiento del modelo en términos de tiempo de entrenamiento y precisión:</p>
+<ul class="simple">
+<li><p><strong>solver=’liblinear’</strong>: Es adecuado para conjuntos de datos pequeños y es una opción sólida para la clasificación binaria.</p></li>
+<li><p><strong>solver=’lbfgs’</strong>: Es una opción eficiente para conjuntos de datos grandes y pequeños. Utiliza el método de optimización de Broyden–Fletcher–Goldfarb–Shanno (BFGS).</p></li>
+<li><p><strong>solver=’newton-cg’</strong>:Utiliza el método de Newton-Conjugate Gradient. Es apropiado para problemas de clasificación multiclase y requiere la inversión de matrices Hessianas durante el entrenamiento.</p></li>
+<li><p><strong>solver=’sag’</strong>: Utiliza el método de promedio estocástico de gradientes (Stochastic Average Gradient). Es eficiente para conjuntos de datos grandes y puede ser más rápido que otros métodos en conjuntos de datos grandes.</p></li>
+<li><p><strong>solver=’saga’</strong>: Es una versión mejorada del solver ‘sag’ y también es adecuado para conjuntos de datos grandes. Incorpora características adicionales como penalización elástica y manejo eficiente de la regularización.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -401,20 +433,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="introduccion.html"
+       href="modelos.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Problemas de clasificación</p>
+        <p class="prev-next-title">Modelos de clasificación</p>
       </div>
     </a>
     <a class="right-next"
-       href="matriz_confusion.html"
+       href="descenso_gradiente.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Matriz de confusión</p>
+        <p class="prev-next-title">Descenso de Gradiente</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -433,7 +465,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medir-la-precision-con-validacion-cruzada">Medir la precisión con validación cruzada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hiperparametros-de-la-regresion-logistica">Hiperparámetros de la Regresión logística</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efectos-de-penalty-en-la-regresion-logistica">Efectos de penalty en la Regresión logística</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efectos-de-c-en-la-regresion-logistica">Efectos de C en la Regresión logística</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solver">Solver</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
