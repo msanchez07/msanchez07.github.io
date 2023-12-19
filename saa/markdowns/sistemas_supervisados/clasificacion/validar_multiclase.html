@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Error Cuadrático Medio (MSE) &#8212; Programación de inteligencia artificial</title>
+    <title>Validar clasificador multiclase &#8212; Programación de inteligencia artificial</title>
   
   
   
@@ -68,13 +68,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/anexos/metricas/mse';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdowns/sistemas_supervisados/clasificacion/validar_multiclase';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Raíz del Error Cuadrático Medio (RMSE)" href="rmse.html" />
-    <link rel="prev" title="Anexo: Métricas de regresión" href="metricas_regresion.html" />
+    <link rel="next" title="Búsqueda de hiperparámetros" href="../grid_search.html" />
+    <link rel="prev" title="Descenso de Gradiente" href="descenso_gradiente.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -172,44 +170,44 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../introduccion.html">Introducción</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">SISTEMAS DE APRENDIZAJE SUPERVISADO</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../sistemas_supervisados/introduccion.html">Introducción</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../sistemas_supervisados/proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../sistemas_supervisados/analisis_datos.html">Análisis exploratorio de datos</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../sistemas_supervisados/regresion/regresion.html">Problemas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/regresion/entrenar_modelo.html">Entrenamiento del modelo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/regresion/modelos/arboles_decision.html">Árboles de decisión</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/regresion/modelos/svm.html">Máquinas de vectores de soporte (SVM)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/regresion/modelos/regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/regresion/modelos/random_forest.html">Random forest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/regresion/modelos/ensamble_modelos.html">Ensamble de modelos</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/regresion/estandarizar_y_normalizar.html">Estandarizar y normalizar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/regresion/validar_modelo.html">Validar un modelo</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduccion.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proyecto_supervisado.html">Proyecto de aprendizaje supervisado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analisis_datos.html">Análisis exploratorio de datos</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../regresion/regresion.html">Problemas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/entrenar_modelo.html">Entrenamiento del modelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/arboles_decision.html">Árboles de decisión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/svm.html">Máquinas de vectores de soporte (SVM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/regresion_ridge_lasso.html">Otros tipos de regresión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/random_forest.html">Random forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/modelos/ensamble_modelos.html">Ensamble de modelos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/estandarizar_y_normalizar.html">Estandarizar y normalizar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../regresion/validar_modelo.html">Validar un modelo</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/introduccion.html">Problemas de clasificación</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/entrenar_clasificador_binario.html">Entrenando un clasificador binario</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/matriz_confusion.html">Matriz de confusión</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/curva_roc.html">Curva ROC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/modelos.html">Modelos de clasificación</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/regresion_logistica.html">Regresión logística</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/descenso_gradiente.html">Descenso de Gradiente</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="introduccion.html">Problemas de clasificación</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_binario.html">Entrenando un clasificador binario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matriz_confusion.html">Matriz de confusión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curva_roc.html">Curva ROC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="entrenar_clasificador_multiclase.html">Clasificador multiclase</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="modelos.html">Modelos de clasificación</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="regresion_logistica.html">Regresión logística</a></li>
+<li class="toctree-l3"><a class="reference internal" href="descenso_gradiente.html">Descenso de Gradiente</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../sistemas_supervisados/clasificacion/validar_multiclase.html">Validar clasificador multiclase</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Validar clasificador multiclase</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../sistemas_supervisados/grid_search.html">Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grid_search.html">Búsqueda de hiperparámetros</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ANEXOS</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="metricas_regresion.html">Anexo: Métricas de regresión</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Error Cuadrático Medio (MSE)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mae.html">Error Absoluto Medio (MAE)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="r2.html">Coeficiente de Determinación (<span class="math notranslate nohighlight">\(R^2\)</span>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mape.html">Error Porcentual Absoluto Medio (MAPE)</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../anexos/metricas/metricas_regresion.html">Anexo: Métricas de regresión</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mse.html">Error Cuadrático Medio (MSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/rmse.html">Raíz del Error Cuadrático Medio (RMSE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mae.html">Error Absoluto Medio (MAE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/r2.html">Coeficiente de Determinación (<span class="math notranslate nohighlight">\(R^2\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../anexos/metricas/mape.html">Error Porcentual Absoluto Medio (MAPE)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../bibliografia.html">Bibliografía</a></li>
@@ -288,9 +286,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -301,20 +297,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Error Cuadrático Medio (MSE)</h1>
+    <h1>Validar clasificador multiclase</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-usarlo">¿Cuándo usarlo?</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -324,41 +311,37 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="error-cuadratico-medio-mse">
-<h1>Error Cuadrático Medio (MSE)<a class="headerlink" href="#error-cuadratico-medio-mse" title="Permalink to this heading">#</a></h1>
-<p>El Error Cuadrático Medio (MSE) es una métrica utilizada para evaluar el rendimiento de modelos de regresión. Es especialmente útil para medir cuán cerca están las predicciones del modelo de los valores reales en un conjunto de datos. Este viene dado por la siguiente fórmula:</p>
-<div class="math notranslate nohighlight">
-\[MSE = \sum_{i=1}^{n}\frac{(y_{1}-ŷ_{i})²}{n}\]</div>
-<p>Donde:</p>
-<ul class="simple">
-<li><p><strong>n</strong> es el número total de observaciones en el conjunto de datos.</p></li>
-<li><p><strong><span class="math notranslate nohighlight">\(y_{i}\)</span></strong> representa el valor real de la observación i.</p></li>
-<li><p><strong><span class="math notranslate nohighlight">\(ŷ_{i}\)</span></strong> representa el valor predicho por el modelo para la observación i.</p></li>
-<li><p><strong>Σ</strong> denota la suma, es decir, debes calcular la suma de los cuadrados de las diferencias entre los valores reales y los valores predichos para todas las observaciones y luego dividirla por n.</p></li>
-</ul>
-<p>El MSE mide la magnitud promedio de los errores (diferencias) entre las predicciones hechas por el modelo y los valores reales en el conjunto de datos de prueba. Cuanto menor sea el valor del MSE, mejor será el ajuste del modelo a los datos. Aquí hay algunas interpretaciones clave:</p>
-<ul class="simple">
-<li><p><strong>Mayor MSE significa mayor error</strong>: Un MSE alto indica que el modelo tiene un error promedio significativamente grande en sus predicciones. En otras palabras, el modelo no se ajusta bien a los datos reales.</p></li>
-<li><p><strong>MSE igual a cero</strong>: Si el MSE es cero, significa que el modelo hace predicciones perfectas que coinciden exactamente con los valores reales. Esto es raro en la práctica y a menudo indica un posible sobreajuste (overfitting) al conjunto de datos de entrenamiento.</p></li>
-<li><p><strong>Comparación de modelos</strong>: El MSE se utiliza comúnmente para comparar varios modelos de regresión. Entre dos modelos, el que tenga un MSE más bajo se considera generalmente mejor en términos de su capacidad para hacer predicciones precisas.</p></li>
-<li><p><strong>Magnitud en unidades originales</strong>: La magnitud del MSE está en las unidades originales del problema. Por ejemplo, si se está trabajando en la predicción de precios de viviendas en dólares, el MSE se medirá en dólares al cuadrado.</p></li>
-<li><p><strong>Sensible a valores atípicos</strong>: El MSE es sensible a valores atípicos en los datos, ya que los errores se elevan al cuadrado. Esto significa que un solo valor atípico puede aumentar significativamente el MSE.</p></li>
-</ul>
-<section id="ejemplo">
-<h2>Ejemplo<a class="headerlink" href="#ejemplo" title="Permalink to this heading">#</a></h2>
-<p>Vamos a partir de la base del ejemplo explicado anteriormente para ver como calcular este error. Primero se debe calcular las diferencias entre las predicciones y los valores reales para cada casa:</p>
-<p>Diferencias al cuadrado: (200.000 – 180.000)², (250.000 – 240.000)², (180.000 – 200.000)², (300.000 – 280.000)², (220.000 – 230.000)²</p>
-<p>Posteriormente se debe calcular el promedio de estas diferencias al cuadrado:</p>
-<p>Promedio = (400.000.000 + 100.000.000 + 400.000.000 + 400.000.000 + 100.000.000) / 5 = 280.000.000</p>
-<p>El MSE es el promedio calculado:</p>
-<p>MSE = 280.000.000</p>
-<p>En este ejemplo, el MSE sería 280.000.000, lo que significa que, en promedio, las predicciones de tu modelo están a una distancia de 280.000.000 unidades al cuadrado de los valores reales de los precios de las casas.</p>
-</section>
-<section id="cuando-usarlo">
-<h2>¿Cuándo usarlo?<a class="headerlink" href="#cuando-usarlo" title="Permalink to this heading">#</a></h2>
-<p>Emplea el MSE cuando necesites calcular el promedio de las diferencias al cuadrado entre las predicciones y los valores reales. Es útil cuando deseas penalizar más los errores grandes.</p>
-<p>Por ejemplo, en la predicción de la temperatura diaria, el MSE mide cuánto se desvían tus predicciones en términos de grados cuadrados.</p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="validar-clasificador-multiclase">
+<h1>Validar clasificador multiclase<a class="headerlink" href="#validar-clasificador-multiclase" title="Permalink to this heading">#</a></h1>
+<p>Anteriormente hemos visto como validar un clasificador binario con la matriz de confusión y la curva ROC. En este punto vamos a ver como validar un clasificador multiclase.</p>
+<p>En primer lugar vamos a obtener la matriz de confusión:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+
+<span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">svm_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="bg-primary reference internal image-reference" href="../../../_images/15.png"><img alt="../../../_images/15.png" class="bg-primary align-center" src="../../../_images/15.png" style="width: 65%;" /></a>
+</br>
+<p>Parece que el clasificador funciona bastante bien ya que la diagonal principal es la que más casos está clasificando. No obstante, podemos observar un detalle curioso, y es que los casos de clasificación del número 3 son menores que otros casos, como el 1. Pero, ¿Cuantos casos han fallado? Vamos a ver esto en porcentaje:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="n">values_format</span><span class="o">=</span><span class="s2">&quot;.0%&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="bg-primary reference internal image-reference" href="../../../_images/16.png"><img alt="../../../_images/16.png" class="bg-primary align-center" src="../../../_images/16.png" style="width: 65%;" /></a>
+</br>
+<p>Como podemos observar, se han clasificado bien un 89% de los casos, la segunda peor marca. Muchas de las imagenes mal clasificadas han sido clasificadas como 5, como podemos ver en la matriz de confusión.</p>
+<p>Si queremos ver cuales son los errores que ha cometido el clasificador, podemos generar una matriz de confusión donde esto se resalte para cada una de las clases:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_weight</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_test_pred</span> <span class="o">!=</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span>
+<span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="n">values_format</span><span class="o">=</span><span class="s2">&quot;.0%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="bg-primary reference internal image-reference" href="../../../_images/17.png"><img alt="../../../_images/17.png" class="bg-primary align-center" src="../../../_images/17.png" style="width: 65%;" /></a>
+</br>
+<p>Ahora podemos ver como el 50% de los errores de la claisificación del número tres es porque se han clasificado como cinco.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -374,7 +357,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./markdowns/anexos/metricas"
+            path: "./markdowns/sistemas_supervisados/clasificacion"
         },
         predefinedOutput: true
     }
@@ -392,20 +375,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="metricas_regresion.html"
+       href="descenso_gradiente.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Anexo: Métricas de regresión</p>
+        <p class="prev-next-title">Descenso de Gradiente</p>
       </div>
     </a>
     <a class="right-next"
-       href="rmse.html"
+       href="../grid_search.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Raíz del Error Cuadrático Medio (RMSE)</p>
+        <p class="prev-next-title">Búsqueda de hiperparámetros</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -415,21 +398,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-usarlo">¿Cuándo usarlo?</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

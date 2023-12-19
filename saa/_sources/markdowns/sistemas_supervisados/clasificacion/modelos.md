@@ -24,5 +24,7 @@ Estos modelos no se limitan a respuestas "sí" o "no", sino qut tienen la capaci
 
 [Random forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
 
+[Naive Bayes](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html)
+
 Muchos de estos modelos ya los hemos comentado en la parte de regresión, así que vamos a ver aquellos no explicados.
 

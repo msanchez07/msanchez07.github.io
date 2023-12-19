@@ -195,6 +195,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../../clasificacion/descenso_gradiente.html">Descenso de Gradiente</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../clasificacion/validar_multiclase.html">Validar clasificador multiclase</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../grid_search.html">Búsqueda de hiperparámetros</a></li>
@@ -339,7 +340,7 @@ document.write(`
 <h2>Regresión Ridge<a class="headerlink" href="#regresion-ridge" title="Permalink to this heading">#</a></h2>
 <p>La regresión Ridge es un método de regresión lineal regularizado que aborda el problema de la multicolinealidad en los datos de entrada. En la regresión lineal clásica, cuando hay características altamente correlacionadas, el problema se vuelve mal condicionado, lo que significa que las estimaciones de los coeficientes pueden volverse muy sensibles a pequeñas variaciones en los datos. Ridge introduce una penalización en la magnitud de los coeficientes, lo que ayuda a suavizar el ajuste y mitigar la multicolinealidad.</p>
 <p>La característica distintiva de la regresión Ridge es la introducción de un término de penalización L2 en la función de costo, que se agrega a la función de mínimos cuadrados ordinarios. Este término penaliza los coeficientes grandes, forzándolos a ser más pequeños y reduciendo así la complejidad del modelo. El parámetro de regularización, denotado como <strong>α</strong>, controla la fuerza de la penalización. Un α más grande conduce a coeficientes más pequeños y un modelo más regularizado.</p>
-<img alt="../../../../_images/15.png" class="bg-primary align-center" src="../../../../_images/15.png" />
+<img alt="../../../../_images/151.png" class="bg-primary align-center" src="../../../../_images/151.png" />
 </br>
 <p>La regresión Ridge es particularmente útil cuando se enfrenta a problemas de multicolinealidad, donde varias características están fuertemente correlacionadas. Al introducir la penalización L2, Ridge permite que todas las características contribuyan al modelo de manera más equitativa y robusta. Sin embargo, es importante ajustar cuidadosamente el valor de α mediante validación cruzada para equilibrar la reducción de la multicolinealidad y la capacidad del modelo para ajustarse a los datos. En resumen, la regresión Ridge es una herramienta valiosa en la modelización lineal cuando se busca estabilidad en presencia de multicolinealidad.</p>
 <section id="entrenar-una-regresion-ridge">
@@ -407,7 +408,7 @@ document.write(`
 <p>La regresión Lasso (Least Absolute Shrinkage and Selection Operator) es un método de regresión lineal regularizado que introduce una penalización L1 en la función de costo para favorecer modelos más dispersos. A diferencia de la regresión Ridge, que utiliza una penalización L2, la penalización L1 en Lasso lleva algunos coeficientes de características a exactamente cero durante el ajuste del modelo. Esta propiedad única de Lasso facilita la selección automática de características, lo que puede ser beneficioso en situaciones donde solo un subconjunto de características es relevante para la predicción.</p>
 <p>La función de costo de la regresión Lasso se compone de dos términos: el término de mínimos cuadrados ordinarios y la penalización L1, ponderada por un parámetro de regularización (α). A medida que α aumenta, la influencia de la penalización L1 se intensifica, llevando a más coeficientes a cero. Este proceso de selección de características es valioso en problemas de alta dimensionalidad, donde hay muchas características, pero solo unas pocas son informativas.</p>
 <p>Un aspecto importante a considerar al utilizar la regresión Lasso es la elección adecuada del parámetro de regularización α. Este parámetro controla la fuerza de la penalización y, al igual que en Ridge, se ajusta típicamente mediante validación cruzada para encontrar el equilibrio óptimo entre la precisión del ajuste y la regularización. La regresión Lasso es especialmente útil en problemas de ciencia de datos y aprendizaje automático donde la interpretación y la identificación de características clave son esenciales. Además, la combinación de regresión Lasso y Ridge da lugar a la regresión Elastic Net, que proporciona un equilibrio entre las penalizaciones L1 y L2.</p>
-<img alt="../../../../_images/16.png" class="bg-primary align-center" src="../../../../_images/16.png" />
+<img alt="../../../../_images/161.png" class="bg-primary align-center" src="../../../../_images/161.png" />
 <p>Como siempre, habrá que configurar los <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html">hiperparámetros</a> para mejorar la calidad del modelo.</p>
 <section id="entrenar-una-regresion-lasso">
 <h3>Entrenar una Regresión Lasso<a class="headerlink" href="#entrenar-una-regresion-lasso" title="Permalink to this heading">#</a></h3>
